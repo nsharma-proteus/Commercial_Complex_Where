@@ -7,7 +7,7 @@
   "status": "error",
   "description": "[The user currently has the \"Member Profile\" screen open (object ccw_member_profile, type T). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nRemove the business category from the main form it noy mandatoty to have the a business category",
   "created_at": 1794905923.8868914,
-  "updated_at": 1794996309.8577392,
+  "updated_at": 1795000798.1912296,
   "todos": [
     {
       "id": "change_turn",
