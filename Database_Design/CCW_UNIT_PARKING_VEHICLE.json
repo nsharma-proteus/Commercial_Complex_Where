@@ -1,0 +1,107 @@
+{
+  "table_name": "CCW_UNIT_PARKING_VEHICLE",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "PARKING_SLOT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Parent slot",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "LINE_NO",
+      "data_type": "NUMBER",
+      "size": "4",
+      "key": true,
+      "description": "Vehicle line",
+      "sequence": 2
+    },
+    {
+      "column_name": "VEHICLE_NO",
+      "data_type": "VARCHAR",
+      "size": "20",
+      "key": false,
+      "description": "Upper case, no spaces; unique across vehicles",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "VEHICLE_TYPE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Type of vehicle",
+      "sequence": 4,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "C",
+          "label": "Car"
+        },
+        {
+          "value": "T",
+          "label": "Two-Wheeler"
+        },
+        {
+          "value": "O",
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "column_name": "MAKE_MODEL",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Make and model",
+      "sequence": 5
+    },
+    {
+      "column_name": "COLOUR",
+      "data_type": "VARCHAR",
+      "size": "30",
+      "key": false,
+      "description": "Vehicle colour",
+      "sequence": 6
+    },
+    {
+      "column_name": "USED_BY",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Owner or Tenant of the unit",
+      "sequence": 7,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "O",
+          "label": "Owner"
+        },
+        {
+          "value": "T",
+          "label": "Tenant"
+        }
+      ]
+    },
+    {
+      "column_name": "USER_NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Person using the vehicle",
+      "sequence": 8
+    },
+    {
+      "column_name": "USER_MOBILE",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Mobile of the user",
+      "sequence": 9
+    }
+  ]
+}

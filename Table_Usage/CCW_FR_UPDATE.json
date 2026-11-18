@@ -1,0 +1,23 @@
+{
+  "table_name": "CCW_FR_UPDATE",
+  "objects": [
+    {
+      "object_name": "ccw_facility_request",
+      "form_no": "2",
+      "usage_type": "R",
+      "referred_columns": [
+        "REMARK",
+        "REQUEST_NO",
+        "UPDATE_DATE_TIME",
+        "UPDATED_BY",
+        "STATUS",
+        "LINE_NO"
+      ],
+      "join_info": {
+        "column": "REQUEST_NO",
+        "join_table": "CCW_FACILITY_REQUEST",
+        "join_column": "REQUEST_NO"
+      }
+    }
+  ]
+}

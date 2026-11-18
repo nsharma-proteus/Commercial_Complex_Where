@@ -1,0 +1,34 @@
+{
+  "object_name": "ccw_unit_parking",
+  "tables": {
+    "CCW_UNIT_PARKING": [
+      "ADD_USER",
+      "PARKING_SLOT_NO",
+      "SLOT_TYPE",
+      "CHG_DATE",
+      "CHG_TERM",
+      "UNIT_NO",
+      "CHG_USER",
+      "ADD_DATE",
+      "STATUS",
+      "SLOT_LOCATION",
+      "ADD_TERM"
+    ],
+    "CCW_UNIT_MASTER": [
+      "WING_CODE",
+      "FLOOR_NO",
+      "UNIT_NO"
+    ],
+    "CCW_UNIT_PARKING_VEHICLE": [
+      "USER_NAME",
+      "USED_BY",
+      "PARKING_SLOT_NO",
+      "COLOUR",
+      "VEHICLE_NO",
+      "VEHICLE_TYPE",
+      "MAKE_MODEL",
+      "LINE_NO",
+      "USER_MOBILE"
+    ]
+  }
+}

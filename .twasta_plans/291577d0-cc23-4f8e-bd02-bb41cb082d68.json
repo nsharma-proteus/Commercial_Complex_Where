@@ -1,0 +1,35 @@
+{
+  "id": "291577d0-cc23-4f8e-bd02-bb41cb082d68",
+  "project": "Commercial_Complex_Where",
+  "backend": "autoagent",
+  "title": "Change",
+  "kind": "change",
+  "status": "completed",
+  "description": "Fix it \u2014 apply the recommended fix from your investigation above.",
+  "created_at": 1794830105.020728,
+  "updated_at": 1794996309.8571255,
+  "todos": [
+    {
+      "id": "change_turn",
+      "step": "change",
+      "label": "Fix it \u2014 apply the recommended fix from your investigation above.",
+      "status": "completed",
+      "error": null,
+      "obj_name": null,
+      "obj_type": null,
+      "phase_id": null,
+      "started_at": 1794830105.0171878,
+      "completed_at": 1794830136.6453893
+    }
+  ],
+  "phases": [],
+  "originating_prompt": "Fix it \u2014 apply the recommended fix from your investigation above.",
+  "resume_ref": {
+    "session_id": "150a8a68-ef90-4649-aa14-b974d6d40870",
+    "plan_id": "291577d0-cc23-4f8e-bd02-bb41cb082d68",
+    "scope": null
+  },
+  "depends_on": [],
+  "result_summary": "",
+  "awaiting_answer": false
+}

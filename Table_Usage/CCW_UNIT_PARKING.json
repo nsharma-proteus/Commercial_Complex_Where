@@ -1,0 +1,41 @@
+{
+  "table_name": "CCW_UNIT_PARKING",
+  "objects": [
+    {
+      "object_name": "ccw_unit_parking",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "ADD_USER",
+        "ADD_TERM",
+        "PARKING_SLOT_NO",
+        "SLOT_TYPE",
+        "CHG_DATE",
+        "CHG_TERM",
+        "CHG_USER",
+        "ADD_DATE",
+        "STATUS",
+        "SLOT_LOCATION",
+        "UNIT_NO"
+      ],
+      "join_info": {
+        "column": "UNIT_NO",
+        "join_table": "CCW_UNIT_MASTER",
+        "join_column": "UNIT_NO"
+      }
+    },
+    {
+      "object_name": "ccw_unit_parking",
+      "form_no": "2",
+      "usage_type": "M",
+      "referred_columns": [
+        "PARKING_SLOT_NO"
+      ],
+      "join_info": {
+        "column": "PARKING_SLOT_NO",
+        "join_table": "CCW_UNIT_PARKING_VEHICLE",
+        "join_column": "PARKING_SLOT_NO"
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "table_name": "CCW_FACILITY_REQUEST",
+  "objects": [
+    {
+      "object_name": "ccw_facility_request",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "RAISED_BY_CONTACT_NO",
+        "CHG_DATE",
+        "CHG_TERM",
+        "STATUS",
+        "LOCATION_DETAIL",
+        "CHG_USER",
+        "PRIORITY",
+        "RESOLUTION_NOTE",
+        "ADD_TERM",
+        "ATTACHMENT",
+        "DESCRIPTION",
+        "ADD_DATE",
+        "CLOSED_ON",
+        "UNIT_NO",
+        "ASSIGNED_TO",
+        "REQUEST_CATEGORY",
+        "ADD_USER",
+        "REQUEST_NO",
+        "RAISED_BY_EMAIL",
+        "RESOLVED_ON",
+        "RAISED_BY_NAME",
+        "REQUEST_DATE_TIME"
+      ],
+      "join_info": {
+        "column": "ASSIGNED_TO",
+        "join_table": "CCW_FACILITY_TEAM_MEMBER",
+        "join_column": "STAFF_CODE"
+      }
+    },
+    {
+      "object_name": "ccw_facility_request",
+      "form_no": "2",
+      "usage_type": "M",
+      "referred_columns": [
+        "REQUEST_NO"
+      ],
+      "join_info": {
+        "column": "REQUEST_NO",
+        "join_table": "CCW_FR_UPDATE",
+        "join_column": "REQUEST_NO"
+      }
+    }
+  ]
+}

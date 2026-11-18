@@ -1,0 +1,47 @@
+{
+  "object_name": "ccw_member_profile",
+  "tables": {
+    "CCW_MEMBER_PROFILE": [
+      "SHOW_IN_DIRECTORY",
+      "BUSINESS_CATEGORY",
+      "CONTACT_NO_1",
+      "BUSINESS_NAME",
+      "CHG_USER",
+      "LOGO",
+      "UNIT_NO",
+      "SHOW_TENANT_IN_DIRECTORY",
+      "WEBSITE",
+      "EMAIL",
+      "CONTACT_NO_2",
+      "OCCUPANCY_TYPE",
+      "CONTACT_PERSON",
+      "ADD_USER",
+      "ADD_DATE",
+      "PROFILE_STATUS",
+      "BUSINESS_DESCRIPTION",
+      "CHG_DATE",
+      "ALLOW_TENANT_TO_UPDATE_PROFILE",
+      "ADD_TERM",
+      "CHG_TERM",
+      "TENANT_LOGIN_ALLOWED"
+    ],
+    "CCW_UNIT_MASTER": [
+      "WING_CODE",
+      "UNIT_NO",
+      "FLOOR_NO"
+    ],
+    "CCW_BUSINESS_CATEGORY": [
+      "CATEGORY_NAME",
+      "CATEGORY_CODE"
+    ],
+    "CCW_MEMBER_OWNER": [
+      "IS_PRIMARY_OWNER",
+      "UNIT_NO",
+      "OWNER_MOBILE",
+      "OWNER_NAME",
+      "OWNER_EMAIL",
+      "LINE_NO",
+      "LOGIN_ENABLED"
+    ]
+  }
+}

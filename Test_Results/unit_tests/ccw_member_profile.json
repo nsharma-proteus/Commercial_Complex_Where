@@ -1,0 +1,80 @@
+{
+  "report": {
+    "ok": false,
+    "summary": "FAIL",
+    "project": "Commercial_Complex_Where",
+    "obj_name": "ccw_member_profile",
+    "passed": 1,
+    "failed": 1,
+    "steps": [
+      {
+        "name": "deploy schema",
+        "status": "PASS",
+        "issue": null,
+        "detail": "schema=commercial_complex_where",
+        "check": "record"
+      },
+      {
+        "name": "add record",
+        "status": "FAIL",
+        "issue": {
+          "code": "VALIDATION_FAILED",
+          "message": "1 validation error(s): unit_no: [UNIT_NOT_FOUND] Unit D7150FA714 does not exist in the Unit Master.",
+          "field_errors": [
+            {
+              "field": "unit_no",
+              "message": "[UNIT_NOT_FOUND] Unit D7150FA714 does not exist in the Unit Master.",
+              "rule": "UNIT_NOT_FOUND",
+              "code": "UNIT_NOT_FOUND",
+              "severity": "E"
+            }
+          ]
+        },
+        "detail": null,
+        "check": "record"
+      }
+    ],
+    "checks": [
+      {
+        "id": "record",
+        "kind": "record",
+        "name": "",
+        "label": "Add, list, open, edit and delete a record",
+        "steps": 2,
+        "status": "failed",
+        "first_failure": {
+          "step": "add record",
+          "code": "VALIDATION_FAILED",
+          "message": "1 validation error(s): unit_no: [UNIT_NOT_FOUND] Unit D7150FA714 does not exist in the Unit Master.",
+          "field_errors": [
+            {
+              "field": "unit_no",
+              "message": "[UNIT_NOT_FOUND] Unit D7150FA714 does not exist in the Unit Master.",
+              "rule": "UNIT_NOT_FOUND",
+              "code": "UNIT_NOT_FOUND",
+              "severity": "E"
+            }
+          ]
+        }
+      }
+    ],
+    "first_failure": {
+      "step": "add record",
+      "code": "VALIDATION_FAILED",
+      "message": "1 validation error(s): unit_no: [UNIT_NOT_FOUND] Unit D7150FA714 does not exist in the Unit Master.",
+      "field_errors": [
+        {
+          "field": "unit_no",
+          "message": "[UNIT_NOT_FOUND] Unit D7150FA714 does not exist in the Unit Master.",
+          "rule": "UNIT_NOT_FOUND",
+          "code": "UNIT_NOT_FOUND",
+          "severity": "E"
+        }
+      ]
+    },
+    "emitted_events": []
+  },
+  "at": "2026-11-17T08:59:43+00:00",
+  "by": "nilay.sharma@proteustech.in",
+  "via": "Ask-AI"
+}

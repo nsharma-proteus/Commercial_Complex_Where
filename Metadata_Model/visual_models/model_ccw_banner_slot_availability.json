@@ -1,0 +1,47 @@
+{
+ "DATA_SOURCE_MODE": "sql",
+ "SQLMODEL": {
+  "SQLModel": {"COLUMNS": [{"COLUMN": [
+   {"COLID": 2, "NAME": "MONTH_LABEL", "DBTABLE": "CCW_BANNER_BOOKING", "DBNAME": "START_DATE", "tableName": "CCW_BANNER_BOOKING", "content": "Month", "name": "Month", "type": "string", "JAVATYPE": "java.lang.String", "COLTYPE": "CHAR", "EXPRESSIONTYPE": "C", "DEFAULTFUNCTION": "", "FUNCTION": "", "expression": "", "groupName": "Rows", "StandardName": "Rows", "checked": true},
+   {"COLID": 3, "NAME": "BOOKED_SLOTS", "DBTABLE": "CCW_BANNER_BOOKING", "DBNAME": "BOOKING_NO", "tableName": "CCW_BANNER_BOOKING", "content": "Booked Slots", "name": "Booked Slots", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "SUM", "FUNCTION": "SUM", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true},
+   {"COLID": 4, "NAME": "AVAILABLE_SLOTS", "DBTABLE": "CCW_BANNER_RATE_PLAN_MASTER", "DBNAME": "MAX_CAROUSEL_SLOTS", "tableName": "CCW_BANNER_RATE_PLAN_MASTER", "content": "Available Slots", "name": "Available Slots", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "SUM", "FUNCTION": "SUM", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true},
+   {"COLID": 5, "NAME": "CAPACITY", "DBTABLE": "CCW_BANNER_RATE_PLAN_MASTER", "DBNAME": "MAX_CAROUSEL_SLOTS", "tableName": "CCW_BANNER_RATE_PLAN_MASTER", "content": "Capacity", "name": "Capacity", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "MAX", "FUNCTION": "MAX", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true}
+  ]}]},
+  "CRITERIA": {"query": {"rules": [
+   {"id": "Criteria_1", "field": "CCW_BANNER_BOOKING.NO_OF_MONTHS", "DBNAME": "NO_OF_MONTHS", "tableName": "CCW_BANNER_BOOKING", "COLTYPE": "number", "currentFieldType": "number", "operator": "=", "queryOption": "P", "prevOption": "P", "customValue": "FixedValue", "promptLabel": "Months Ahead", "promptVar": "months_ahead", "value": "6", "chipValue": []}
+  ], "condition": "and"}},
+  "VISUAL_NAME": "Stacked Column",
+  "SCHEMA_NAME": "CCW_BANNER_SLOT_AVAILABILITY",
+  "SCHEMA_DESCR": "Banner Slot Availability",
+  "SCHEMA_TYPE": "S",
+  "OUTPUT_TYPE": "JSON",
+  "DATABASE_TYPE": "1",
+  "DATABASE_DETAIL": {"DATABASE_NAME": "PostgreSQL", "TYPE": 1}
+ },
+ "LAYOUT_DATA": {
+  "visualLayout": {
+   "ID": "stacked_column", "VisualName": "Stacked Column", "VisualType": "Standard", "VisualIcon": "Stacked_Column.svg", "DisplayOrder": "6", "className": "InsightStackedChart", "linkOptions": "", "OutputType": "JSON",
+   "title": "Banner Slot Availability", "subtitle": "Approved slots booked vs available, by month",
+   "options": [
+    {"optionId": "ShowPercentage", "optionName": "ShowPercentage", "optionHeading": "ShowPercentage", "dataType": "boolean", "defaultValue": "false", "listOfValues": "true,false", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "sortingColumns", "optionName": "sortingColumns", "optionHeading": "sortingColumns", "dataType": "string", "defaultValue": "none", "listOfValues": "", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "referenceLines", "optionName": "referenceLines", "optionHeading": "referenceLines", "dataType": "string", "defaultValue": "column:CAPACITY:Capacity", "listOfValues": "", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "showDataLabels", "optionName": "showDataLabels", "optionHeading": "showDataLabels", "dataType": "boolean", "defaultValue": "true", "listOfValues": "true,false", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "themeColor", "optionName": "themeColor", "optionHeading": "themeColor", "dataType": "string", "defaultValue": "Default", "listOfValues": "Default,Blue,Green,Orange,Pink,Purple,Yellow,Red", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "toolbar", "optionName": "toolbar", "optionHeading": "toolbar", "dataType": "boolean", "defaultValue": "true", "listOfValues": "true,false", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "autoRefreshSeconds", "optionName": "autoRefreshSeconds", "optionHeading": "autoRefreshSeconds", "dataType": "number", "defaultValue": "0", "listOfValues": "", "allowChange": "true", "optionType": "inner"}
+   ],
+   "ColumnGroups": [
+    {"GroupID": 1, "GroupName": "Rows", "StandardName": "Rows", "AllowedColumnTypes": "ANY", "MinColumns": 0, "MaxColumns": 0, "COLUMNS": [
+     {"COLID": 2, "NAME": "MONTH_LABEL", "DBTABLE": "CCW_BANNER_BOOKING", "DBNAME": "START_DATE", "tableName": "CCW_BANNER_BOOKING", "content": "Month", "name": "Month", "type": "string", "JAVATYPE": "java.lang.String", "COLTYPE": "CHAR", "EXPRESSIONTYPE": "C", "DEFAULTFUNCTION": "", "FUNCTION": "", "expression": "", "groupName": "Rows", "StandardName": "Rows", "checked": true}]},
+    {"GroupID": 2, "GroupName": "Columns", "StandardName": "Columns", "AllowedColumnTypes": "ANY", "MinColumns": 0, "MaxColumns": 0, "COLUMNS": []},
+    {"GroupID": 3, "GroupName": "Values", "StandardName": "Values", "AllowedColumnTypes": "ANY", "MinColumns": 0, "MaxColumns": 0, "COLUMNS": [
+     {"COLID": 3, "NAME": "BOOKED_SLOTS", "DBTABLE": "CCW_BANNER_BOOKING", "DBNAME": "BOOKING_NO", "tableName": "CCW_BANNER_BOOKING", "content": "Booked Slots", "name": "Booked Slots", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "SUM", "FUNCTION": "SUM", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true},
+     {"COLID": 4, "NAME": "AVAILABLE_SLOTS", "DBTABLE": "CCW_BANNER_RATE_PLAN_MASTER", "DBNAME": "MAX_CAROUSEL_SLOTS", "tableName": "CCW_BANNER_RATE_PLAN_MASTER", "content": "Available Slots", "name": "Available Slots", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "SUM", "FUNCTION": "SUM", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true},
+     {"COLID": 5, "NAME": "CAPACITY", "DBTABLE": "CCW_BANNER_RATE_PLAN_MASTER", "DBNAME": "MAX_CAROUSEL_SLOTS", "tableName": "CCW_BANNER_RATE_PLAN_MASTER", "content": "Capacity", "name": "Capacity", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "MAX", "FUNCTION": "MAX", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true}]}
+   ]
+  },
+  "layoutdata": {}
+ },
+ "SOURCE_SQL": "SELECT TO_CHAR(m.mon, 'YYYY-MM') AS MONTH_LABEL, COUNT(b.booking_no) AS BOOKED_SLOTS, GREATEST(MAX(pl.cap) - COUNT(b.booking_no), 0) AS AVAILABLE_SLOTS, MAX(pl.cap) AS CAPACITY FROM (SELECT (DATE_TRUNC('month', CURRENT_DATE) + (g * INTERVAL '1 month'))::date AS mon FROM generate_series(1, CAST(?.months_ahead AS integer)) AS g) m CROSS JOIN (SELECT COALESCE(MAX(max_carousel_slots), 0) AS cap FROM ccw_banner_rate_plan_master WHERE status = 'A') pl LEFT JOIN ccw_banner_booking b ON b.booking_status = 'A' AND b.start_date <= (m.mon + INTERVAL '1 month' - INTERVAL '1 day')::date AND (b.start_date + (b.no_of_months * INTERVAL '1 month') - INTERVAL '1 day')::date >= m.mon GROUP BY m.mon ORDER BY m.mon"
+}

@@ -1,0 +1,239 @@
+{
+  "table_name": "CCW_TENANT_PROFILE",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Rented unit (must have a Member Profile with occupancy Given on Rent)",
+      "sequence": 1,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_MEMBER_PROFILE",
+        "display_column": "UNIT_NO",
+        "value_column": "UNIT_NO"
+      }
+    },
+    {
+      "column_name": "TENANT_STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Active or Removed; changed only by the Remove Tenant / Re-activate buttons",
+      "sequence": 2,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Active"
+        },
+        {
+          "value": "R",
+          "label": "Removed"
+        }
+      ]
+    },
+    {
+      "column_name": "TENANT_COMPANY_NAME",
+      "data_type": "VARCHAR",
+      "size": "150",
+      "key": false,
+      "description": "Name of the tenant business",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "BUSINESS_CATEGORY",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Type of business",
+      "sequence": 4,
+      "lookup": {
+        "table": "CCW_BUSINESS_CATEGORY",
+        "display_column": "CATEGORY_NAME",
+        "value_column": "CATEGORY_CODE"
+      }
+    },
+    {
+      "column_name": "BUSINESS_DESCRIPTION",
+      "data_type": "VARCHAR",
+      "size": "1000",
+      "key": false,
+      "description": "What the tenant business does",
+      "sequence": 5
+    },
+    {
+      "column_name": "LOGO",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Tenant logo (uploaded file URL)",
+      "sequence": 6
+    },
+    {
+      "column_name": "CONTACT_PERSON",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Person to contact",
+      "sequence": 7,
+      "mandatory": true
+    },
+    {
+      "column_name": "CONTACT_NO_1",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Primary contact number",
+      "sequence": 8,
+      "mandatory": true
+    },
+    {
+      "column_name": "CONTACT_NO_2",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Optional second contact number",
+      "sequence": 9
+    },
+    {
+      "column_name": "TENANT_EMAIL",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Tenant email, used for sign-in and the welcome email; unique across tenants and owners",
+      "sequence": 10,
+      "mandatory": true
+    },
+    {
+      "column_name": "LEASE_START_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Start of the lease",
+      "sequence": 11
+    },
+    {
+      "column_name": "LEASE_END_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "End of the lease; not before the start date",
+      "sequence": 12
+    },
+    {
+      "column_name": "SHOW_IN_DIRECTORY",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Can be Yes only if the owner allows the tenant in the directory",
+      "sequence": 13,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "LOGIN_ENABLED",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Can be Yes only if the owner allows tenant login",
+      "sequence": 14,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "ADDED_BY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Who created the tenant profile",
+      "sequence": 15
+    },
+    {
+      "column_name": "REMOVED_ON",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "When the tenant was removed (set by Remove Tenant)",
+      "sequence": 16
+    },
+    {
+      "column_name": "REMOVAL_REASON",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Reason given when the tenant was removed (set by Remove Tenant)",
+      "sequence": 17
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Record creation date",
+      "sequence": 18
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who created the record",
+      "sequence": 19
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal that created the record",
+      "sequence": 20
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Last change date",
+      "sequence": 21
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who last changed the record",
+      "sequence": 22
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal of last change",
+      "sequence": 23
+    }
+  ]
+}

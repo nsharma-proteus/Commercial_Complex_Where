@@ -1,0 +1,39 @@
+{
+  "object_name": "ccw_banner_booking",
+  "tables": {
+    "CCW_BANNER_BOOKING": [
+      "AMOUNT",
+      "CHG_TERM",
+      "CHG_DATE",
+      "RECEIVED_BY",
+      "BANNER_IMAGE",
+      "START_DATE",
+      "NO_OF_MONTHS",
+      "RATE_PER_MONTH",
+      "CHG_USER",
+      "EMAIL",
+      "BOOKING_NO",
+      "ADD_TERM",
+      "BOOKING_DATE",
+      "PAYMENT_DATE",
+      "BOOKING_STATUS",
+      "PAYMENT_MODE",
+      "ADD_DATE",
+      "PAYMENT_STATUS",
+      "CONTACT_NO",
+      "TOTAL_AMOUNT",
+      "BANNER_TITLE",
+      "TAX_AMOUNT",
+      "UNIT_NO",
+      "INVOICE_DATE",
+      "ADVERTISER_NAME",
+      "ADD_USER",
+      "REJECTION_REASON",
+      "TAX_PCT",
+      "CLICK_URL",
+      "ADVERTISER_TYPE",
+      "INVOICE_NO",
+      "PAYMENT_REFERENCE"
+    ]
+  }
+}

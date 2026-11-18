@@ -1,0 +1,88 @@
+{
+  "table_name": "CCW_MEMBER_OWNER",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Parent unit",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "LINE_NO",
+      "data_type": "NUMBER",
+      "size": "4",
+      "key": true,
+      "description": "Owner line number",
+      "sequence": 2
+    },
+    {
+      "column_name": "OWNER_NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Name of the owner",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "OWNER_MOBILE",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Owner mobile number",
+      "sequence": 4
+    },
+    {
+      "column_name": "OWNER_EMAIL",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Owner email; unique across all owners and used for sign-in",
+      "sequence": 5,
+      "mandatory": true
+    },
+    {
+      "column_name": "IS_PRIMARY_OWNER",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Exactly one owner per unit is primary",
+      "sequence": 6,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "LOGIN_ENABLED",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Owner may sign in to the portal; a welcome email goes to owners with login enabled",
+      "sequence": 7,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    }
+  ]
+}

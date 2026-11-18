@@ -1,0 +1,35 @@
+{
+  "id": "c42669b3-2aaf-444f-8062-5bec0013b0bd",
+  "project": "Commercial_Complex_Where",
+  "backend": "autoagent",
+  "title": "Change",
+  "kind": "change",
+  "status": "completed",
+  "description": "[The user currently has the \"Portal Home\" screen open (object ccw_portal_home, type S). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nI have created a banner plan 30D but where do i select it in the banner booking form",
+  "created_at": 1794906730.8926458,
+  "updated_at": 1794996309.8584182,
+  "todos": [
+    {
+      "id": "change_turn",
+      "step": "change",
+      "label": "I have created a banner plan 30D but where do i select it in the banner booking form",
+      "status": "completed",
+      "error": null,
+      "obj_name": null,
+      "obj_type": null,
+      "phase_id": null,
+      "started_at": 1794906730.887971,
+      "completed_at": 1794906749.0145316
+    }
+  ],
+  "phases": [],
+  "originating_prompt": "[The user currently has the \"Portal Home\" screen open (object ccw_portal_home, type S). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nI have created a banner plan 30D but where do i select it in the banner booking form",
+  "resume_ref": {
+    "session_id": "150a8a68-ef90-4649-aa14-b974d6d40870",
+    "plan_id": "c42669b3-2aaf-444f-8062-5bec0013b0bd",
+    "scope": null
+  },
+  "depends_on": [],
+  "result_summary": "",
+  "awaiting_answer": false
+}

@@ -1,0 +1,705 @@
+{
+  "transaction": {
+    "obj_name": "ccw_unit_master",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Unit Master",
+          "form_descr": "Units (shops/offices) of the complex with wing, floor, type, area and occupancy.",
+          "form_no": "1",
+          "main_table": "CCW_UNIT_MASTER",
+          "columns": [
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Unit number, e.g. D715",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Unit no unique",
+                    "error_code": "UNIT_DUP",
+                    "message": "Unit {form.unit_no} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "wing_code",
+                "db_name": "WING_CODE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Wing",
+                "descr": "Wing of the unit (must exist in Wing Master)",
+                "mandatory": true,
+                "lookup": "CCW_WING_MASTER(WING_NAME, WING_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "must_exist_in": "CCW_WING_MASTER",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Wing exists",
+                    "error_code": "UNIT_WING",
+                    "message": "Wing {form.wing_code} not found in the Wing Master.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_WING_MASTER",
+                      "match_column": "WING_CODE"
+                    }
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_WING_MASTER",
+                  "match_table_col": "WING_CODE",
+                  "on_no_match": "clear",
+                  "fill": [
+                    {
+                      "form_col": "wing_floors",
+                      "table_col": "NO_OF_FLOORS"
+                    }
+                  ]
+                },
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "wing_name",
+                "db_name": "WING_NAME",
+                "table_name": "CCW_WING_MASTER",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Wing Name",
+                "descr": "Wing name (from Wing Master)",
+                "protect": "1",
+                "inline_with": "wing_code",
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_display_name": "Wing master (lookup table)",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "wing_floors",
+                "db_name": "NO_OF_FLOORS",
+                "table_name": "CCW_WING_MASTER",
+                "group_name": "Basic",
+                "col_type": "NUMBER",
+                "heading": "Wing Floors",
+                "descr": "Number of floors in the wing (from Wing Master)",
+                "protect": "1",
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_display_name": "Wing master (lookup table)",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "floor_no",
+                "db_name": "FLOOR_NO",
+                "group_name": "Basic",
+                "col_type": "NUMBER",
+                "heading": "Floor No",
+                "descr": "Floor, from 0 to the wing's number of floors",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Floor within wing",
+                    "error_code": "UNIT_FLOOR",
+                    "message": "Floor {form.floor_no} must be between 0 and the wing's number of floors.",
+                    "builtin": {
+                      "kind": "sql_range",
+                      "sql": "SELECT CASE WHEN {form.floor_no} >= 0 AND {form.floor_no} <= NO_OF_FLOORS THEN 1 ELSE 0 END FROM CCW_WING_MASTER WHERE WING_CODE = {form.wing_code}",
+                      "range_min": { "source": "const", "value": "1" },
+                      "on_no_row": "pass",
+                      "on_error": "fail"
+                    }
+                  }
+                ],
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "unit_type",
+                "db_name": "UNIT_TYPE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Unit Type",
+                "descr": "Shop / Office / Showroom / Other",
+                "mandatory": true,
+                "default_value": "S",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "S",
+                      "display": "Shop"
+                    },
+                    {
+                      "data": "O",
+                      "display": "Office"
+                    },
+                    {
+                      "data": "R",
+                      "display": "Showroom"
+                    },
+                    {
+                      "data": "X",
+                      "display": "Other"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Unit type is a listed value",
+                    "error_code": "UNIT_TYPE",
+                    "message": "Unit type must be one of S, O, R, X.",
+                    "expression": "in_list({form.unit_type}, \"S,O,R,X\")"
+                  }
+                ],
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "area_sqft",
+                "db_name": "AREA_SQFT",
+                "group_name": "Basic",
+                "col_type": "NUMBER",
+                "heading": "Area (sq ft)",
+                "descr": "Area in square feet",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Area not negative",
+                    "error_code": "UNIT_AREA",
+                    "message": "Area cannot be negative.",
+                    "expression": "{form.area_sqft} >= 0"
+                  }
+                ],
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "10,2",
+                "width": 110,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "occupancy_status",
+                "db_name": "OCCUPANCY_STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Occupancy",
+                "descr": "Display only; maintained from Member Profile / Tenant Profile",
+                "default_value": "V",
+                "protect": "1",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "V",
+                      "display": "Vacant"
+                    },
+                    {
+                      "data": "O",
+                      "display": "Owner Used"
+                    },
+                    {
+                      "data": "R",
+                      "display": "Given on Rent"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "V",
+                      "color": "grey",
+                      "label": "Vacant"
+                    },
+                    {
+                      "when": "O",
+                      "color": "blue",
+                      "label": "Owner Used"
+                    },
+                    {
+                      "when": "R",
+                      "color": "amber",
+                      "label": "Given on Rent"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Active or Inactive",
+                "default_value": "A",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Inactive"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Active"
+                    },
+                    {
+                      "when": "I",
+                      "color": "grey",
+                      "label": "Inactive"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Status is a listed value",
+                    "error_code": "UNIT_STATUS",
+                    "message": "Status must be A or I.",
+                    "expression": "in_list({form.status}, \"A,I\")"
+                  }
+                ],
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Created date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Created by",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "110",
+                "y": "110",
+                "col_id": "11",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Created from terminal",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "120",
+                "y": "120",
+                "col_id": "12",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "130",
+                "y": "130",
+                "col_id": "13",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Last changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "140",
+                "y": "140",
+                "col_id": "14",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Last changed from terminal",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "150",
+                "y": "150",
+                "col_id": "15",
+                "table_name": "CCW_UNIT_MASTER",
+                "table_display_name": "Unit master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_UNIT_MASTER",
+                  "main_table": true,
+                  "table_descr": "Unit master"
+                },
+                {
+                  "table": "CCW_WING_MASTER",
+                  "main_table": false,
+                  "table_descr": "Wing master (lookup table)",
+                  "column": "WING_CODE",
+                  "join_table": "CCW_UNIT_MASTER",
+                  "join_column": "WING_CODE",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": [],
+          "list_view": {
+            "tabs": {
+              "column": "status",
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          }
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "business_logic",
+            "name": "Unit has no member profile",
+            "error_code": "UNIT_HAS_PROFILE",
+            "message": "A unit with a Member Profile cannot be deleted.",
+            "business_logic": {
+              "method": "check_unit_delete",
+              "description": "Block delete of a unit that has a Member Profile",
+              "spec": "Payload carries UNIT_NO. If any row exists in the Member Profile table (ccw_member_profile, column UNIT_NO) with UNIT_NO equal to this unit, return {\"error\": \"A unit with a Member Profile cannot be deleted.\"}; otherwise return None. If the member profile table does not exist yet, return None."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "unit_test": {
+      "sample": {
+        "unit_no": "ZT101",
+        "wing_code": "@lookup",
+        "floor_no": 0,
+        "unit_type": "S",
+        "area_sqft": 100
+      }
+    },
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": [],
+    "vector_search": {
+      "enabled": true,
+      "columns": [
+        "wing_code",
+        "unit_type",
+        "occupancy_status",
+        "status",
+        "area_sqft"
+      ],
+      "key_column": "unit_no",
+      "display_column": "wing_code",
+      "allow_alias": true,
+      "auto": true,
+      "reason": "named as a master; searched by wing_code plus unit_type, occupancy_status, status, area_sqft so same-named records stay distinguishable"
+    }
+  }
+}

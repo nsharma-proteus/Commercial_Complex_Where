@@ -1,0 +1,747 @@
+{
+  "project_name": "Commercial Complex Portal",
+  "project_description": "Portal for a commercial complex: units and profiles, business directory, notices and events, business queries, ad banners and billing, guest entry and security, facility requests.",
+  "generated_at": "2026-11-16T12:22:34.808900+00:00",
+  "owner_user_id": "",
+  "navigation_summary": [
+    {
+      "obj_name": "ccw_wing_master",
+      "obj_type": "T",
+      "title": "Wing Master",
+      "description": "Wings of the complex"
+    },
+    {
+      "obj_name": "ccw_unit_master",
+      "obj_type": "T",
+      "title": "Unit Master",
+      "description": "Units of the complex"
+    },
+    {
+      "obj_name": "ccw_business_category_master",
+      "obj_type": "T",
+      "title": "Business Category Master",
+      "description": "Business types"
+    },
+    {
+      "obj_name": "ccw_announcement_category_master",
+      "obj_type": "T",
+      "title": "Announcement Category Master",
+      "description": "Notice and event categories"
+    },
+    {
+      "obj_name": "ccw_facility_request_category_master",
+      "obj_type": "T",
+      "title": "Facility Request Category Master",
+      "description": "Facility concern categories"
+    },
+    {
+      "obj_name": "ccw_facility_team_member_master",
+      "obj_type": "T",
+      "title": "Facility Team Member Master",
+      "description": "Facility staff and security"
+    },
+    {
+      "obj_name": "ccw_guest_purpose_master",
+      "obj_type": "T",
+      "title": "Guest Purpose Master",
+      "description": "Guest visit purposes"
+    },
+    {
+      "obj_name": "ccw_banner_rate_plan_master",
+      "obj_type": "T",
+      "title": "Banner Rate Plan Master",
+      "description": "Banner commercial terms"
+    },
+    {
+      "obj_name": "ccw_member_profile",
+      "obj_type": "T",
+      "title": "Member Profile",
+      "description": "Owner profile of a unit"
+    },
+    {
+      "obj_name": "ccw_tenant_profile",
+      "obj_type": "T",
+      "title": "Tenant Profile",
+      "description": "Tenant of a rented unit"
+    },
+    {
+      "obj_name": "ccw_unit_parking",
+      "obj_type": "T",
+      "title": "Unit Parking",
+      "description": "Parking slots and vehicles"
+    },
+    {
+      "obj_name": "ccw_unit_occupancy_overview",
+      "obj_type": "V",
+      "title": "Unit Occupancy Overview",
+      "description": "Occupancy by wing"
+    },
+    {
+      "obj_name": "ccw_business_directory",
+      "obj_type": "V",
+      "title": "Business Directory",
+      "description": "Searchable directory"
+    },
+    {
+      "obj_name": "ccw_notice",
+      "obj_type": "T",
+      "title": "Notice",
+      "description": "Publish notices"
+    },
+    {
+      "obj_name": "ccw_event",
+      "obj_type": "T",
+      "title": "Event",
+      "description": "Announce events"
+    },
+    {
+      "obj_name": "ccw_notice_board",
+      "obj_type": "V",
+      "title": "Notice Board",
+      "description": "Current notices"
+    },
+    {
+      "obj_name": "ccw_event_calendar",
+      "obj_type": "V",
+      "title": "Event Calendar",
+      "description": "Events calendar"
+    },
+    {
+      "obj_name": "ccw_business_query",
+      "obj_type": "T",
+      "title": "Business Query",
+      "description": "Ask the community"
+    },
+    {
+      "obj_name": "ccw_queries_received",
+      "obj_type": "V",
+      "title": "Queries Received",
+      "description": "Queries forwarded to me"
+    },
+    {
+      "obj_name": "ccw_banner_booking",
+      "obj_type": "T",
+      "title": "Banner Booking",
+      "description": "Banner booking and payment"
+    },
+    {
+      "obj_name": "ccw_banner_carousel",
+      "obj_type": "V",
+      "title": "Banner Carousel",
+      "description": "Live banner strip"
+    },
+    {
+      "obj_name": "ccw_banner_invoice",
+      "obj_type": "R",
+      "title": "Banner Invoice",
+      "description": "Invoice PDF"
+    },
+    {
+      "obj_name": "ccw_banner_bookings_collections",
+      "obj_type": "V",
+      "title": "Banner Bookings & Collections",
+      "description": "Bookings and collections"
+    },
+    {
+      "obj_name": "ccw_banner_slot_availability",
+      "obj_type": "V",
+      "title": "Banner Slot Availability",
+      "description": "Slot capacity by month"
+    },
+    {
+      "obj_name": "ccw_guest_entry",
+      "obj_type": "T",
+      "title": "Guest Entry",
+      "description": "Guest registration"
+    },
+    {
+      "obj_name": "ccw_gate_check_in",
+      "obj_type": "U",
+      "title": "Gate Check-In",
+      "description": "Guard check-in wizard"
+    },
+    {
+      "obj_name": "ccw_guest_log",
+      "obj_type": "V",
+      "title": "Guest Log",
+      "description": "Guest log"
+    },
+    {
+      "obj_name": "ccw_facility_request",
+      "obj_type": "T",
+      "title": "Facility Request",
+      "description": "Raise and resolve concerns"
+    },
+    {
+      "obj_name": "ccw_facility_requests_by_category_status",
+      "obj_type": "V",
+      "title": "Facility Requests by Category and Status",
+      "description": "Requests chart"
+    },
+    {
+      "obj_name": "ccw_member_dashboard",
+      "obj_type": "D",
+      "title": "Member Dashboard",
+      "description": "Owner dashboard"
+    },
+    {
+      "obj_name": "ccw_tenant_dashboard",
+      "obj_type": "D",
+      "title": "Tenant Dashboard",
+      "description": "Tenant dashboard"
+    },
+    {
+      "obj_name": "ccw_management_dashboard",
+      "obj_type": "D",
+      "title": "Management Dashboard",
+      "description": "Management dashboard"
+    },
+    {
+      "obj_name": "ccw_facility_security_dashboard",
+      "obj_type": "D",
+      "title": "Facility & Security Dashboard",
+      "description": "Facility and security dashboard"
+    },
+    {
+      "obj_name": "ccw_portal_home",
+      "obj_type": "S",
+      "title": "Portal Home",
+      "description": "Welcome page"
+    }
+  ],
+  "tables": [
+    {
+      "table_name": "CCW_ANNOUNCE_CATEGORY",
+      "description": "",
+      "key_columns": [
+        "ANNOUNCEMENT_CATEGORY_CODE VARCHAR"
+      ],
+      "other_columns": [
+        "NAME VARCHAR",
+        "APPLIES_TO VARCHAR",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_BANNER_BOOKING",
+      "description": "",
+      "key_columns": [
+        "BOOKING_NO VARCHAR"
+      ],
+      "other_columns": [
+        "BOOKING_DATE DATE",
+        "ADVERTISER_TYPE VARCHAR",
+        "UNIT_NO VARCHAR",
+        "ADVERTISER_NAME VARCHAR",
+        "CONTACT_NO VARCHAR",
+        "EMAIL VARCHAR",
+        "BANNER_TITLE VARCHAR",
+        "BANNER_IMAGE VARCHAR",
+        "CLICK_URL VARCHAR",
+        "START_DATE DATE",
+        "NO_OF_MONTHS NUMBER",
+        "BOOKING_STATUS VARCHAR",
+        "REJECTION_REASON VARCHAR",
+        "RATE_PER_MONTH NUMBER",
+        "AMOUNT NUMBER",
+        "TAX_PCT NUMBER",
+        "TAX_AMOUNT NUMBER",
+        "TOTAL_AMOUNT NUMBER",
+        "INVOICE_NO VARCHAR",
+        "INVOICE_DATE DATE",
+        "PAYMENT_STATUS VARCHAR",
+        "PAYMENT_MODE VARCHAR",
+        "PAYMENT_REFERENCE VARCHAR",
+        "PAYMENT_DATE DATE",
+        "RECEIVED_BY VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+      "description": "",
+      "key_columns": [
+        "PLAN_CODE VARCHAR"
+      ],
+      "other_columns": [
+        "PLAN_NAME VARCHAR",
+        "EFFECTIVE_FROM DATE",
+        "STATUS VARCHAR",
+        "RATE_PER_SLOT_PER_MONTH NUMBER",
+        "TAX_PCT NUMBER",
+        "MIN_MONTHS NUMBER",
+        "MAX_CAROUSEL_SLOTS NUMBER",
+        "SECONDS_PER_BANNER NUMBER",
+        "IMAGE_SIZE_GUIDANCE VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_BQ_RECIPIENT",
+      "description": "",
+      "key_columns": [
+        "QUERY_NO VARCHAR",
+        "LINE_NO NUMBER"
+      ],
+      "other_columns": [
+        "UNIT_NO VARCHAR",
+        "BUSINESS_NAME VARCHAR",
+        "RECIPIENT_EMAIL VARCHAR",
+        "FORWARDED_ON DATETIME",
+        "VIEWED VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_BQ_RESPONSE",
+      "description": "",
+      "key_columns": [
+        "QUERY_NO VARCHAR",
+        "LINE_NO NUMBER"
+      ],
+      "other_columns": [
+        "RESPONSE_DATE DATETIME",
+        "RESPONDER_UNIT_NO VARCHAR",
+        "RESPONDER_BUSINESS_NAME VARCHAR",
+        "RESPONSE_TEXT VARCHAR",
+        "RESPONDER_CONTACT_NO VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_BUSINESS_CATEGORY",
+      "description": "",
+      "key_columns": [
+        "CATEGORY_CODE VARCHAR"
+      ],
+      "other_columns": [
+        "CATEGORY_NAME VARCHAR",
+        "DESCRIPTION VARCHAR",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_BUSINESS_QUERY",
+      "description": "",
+      "key_columns": [
+        "QUERY_NO VARCHAR"
+      ],
+      "other_columns": [
+        "QUERY_DATE DATE",
+        "TARGET_BUSINESS_CATEGORY VARCHAR",
+        "SUBJECT VARCHAR",
+        "DESCRIPTION VARCHAR",
+        "RAISED_BY_EMAIL VARCHAR",
+        "RAISED_BY_UNIT_NO VARCHAR",
+        "RAISED_BY_NAME VARCHAR",
+        "STATUS VARCHAR",
+        "CLOSURE_REMARK VARCHAR",
+        "CLOSED_ON DATETIME",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_EVENT",
+      "description": "",
+      "key_columns": [
+        "EVENT_NO VARCHAR"
+      ],
+      "other_columns": [
+        "TITLE VARCHAR",
+        "ANNOUNCEMENT_CATEGORY VARCHAR",
+        "VENUE VARCHAR",
+        "START_DATE_TIME DATETIME",
+        "END_DATE_TIME DATETIME",
+        "DESCRIPTION TEXT",
+        "EVENT_IMAGE VARCHAR",
+        "ORGANISER VARCHAR",
+        "ORGANISER_CONTACT_NO VARCHAR",
+        "AUDIENCE VARCHAR",
+        "WING_CODE VARCHAR",
+        "STATUS VARCHAR",
+        "CANCELLATION_REASON VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_FACILITY_REQUEST",
+      "description": "",
+      "key_columns": [
+        "REQUEST_NO VARCHAR"
+      ],
+      "other_columns": [
+        "REQUEST_DATE_TIME DATETIME",
+        "RAISED_BY_EMAIL VARCHAR",
+        "UNIT_NO VARCHAR",
+        "RAISED_BY_NAME VARCHAR",
+        "RAISED_BY_CONTACT_NO VARCHAR",
+        "REQUEST_CATEGORY VARCHAR",
+        "PRIORITY VARCHAR",
+        "LOCATION_DETAIL VARCHAR",
+        "DESCRIPTION VARCHAR",
+        "ATTACHMENT VARCHAR",
+        "ASSIGNED_TO VARCHAR",
+        "STATUS VARCHAR",
+        "RESOLUTION_NOTE VARCHAR",
+        "RESOLVED_ON DATETIME",
+        "CLOSED_ON DATETIME",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_FACILITY_REQ_CATEGORY",
+      "description": "",
+      "key_columns": [
+        "REQUEST_CATEGORY_CODE VARCHAR"
+      ],
+      "other_columns": [
+        "NAME VARCHAR",
+        "TARGET_RESOLUTION_HOURS NUMBER",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_FACILITY_TEAM_MEMBER",
+      "description": "",
+      "key_columns": [
+        "STAFF_CODE VARCHAR"
+      ],
+      "other_columns": [
+        "STAFF_NAME VARCHAR",
+        "ROLE VARCHAR",
+        "MOBILE_NO VARCHAR",
+        "EMAIL VARCHAR",
+        "SPECIALISATION VARCHAR",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_FR_UPDATE",
+      "description": "",
+      "key_columns": [
+        "REQUEST_NO VARCHAR",
+        "LINE_NO NUMBER"
+      ],
+      "other_columns": [
+        "UPDATE_DATE_TIME DATETIME",
+        "UPDATED_BY VARCHAR",
+        "STATUS VARCHAR",
+        "REMARK VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_GUEST_ENTRY",
+      "description": "",
+      "key_columns": [
+        "GUEST_ENTRY_NO VARCHAR"
+      ],
+      "other_columns": [
+        "ENTRY_TYPE VARCHAR",
+        "GUEST_NAME VARCHAR",
+        "GUEST_MOBILE VARCHAR",
+        "NO_OF_PERSONS NUMBER",
+        "GUEST_COMPANY VARCHAR",
+        "VEHICLE_NO VARCHAR",
+        "ID_PROOF_TYPE VARCHAR",
+        "ID_PROOF_NO VARCHAR",
+        "PURPOSE VARCHAR",
+        "UNIT_NO VARCHAR",
+        "PERSON_TO_MEET VARCHAR",
+        "EXPECTED_DATE DATE",
+        "VALID_FROM_TIME TIME",
+        "VALID_TO_TIME TIME",
+        "PASS_CODE VARCHAR",
+        "PASS_QR VARCHAR",
+        "REGISTERED_BY VARCHAR",
+        "STATUS VARCHAR",
+        "APPROVED_VIA VARCHAR",
+        "APPROVED_BY VARCHAR",
+        "CHECK_IN_TIME DATETIME",
+        "CHECKED_IN_BY VARCHAR",
+        "CHECK_OUT_TIME DATETIME",
+        "SECURITY_REMARK VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_GUEST_PURPOSE_MASTER",
+      "description": "",
+      "key_columns": [
+        "PURPOSE_CODE VARCHAR"
+      ],
+      "other_columns": [
+        "PURPOSE_NAME VARCHAR",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_MEMBER_CATEGORY",
+      "description": "Additional business categories of a member profile (the primary category stays on CCW_MEMBER_PROFILE.BUSINESS_CATEGORY)",
+      "key_columns": [
+        "UNIT_NO VARCHAR",
+        "LINE_NO NUMBER"
+      ],
+      "other_columns": [
+        "CATEGORY_CODE VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_MEMBER_OWNER",
+      "description": "",
+      "key_columns": [
+        "UNIT_NO VARCHAR",
+        "LINE_NO NUMBER"
+      ],
+      "other_columns": [
+        "OWNER_NAME VARCHAR",
+        "OWNER_MOBILE VARCHAR",
+        "OWNER_EMAIL VARCHAR",
+        "IS_PRIMARY_OWNER VARCHAR",
+        "LOGIN_ENABLED VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_MEMBER_PROFILE",
+      "description": "",
+      "key_columns": [
+        "UNIT_NO VARCHAR"
+      ],
+      "other_columns": [
+        "PROFILE_STATUS VARCHAR",
+        "BUSINESS_NAME VARCHAR",
+        "CONTACT_NO_1 VARCHAR",
+        "BUSINESS_CATEGORY VARCHAR",
+        "ALLOW_TENANT_TO_UPDATE_PROFILE VARCHAR",
+        "BUSINESS_DESCRIPTION VARCHAR",
+        "TENANT_LOGIN_ALLOWED VARCHAR",
+        "LOGO VARCHAR",
+        "SHOW_TENANT_IN_DIRECTORY VARCHAR",
+        "CONTACT_PERSON VARCHAR",
+        "OCCUPANCY_TYPE VARCHAR",
+        "CONTACT_NO_2 VARCHAR",
+        "EMAIL VARCHAR",
+        "WEBSITE VARCHAR",
+        "SHOW_IN_DIRECTORY VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_NOTICE",
+      "description": "",
+      "key_columns": [
+        "NOTICE_NO VARCHAR"
+      ],
+      "other_columns": [
+        "TITLE VARCHAR",
+        "ANNOUNCEMENT_CATEGORY VARCHAR",
+        "PUBLISH_DATE DATE",
+        "EXPIRY_DATE DATE",
+        "IS_IMPORTANT VARCHAR",
+        "NOTICE_BODY TEXT",
+        "ATTACHMENT VARCHAR",
+        "AUDIENCE VARCHAR",
+        "WING_CODE VARCHAR",
+        "STATUS VARCHAR",
+        "PUBLISHED_BY VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_TENANT_CATEGORY",
+      "description": "Additional business categories of a tenant profile (the primary category stays on CCW_TENANT_PROFILE.BUSINESS_CATEGORY)",
+      "key_columns": [
+        "UNIT_NO VARCHAR",
+        "LINE_NO NUMBER"
+      ],
+      "other_columns": [
+        "CATEGORY_CODE VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_TENANT_PROFILE",
+      "description": "",
+      "key_columns": [
+        "UNIT_NO VARCHAR"
+      ],
+      "other_columns": [
+        "TENANT_STATUS VARCHAR",
+        "TENANT_COMPANY_NAME VARCHAR",
+        "BUSINESS_CATEGORY VARCHAR",
+        "BUSINESS_DESCRIPTION VARCHAR",
+        "LOGO VARCHAR",
+        "CONTACT_PERSON VARCHAR",
+        "CONTACT_NO_1 VARCHAR",
+        "CONTACT_NO_2 VARCHAR",
+        "TENANT_EMAIL VARCHAR",
+        "LEASE_START_DATE DATE",
+        "LEASE_END_DATE DATE",
+        "SHOW_IN_DIRECTORY VARCHAR",
+        "LOGIN_ENABLED VARCHAR",
+        "ADDED_BY VARCHAR",
+        "REMOVED_ON DATETIME",
+        "REMOVAL_REASON VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_UNIT_MASTER",
+      "description": "",
+      "key_columns": [
+        "UNIT_NO VARCHAR"
+      ],
+      "other_columns": [
+        "WING_CODE VARCHAR",
+        "FLOOR_NO NUMBER",
+        "UNIT_TYPE VARCHAR",
+        "AREA_SQFT NUMBER",
+        "OCCUPANCY_STATUS VARCHAR",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_UNIT_PARKING",
+      "description": "",
+      "key_columns": [
+        "PARKING_SLOT_NO VARCHAR"
+      ],
+      "other_columns": [
+        "UNIT_NO VARCHAR",
+        "SLOT_LOCATION VARCHAR",
+        "SLOT_TYPE VARCHAR",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_UNIT_PARKING_VEHICLE",
+      "description": "",
+      "key_columns": [
+        "PARKING_SLOT_NO VARCHAR",
+        "LINE_NO NUMBER"
+      ],
+      "other_columns": [
+        "VEHICLE_NO VARCHAR",
+        "VEHICLE_TYPE VARCHAR",
+        "MAKE_MODEL VARCHAR",
+        "COLOUR VARCHAR",
+        "USED_BY VARCHAR",
+        "USER_NAME VARCHAR",
+        "USER_MOBILE VARCHAR"
+      ]
+    },
+    {
+      "table_name": "CCW_WING_MASTER",
+      "description": "",
+      "key_columns": [
+        "WING_CODE VARCHAR"
+      ],
+      "other_columns": [
+        "WING_NAME VARCHAR",
+        "NO_OF_FLOORS NUMBER",
+        "STATUS VARCHAR",
+        "ADD_DATE DATETIME",
+        "ADD_USER VARCHAR",
+        "ADD_TERM VARCHAR",
+        "CHG_DATE DATETIME",
+        "CHG_USER VARCHAR",
+        "CHG_TERM VARCHAR"
+      ]
+    }
+  ]
+}

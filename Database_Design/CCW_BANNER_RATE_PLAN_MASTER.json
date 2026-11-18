@@ -1,0 +1,154 @@
+{
+  "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "PLAN_CODE",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Unique code of the rate plan",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "PLAN_NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Name of the banner rate plan",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "EFFECTIVE_FROM",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Date from which the plan applies",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Active or Inactive",
+      "sequence": 4,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Active"
+        },
+        {
+          "value": "I",
+          "label": "Inactive"
+        }
+      ]
+    },
+    {
+      "column_name": "RATE_PER_SLOT_PER_MONTH",
+      "data_type": "NUMBER",
+      "size": "12,2",
+      "key": false,
+      "description": "Monthly rate for one carousel slot",
+      "sequence": 5,
+      "mandatory": true
+    },
+    {
+      "column_name": "TAX_PCT",
+      "data_type": "NUMBER",
+      "size": "5,2",
+      "key": false,
+      "description": "Tax percentage applied on the booking amount",
+      "sequence": 6,
+      "mandatory": true
+    },
+    {
+      "column_name": "MIN_MONTHS",
+      "data_type": "NUMBER",
+      "size": "3",
+      "key": false,
+      "description": "Minimum number of months per booking",
+      "sequence": 7,
+      "mandatory": true
+    },
+    {
+      "column_name": "MAX_CAROUSEL_SLOTS",
+      "data_type": "NUMBER",
+      "size": "3",
+      "key": false,
+      "description": "Banners that can be live on any day",
+      "sequence": 8,
+      "mandatory": true
+    },
+    {
+      "column_name": "SECONDS_PER_BANNER",
+      "data_type": "NUMBER",
+      "size": "3",
+      "key": false,
+      "description": "Seconds each banner is shown before the carousel rotates",
+      "sequence": 9,
+      "mandatory": true
+    },
+    {
+      "column_name": "IMAGE_SIZE_GUIDANCE",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Text shown to advertisers about banner image size",
+      "sequence": 10
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Record creation date",
+      "sequence": 11
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who created the record",
+      "sequence": 12
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal that created the record",
+      "sequence": 13
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Last change date",
+      "sequence": 14
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who last changed the record",
+      "sequence": 15
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal of last change",
+      "sequence": 16
+    }
+  ]
+}

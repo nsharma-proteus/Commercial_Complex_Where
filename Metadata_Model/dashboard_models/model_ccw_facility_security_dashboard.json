@@ -1,0 +1,29 @@
+{
+ "DASHBOARD": {
+  "DASHBOARD_ID": "CCW_FACILITY_SECURITY_DASHBOARD",
+  "DASHBOARD_TYPE": "S",
+  "DASHBOARD_NAME": "Facility & Security Dashboard",
+  "DASHBOARD_DESCR": "Facility requests by category and status, and the guest log for the selected date. Built from the existing visuals only; KPI cards, funnel, staff bar, hour-of-day column and overdue grid need new visuals.",
+  "CREATED_BY": "admin",
+  "CREATED_DATE": "2026-11-16",
+  "REFRESH_INTERVAL_SECONDS": 0,
+  "THEME_COLOR": "default",
+  "GLOBAL_CRITERIA": [
+   {"PARAM_NAME": "FROM_DATE", "PROMPT_LABEL": "From Date", "DEFAULT_VALUE": ":calendar_today", "DATA_TYPE": "date", "OPERATOR": ">=", "BROADCAST_TO": ["VIS_REQ_CHART", "VIS_GUESTS"]},
+   {"PARAM_NAME": "TO_DATE", "PROMPT_LABEL": "To Date", "DEFAULT_VALUE": ":calendar_today", "DATA_TYPE": "date", "OPERATOR": "<=", "BROADCAST_TO": ["VIS_REQ_CHART", "VIS_GUESTS"]},
+   {"PARAM_NAME": "WING_CODE", "PROMPT_LABEL": "Wing", "DEFAULT_VALUE": "%", "DATA_TYPE": "string", "OPERATOR": "like", "BROADCAST_TO": ["VIS_REQ_CHART"]}
+  ],
+  "VISUALS": [
+   {"VISUAL_ID": "VIS_REQ_CHART", "VISUAL_NAME": "Facility Requests by Category and Status", "POSITION": {"X": 0, "Y": 0, "WIDTH": 12, "HEIGHT": 4}, "VISUAL_CONFIG_REF": "model_ccw_facility_requests_by_category_status.json",
+    "CRITERIA_BINDINGS": [
+     {"VISUAL_PARAM": "from_date", "BIND_TYPE": "global", "GLOBAL_PARAM": "FROM_DATE"},
+     {"VISUAL_PARAM": "to_date", "BIND_TYPE": "global", "GLOBAL_PARAM": "TO_DATE"},
+     {"VISUAL_PARAM": "wing_code", "BIND_TYPE": "global", "GLOBAL_PARAM": "WING_CODE"}]},
+   {"VISUAL_ID": "VIS_GUESTS", "VISUAL_NAME": "Guest Log", "POSITION": {"X": 0, "Y": 4, "WIDTH": 12, "HEIGHT": 5}, "VISUAL_CONFIG_REF": "model_ccw_guest_log.json",
+    "CRITERIA_BINDINGS": [
+     {"VISUAL_PARAM": "from_date", "BIND_TYPE": "global", "GLOBAL_PARAM": "FROM_DATE"},
+     {"VISUAL_PARAM": "to_date", "BIND_TYPE": "global", "GLOBAL_PARAM": "TO_DATE"}]}
+  ],
+  "DRILL_THROUGH": []
+ }
+}

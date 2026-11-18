@@ -1,0 +1,17 @@
+{
+  "object_name": "ccw_announcement_category_master",
+  "tables": {
+    "CCW_ANNOUNCE_CATEGORY": [
+      "NAME",
+      "CHG_USER",
+      "ADD_TERM",
+      "ADD_USER",
+      "ANNOUNCEMENT_CATEGORY_CODE",
+      "CHG_TERM",
+      "ADD_DATE",
+      "CHG_DATE",
+      "STATUS",
+      "APPLIES_TO"
+    ]
+  }
+}

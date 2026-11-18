@@ -1,0 +1,171 @@
+{
+  "table_name": "CCW_BUSINESS_QUERY",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "QUERY_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Auto-generated query number",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "QUERY_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Date raised",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "TARGET_BUSINESS_CATEGORY",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Category of businesses the query is forwarded to (cannot change after first save)",
+      "sequence": 3,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_BUSINESS_CATEGORY",
+        "display_column": "CATEGORY_NAME",
+        "value_column": "CATEGORY_CODE"
+      }
+    },
+    {
+      "column_name": "SUBJECT",
+      "data_type": "VARCHAR",
+      "size": "200",
+      "key": false,
+      "description": "Short subject, e.g. Need a lawyer",
+      "sequence": 4,
+      "mandatory": true
+    },
+    {
+      "column_name": "DESCRIPTION",
+      "data_type": "VARCHAR",
+      "size": "1000",
+      "key": false,
+      "description": "What is needed",
+      "sequence": 5,
+      "mandatory": true
+    },
+    {
+      "column_name": "RAISED_BY_EMAIL",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Raiser email (defaults to the signed-in user)",
+      "sequence": 6,
+      "mandatory": true
+    },
+    {
+      "column_name": "RAISED_BY_UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Unit of the raiser (defaults from the user's unit)",
+      "sequence": 7,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_UNIT_MASTER",
+        "display_column": "UNIT_NO",
+        "value_column": "UNIT_NO"
+      }
+    },
+    {
+      "column_name": "RAISED_BY_NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Name of the raiser",
+      "sequence": 8
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Open / Closed; changed by Close and Reopen",
+      "sequence": 9,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "O",
+          "label": "Open"
+        },
+        {
+          "value": "C",
+          "label": "Closed"
+        }
+      ]
+    },
+    {
+      "column_name": "CLOSURE_REMARK",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Filled by Close",
+      "sequence": 10
+    },
+    {
+      "column_name": "CLOSED_ON",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Filled by Close",
+      "sequence": 11
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: added on",
+      "sequence": 12
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: added by",
+      "sequence": 13
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: added from",
+      "sequence": 14
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: changed on",
+      "sequence": 15
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: changed by",
+      "sequence": 16
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: changed from",
+      "sequence": 17
+    }
+  ]
+}

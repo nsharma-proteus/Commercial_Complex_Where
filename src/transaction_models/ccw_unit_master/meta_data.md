@@ -1,0 +1,1 @@
+[1] Unit Master: unit_no(V10), wing_code(V10), wing_name(V100), wing_floors(N3), floor_no(N3), unit_type(V1), area_sqft(N10,2), occupancy_status(V1), status(V1), add_date(DT), add_user(V10), add_term(V15), chg_date(DT), chg_user(V10), chg_term(V15)

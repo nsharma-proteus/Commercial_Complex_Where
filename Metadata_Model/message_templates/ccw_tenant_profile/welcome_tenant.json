@@ -1,0 +1,36 @@
+{
+  "id": "welcome_tenant",
+  "name": "Welcome tenant",
+  "grouping": {"mode": "per_record"},
+  "recipients": [
+    {"role": "to", "channel": "email", "from": {"column": "tenant_email"}}
+  ],
+  "channels": {
+    "email": {
+      "subject": "Welcome to the {ORG.name} portal - Unit {unit_no}",
+      "body": {"type": "doc", "content": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "Dear "},
+          {"type": "mergeField", "attrs": {"key": "contact_person", "fallback": ""}},
+          {"type": "text", "text": ","}
+        ]},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "The tenant profile of "},
+          {"type": "mergeField", "attrs": {"key": "tenant_company_name", "fallback": ""}},
+          {"type": "text", "text": " for unit "},
+          {"type": "mergeField", "attrs": {"key": "unit_no", "fallback": ""}},
+          {"type": "text", "text": " is now active on the commercial complex portal. Your landlord is "},
+          {"type": "mergeField", "attrs": {"key": "owner_business_name", "fallback": ""}},
+          {"type": "text", "text": "."}
+        ]},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "If portal login has been enabled for you, sign in with this email address."}
+        ]},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "Regards, "},
+          {"type": "mergeField", "attrs": {"key": "ORG.name"}}
+        ]}
+      ]}
+    }
+  }
+}

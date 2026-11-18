@@ -1,0 +1,567 @@
+{
+  "DATA_SOURCE_MODE": "sql",
+  "SQLMODEL": {
+    "SQLModel": {
+      "COLUMNS": [
+        {
+          "COLUMN": [
+            {
+              "COLID": 2,
+              "NAME": "START_DATE_TIME",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "START_DATE_TIME",
+              "tableName": "CCW_EVENT",
+              "content": "Start",
+              "name": "Start",
+              "type": "date",
+              "JAVATYPE": "java.sql.Timestamp",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Date",
+              "StandardName": "Date",
+              "checked": true
+            },
+            {
+              "COLID": 3,
+              "NAME": "END_DATE_TIME",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "END_DATE_TIME",
+              "tableName": "CCW_EVENT",
+              "content": "End",
+              "name": "End",
+              "type": "date",
+              "JAVATYPE": "java.sql.Timestamp",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "End Date",
+              "StandardName": "EndDate",
+              "checked": true
+            },
+            {
+              "COLID": 4,
+              "NAME": "CATEGORY",
+              "DBTABLE": "CCW_ANNOUNCE_CATEGORY",
+              "DBNAME": "NAME",
+              "tableName": "CCW_ANNOUNCE_CATEGORY",
+              "content": "Category",
+              "name": "Category",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Groups",
+              "StandardName": "Groups",
+              "checked": true
+            },
+            {
+              "COLID": 5,
+              "NAME": "TITLE",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "TITLE",
+              "tableName": "CCW_EVENT",
+              "content": "Title",
+              "name": "Title",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "First Row Left",
+              "StandardName": "FirstRowLeft",
+              "checked": true
+            },
+            {
+              "COLID": 6,
+              "NAME": "VENUE",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "VENUE",
+              "tableName": "CCW_EVENT",
+              "content": "Venue",
+              "name": "Venue",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Second Row Left",
+              "StandardName": "SecondRowLeft",
+              "checked": true
+            },
+            {
+              "COLID": 7,
+              "NAME": "STATUS",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "STATUS",
+              "tableName": "CCW_EVENT",
+              "content": "Status",
+              "name": "Status",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Second Row Right",
+              "StandardName": "SecondRowRight",
+              "checked": true
+            },
+            {
+              "COLID": 8,
+              "NAME": "EVENT_NO",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "EVENT_NO",
+              "tableName": "CCW_EVENT",
+              "content": "Event No",
+              "name": "Event No",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Third Row Left",
+              "StandardName": "ThirdRowLeft",
+              "checked": true
+            }
+          ]
+        }
+      ]
+    },
+    "CRITERIA": {
+      "query": {
+        "rules": [
+          {
+            "id": "Criteria_1",
+            "field": "CCW_EVENT.START_DATE_TIME",
+            "DBNAME": "START_DATE_TIME",
+            "tableName": "CCW_EVENT",
+            "COLTYPE": "date",
+            "currentFieldType": "date",
+            "operator": ">=",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "From Date",
+            "promptVar": "from_date",
+            "value": ":calendar_month_start",
+            "chipValue": []
+          },
+          {
+            "id": "Criteria_2",
+            "field": "CCW_EVENT.START_DATE_TIME",
+            "DBNAME": "START_DATE_TIME",
+            "tableName": "CCW_EVENT",
+            "COLTYPE": "date",
+            "currentFieldType": "date",
+            "operator": "<=",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "To Date",
+            "promptVar": "to_date",
+            "value": ":calendar_month_end",
+            "chipValue": []
+          },
+          {
+            "id": "Criteria_3",
+            "field": "CCW_EVENT.ANNOUNCEMENT_CATEGORY",
+            "DBNAME": "ANNOUNCEMENT_CATEGORY",
+            "tableName": "CCW_EVENT",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "like",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Category",
+            "promptVar": "category",
+            "value": "%",
+            "chipValue": [],
+            "lookup": "CCW_ANNOUNCE_CATEGORY(NAME, ANNOUNCEMENT_CATEGORY_CODE)"
+          },
+          {
+            "id": "Criteria_4",
+            "field": "CCW_EVENT.STATUS",
+            "DBNAME": "STATUS",
+            "tableName": "CCW_EVENT",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "in",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Status (add C to show cancelled)",
+            "promptVar": "status",
+            "value": "",
+            "chipValue": [
+              "P"
+            ],
+            "options": [
+              {
+                "data": "P",
+                "display": "Published"
+              },
+              {
+                "data": "C",
+                "display": "Cancelled"
+              },
+              {
+                "data": "D",
+                "display": "Draft"
+              }
+            ]
+          }
+        ],
+        "condition": "and"
+      }
+    },
+    "VISUAL_NAME": "Calendar",
+    "SCHEMA_NAME": "CCW_EVENT_CALENDAR",
+    "SCHEMA_DESCR": "Event Calendar",
+    "SCHEMA_TYPE": "S",
+    "OUTPUT_TYPE": "JSON",
+    "DATABASE_TYPE": "1",
+    "DATABASE_DETAIL": {
+      "DATABASE_NAME": "PostgreSQL",
+      "TYPE": 1
+    }
+  },
+  "LAYOUT_DATA": {
+    "visualLayout": {
+      "ID": "insight_calendar_feed",
+      "VisualName": "Calendar",
+      "VisualType": "Standard",
+      "VisualIcon": "Calendar.svg",
+      "DisplayOrder": "17",
+      "className": "InsightCalendarFeed",
+      "linkOptions": "",
+      "OutputType": "JSON",
+      "title": "Event Calendar",
+      "subtitle": "Events by month, week or list",
+      "options": [
+        {
+          "optionId": "openView",
+          "optionName": "openView",
+          "optionHeading": "openView",
+          "dataType": "string",
+          "defaultValue": "month",
+          "listOfValues": "month,compact,week,day,list",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "weekStart",
+          "optionName": "weekStart",
+          "optionHeading": "weekStart",
+          "dataType": "string",
+          "defaultValue": "monday",
+          "listOfValues": "monday,sunday",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "maxEventsPerDay",
+          "optionName": "maxEventsPerDay",
+          "optionHeading": "maxEventsPerDay",
+          "dataType": "string",
+          "defaultValue": "3",
+          "listOfValues": "",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "toolbar",
+          "optionName": "toolbar",
+          "optionHeading": "toolbar",
+          "dataType": "string",
+          "defaultValue": "true",
+          "listOfValues": "true,false",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "autoRefreshSeconds",
+          "optionName": "autoRefreshSeconds",
+          "optionHeading": "autoRefreshSeconds",
+          "dataType": "number",
+          "defaultValue": "0",
+          "listOfValues": "",
+          "allowChange": "true",
+          "optionType": "inner"
+        }
+      ],
+      "ColumnGroups": [
+        {
+          "GroupID": 1,
+          "GroupName": "Date",
+          "StandardName": "Date",
+          "AllowedColumnTypes": "DATE",
+          "MinColumns": 0,
+          "MaxColumns": 1,
+          "COLUMNS": [
+            {
+              "COLID": 2,
+              "NAME": "START_DATE_TIME",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "START_DATE_TIME",
+              "tableName": "CCW_EVENT",
+              "content": "Start",
+              "name": "Start",
+              "type": "date",
+              "JAVATYPE": "java.sql.Timestamp",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Date",
+              "StandardName": "Date",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 2,
+          "GroupName": "Groups",
+          "StandardName": "Groups",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 1,
+          "COLUMNS": [
+            {
+              "COLID": 4,
+              "NAME": "CATEGORY",
+              "DBTABLE": "CCW_ANNOUNCE_CATEGORY",
+              "DBNAME": "NAME",
+              "tableName": "CCW_ANNOUNCE_CATEGORY",
+              "content": "Category",
+              "name": "Category",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Groups",
+              "StandardName": "Groups",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 3,
+          "GroupName": "First Row Left",
+          "StandardName": "FirstRowLeft",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 5,
+              "NAME": "TITLE",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "TITLE",
+              "tableName": "CCW_EVENT",
+              "content": "Title",
+              "name": "Title",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "First Row Left",
+              "StandardName": "FirstRowLeft",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 4,
+          "GroupName": "First Row Right",
+          "StandardName": "FirstRowRight",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": []
+        },
+        {
+          "GroupID": 5,
+          "GroupName": "Second Row Left",
+          "StandardName": "SecondRowLeft",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 6,
+              "NAME": "VENUE",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "VENUE",
+              "tableName": "CCW_EVENT",
+              "content": "Venue",
+              "name": "Venue",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Second Row Left",
+              "StandardName": "SecondRowLeft",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 6,
+          "GroupName": "Second Row Right",
+          "StandardName": "SecondRowRight",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 7,
+              "NAME": "STATUS",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "STATUS",
+              "tableName": "CCW_EVENT",
+              "content": "Status",
+              "name": "Status",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Second Row Right",
+              "StandardName": "SecondRowRight",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 7,
+          "GroupName": "Third Row Left",
+          "StandardName": "ThirdRowLeft",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 8,
+              "NAME": "EVENT_NO",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "EVENT_NO",
+              "tableName": "CCW_EVENT",
+              "content": "Event No",
+              "name": "Event No",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Third Row Left",
+              "StandardName": "ThirdRowLeft",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 8,
+          "GroupName": "Third Row Right",
+          "StandardName": "ThirdRowRight",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": []
+        },
+        {
+          "GroupID": 9,
+          "GroupName": "End Date",
+          "StandardName": "EndDate",
+          "AllowedColumnTypes": "DATE",
+          "MinColumns": 0,
+          "MaxColumns": 1,
+          "COLUMNS": [
+            {
+              "COLID": 3,
+              "NAME": "END_DATE_TIME",
+              "DBTABLE": "CCW_EVENT",
+              "DBNAME": "END_DATE_TIME",
+              "tableName": "CCW_EVENT",
+              "content": "End",
+              "name": "End",
+              "type": "date",
+              "JAVATYPE": "java.sql.Timestamp",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "End Date",
+              "StandardName": "EndDate",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 10,
+          "GroupName": "Events",
+          "StandardName": "Events",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 1,
+          "COLUMNS": []
+        }
+      ],
+      "update": {
+        "ENABLED": true,
+        "TARGET_OBJECT": "ccw_event",
+        "RECORD_KEY": {
+          "event_no": "EVENT_NO"
+        },
+        "SET": [
+          {
+            "GESTURE": "move",
+            "KIND": "move_date",
+            "ZONES": [
+              "Date",
+              "EndDate"
+            ],
+            "COLUMNS": {
+              "START_DATE_TIME": "START_DATE_TIME",
+              "END_DATE_TIME": "END_DATE_TIME"
+            }
+          }
+        ],
+        "CONFIRM": false,
+        "ENABLE_WHEN": ""
+      }
+    },
+    "layoutdata": {}
+  },
+  "SOURCE_SQL": "SELECT e.start_date_time AS START_DATE_TIME, e.end_date_time AS END_DATE_TIME, c.name AS CATEGORY, e.title AS TITLE, e.venue AS VENUE, e.status AS STATUS, e.event_no AS EVENT_NO FROM ccw_event e JOIN ccw_announce_category c ON c.announcement_category_code = e.announcement_category WHERE e.start_date_time::date >= ?.from_date AND e.start_date_time::date <= ?.to_date AND e.announcement_category LIKE ?.category AND e.status IN ?.status ORDER BY e.start_date_time"
+}

@@ -1,0 +1,3 @@
+[1] Business Query: query_no(V10), query_date(D), target_business_category(V10), category_name(V100), subject(V200), description(V1000), raised_by_email(V100), raised_by_unit_no(V10), raised_by_name(V100), status(V1), closure_remark(V500), closed_on(DT), add_date(DT), add_user(V10), add_term(V15), chg_date(DT), chg_user(V10), chg_term(V15)
+[2] Recipients: query_no(V10), line_no(N4), unit_no(V10), business_name(V150), recipient_email(V100), forwarded_on(DT), viewed(V1)
+[3] Responses: query_no(V10), line_no(N4), response_date(DT), responder_unit_no(V10), responder_business_name(V150), response_text(V1000), responder_contact_no(V15)

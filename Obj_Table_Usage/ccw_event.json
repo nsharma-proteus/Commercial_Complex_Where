@@ -1,0 +1,35 @@
+{
+  "object_name": "ccw_event",
+  "tables": {
+    "CCW_EVENT": [
+      "WING_CODE",
+      "CHG_DATE",
+      "CHG_TERM",
+      "STATUS",
+      "EVENT_NO",
+      "START_DATE_TIME",
+      "CHG_USER",
+      "ORGANISER_CONTACT_NO",
+      "AUDIENCE",
+      "END_DATE_TIME",
+      "EVENT_IMAGE",
+      "ADD_TERM",
+      "VENUE",
+      "DESCRIPTION",
+      "CANCELLATION_REASON",
+      "ADD_DATE",
+      "ANNOUNCEMENT_CATEGORY",
+      "TITLE",
+      "ADD_USER",
+      "ORGANISER"
+    ],
+    "CCW_ANNOUNCE_CATEGORY": [
+      "NAME",
+      "ANNOUNCEMENT_CATEGORY_CODE"
+    ],
+    "CCW_WING_MASTER": [
+      "WING_CODE",
+      "WING_NAME"
+    ]
+  }
+}

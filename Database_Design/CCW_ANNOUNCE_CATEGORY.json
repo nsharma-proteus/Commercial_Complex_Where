@@ -1,0 +1,115 @@
+{
+  "table_name": "CCW_ANNOUNCE_CATEGORY",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "ANNOUNCEMENT_CATEGORY_CODE",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Unique category code",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Category name, unique within Applies To",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "APPLIES_TO",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Notice / Event / Both",
+      "sequence": 3,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "N",
+          "label": "Notice"
+        },
+        {
+          "value": "E",
+          "label": "Event"
+        },
+        {
+          "value": "B",
+          "label": "Both"
+        }
+      ]
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Active or Inactive",
+      "sequence": 4,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Active"
+        },
+        {
+          "value": "I",
+          "label": "Inactive"
+        }
+      ]
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Created date",
+      "sequence": 5
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Created by",
+      "sequence": 6
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Created from terminal",
+      "sequence": 7
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Last change date",
+      "sequence": 8
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Last changed by",
+      "sequence": 9
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Last changed from terminal",
+      "sequence": 10
+    }
+  ]
+}

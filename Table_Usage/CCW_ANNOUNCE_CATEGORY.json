@@ -1,0 +1,50 @@
+{
+  "table_name": "CCW_ANNOUNCE_CATEGORY",
+  "objects": [
+    {
+      "object_name": "ccw_announcement_category_master",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "NAME",
+        "CHG_USER",
+        "ADD_TERM",
+        "ADD_USER",
+        "ANNOUNCEMENT_CATEGORY_CODE",
+        "CHG_TERM",
+        "ADD_DATE",
+        "CHG_DATE",
+        "STATUS",
+        "APPLIES_TO"
+      ]
+    },
+    {
+      "object_name": "ccw_notice",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "NAME",
+        "ANNOUNCEMENT_CATEGORY_CODE"
+      ],
+      "join_info": {
+        "column": "ANNOUNCEMENT_CATEGORY_CODE",
+        "join_table": "CCW_NOTICE",
+        "join_column": "ANNOUNCEMENT_CATEGORY"
+      }
+    },
+    {
+      "object_name": "ccw_event",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "NAME",
+        "ANNOUNCEMENT_CATEGORY_CODE"
+      ],
+      "join_info": {
+        "column": "ANNOUNCEMENT_CATEGORY_CODE",
+        "join_table": "CCW_EVENT",
+        "join_column": "ANNOUNCEMENT_CATEGORY"
+      }
+    }
+  ]
+}

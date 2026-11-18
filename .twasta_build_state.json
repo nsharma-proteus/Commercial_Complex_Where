@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "objects": {
+    "T:ccw_unit_master": {
+      "obj_type": "T",
+      "obj_name": "ccw_unit_master",
+      "verified_at": 1794817181.3625436,
+      "verify_ok": true,
+      "verify_summary": "\u2713 ccw_unit_master passed the CRUD test.",
+      "verify_fingerprint": "3910aaa208c8153c"
+    },
+    "T:ccw_member_profile": {
+      "obj_type": "T",
+      "obj_name": "ccw_member_profile",
+      "verified_at": 1794817616.9169102,
+      "verify_ok": true,
+      "verify_summary": "\u2713 ccw_member_profile passed the CRUD test.",
+      "verify_fingerprint": "0b4a86dd961aee8c"
+    },
+    "T:ccw_tenant_profile": {
+      "obj_type": "T",
+      "obj_name": "ccw_tenant_profile",
+      "verified_at": 1794820441.0127573,
+      "verify_ok": true,
+      "verify_summary": "\u2713 ccw_tenant_profile passed the CRUD test.",
+      "verify_fingerprint": "dac4cbb135db62ab"
+    },
+    "T:ccw_unit_parking": {
+      "obj_type": "T",
+      "obj_name": "ccw_unit_parking",
+      "verified_at": 1794821450.1887567,
+      "verify_ok": true,
+      "verify_summary": "\u2713 ccw_unit_parking passed the CRUD test.",
+      "verify_fingerprint": "19e3a6a6bfa18c2d"
+    },
+    "T:ccw_notice": {
+      "obj_type": "T",
+      "obj_name": "ccw_notice",
+      "verified_at": 1794821956.4362037,
+      "verify_ok": true,
+      "verify_summary": "\u2713 ccw_notice passed the CRUD test.",
+      "verify_fingerprint": "2b80b32025221c3f"
+    },
+    "T:ccw_event": {
+      "obj_type": "T",
+      "obj_name": "ccw_event",
+      "verified_at": 1794822114.5543194,
+      "verify_ok": true,
+      "verify_summary": "\u2713 ccw_event passed the CRUD test.",
+      "verify_fingerprint": "c40847cf50d94112"
+    },
+    "T:ccw_banner_booking": {
+      "obj_type": "T",
+      "obj_name": "ccw_banner_booking",
+      "verified_at": 1794823192.3049355,
+      "verify_ok": true,
+      "verify_summary": "\u2713 ccw_banner_booking passed the CRUD test.",
+      "verify_fingerprint": "aed33d0daa8242e2"
+    },
+    "V:ccw_queries_received": {
+      "obj_type": "V",
+      "obj_name": "ccw_queries_received",
+      "verified_at": 1794824832.43703,
+      "verify_ok": true,
+      "verify_summary": "\u2713 BI verification passed \u2014 1 visual re-ran with no missing input or errors.",
+      "verify_fingerprint": "fdec6d10be443fe0"
+    }
+  }
+}

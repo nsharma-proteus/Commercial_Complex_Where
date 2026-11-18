@@ -1,0 +1,712 @@
+{
+  "DATA_SOURCE_MODE": "sql",
+  "SQLMODEL": {
+    "SQLModel": {
+      "COLUMNS": [
+        {
+          "COLUMN": [
+            {
+              "COLID": 2,
+              "NAME": "BOOKING_NO",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "BOOKING_NO",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Booking No",
+              "name": "Booking No",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 3,
+              "NAME": "ADVERTISER_NAME",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "ADVERTISER_NAME",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Advertiser",
+              "name": "Advertiser",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 4,
+              "NAME": "UNIT_NO",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "UNIT_NO",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Unit",
+              "name": "Unit",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 5,
+              "NAME": "START_DATE",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "START_DATE",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Start Date",
+              "name": "Start Date",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              }
+            },
+            {
+              "COLID": 6,
+              "NAME": "END_DATE",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "START_DATE",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "End Date",
+              "name": "End Date",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              }
+            },
+            {
+              "COLID": 7,
+              "NAME": "NO_OF_MONTHS",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "NO_OF_MONTHS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Months",
+              "name": "Months",
+              "type": "number",
+              "JAVATYPE": "java.lang.Integer",
+              "COLTYPE": "NUMBER",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 8,
+              "NAME": "TOTAL_AMOUNT",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "TOTAL_AMOUNT",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Billed",
+              "name": "Billed",
+              "type": "number",
+              "JAVATYPE": "java.math.BigDecimal",
+              "COLTYPE": "NUMBER",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "number",
+                "numberStyle": "currency",
+                "currency": "INR",
+                "decimals": 2
+              }
+            },
+            {
+              "COLID": 9,
+              "NAME": "RECEIVED_AMOUNT",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "TOTAL_AMOUNT",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Received",
+              "name": "Received",
+              "type": "number",
+              "JAVATYPE": "java.math.BigDecimal",
+              "COLTYPE": "NUMBER",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "number",
+                "numberStyle": "currency",
+                "currency": "INR",
+                "decimals": 2
+              }
+            },
+            {
+              "COLID": 10,
+              "NAME": "BOOKING_STATUS",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "BOOKING_STATUS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Booking Status",
+              "name": "Booking Status",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 11,
+              "NAME": "PAYMENT_STATUS",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "PAYMENT_STATUS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Payment Status",
+              "name": "Payment Status",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 12,
+              "NAME": "DISPLAY_STATE",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "BOOKING_STATUS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Display State",
+              "name": "Display State",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            }
+          ]
+        }
+      ]
+    },
+    "CRITERIA": {
+      "query": {
+        "rules": [
+          {
+            "id": "Criteria_1",
+            "field": "CCW_BANNER_BOOKING.START_DATE",
+            "DBNAME": "START_DATE",
+            "tableName": "CCW_BANNER_BOOKING",
+            "COLTYPE": "date",
+            "currentFieldType": "date",
+            "operator": ">=",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "From Date",
+            "promptVar": "from_date",
+            "value": ":calendar_year_start",
+            "chipValue": []
+          },
+          {
+            "id": "Criteria_2",
+            "field": "CCW_BANNER_BOOKING.START_DATE",
+            "DBNAME": "START_DATE",
+            "tableName": "CCW_BANNER_BOOKING",
+            "COLTYPE": "date",
+            "currentFieldType": "date",
+            "operator": "<=",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "To Date",
+            "promptVar": "to_date",
+            "value": ":calendar_year_end",
+            "chipValue": []
+          },
+          {
+            "id": "Criteria_3",
+            "field": "CCW_BANNER_BOOKING.BOOKING_STATUS",
+            "DBNAME": "BOOKING_STATUS",
+            "tableName": "CCW_BANNER_BOOKING",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "in",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Booking Status",
+            "promptVar": "booking_status",
+            "value": "",
+            "chipValue": [
+              "R",
+              "A",
+              "J",
+              "C"
+            ],
+            "options": [
+              {
+                "data": "R",
+                "display": "Requested"
+              },
+              {
+                "data": "A",
+                "display": "Approved"
+              },
+              {
+                "data": "J",
+                "display": "Rejected"
+              },
+              {
+                "data": "C",
+                "display": "Cancelled"
+              }
+            ]
+          },
+          {
+            "id": "Criteria_4",
+            "field": "CCW_BANNER_BOOKING.PAYMENT_STATUS",
+            "DBNAME": "PAYMENT_STATUS",
+            "tableName": "CCW_BANNER_BOOKING",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "in",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Payment Status",
+            "promptVar": "payment_status",
+            "value": "",
+            "chipValue": [
+              "U",
+              "P"
+            ],
+            "options": [
+              {
+                "data": "U",
+                "display": "Unpaid"
+              },
+              {
+                "data": "P",
+                "display": "Paid"
+              }
+            ]
+          },
+          {
+            "id": "Criteria_5",
+            "field": "CCW_BANNER_BOOKING.ADVERTISER_TYPE",
+            "DBNAME": "ADVERTISER_TYPE",
+            "tableName": "CCW_BANNER_BOOKING",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "in",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Advertiser Type",
+            "promptVar": "advertiser_type",
+            "value": "",
+            "chipValue": [
+              "M",
+              "T",
+              "E"
+            ],
+            "options": [
+              {
+                "data": "M",
+                "display": "Member"
+              },
+              {
+                "data": "T",
+                "display": "Tenant"
+              },
+              {
+                "data": "E",
+                "display": "External"
+              }
+            ]
+          }
+        ],
+        "condition": "and"
+      }
+    },
+    "VISUAL_NAME": "Grid",
+    "SCHEMA_NAME": "CCW_BANNER_BOOKINGS_COLLECTIONS",
+    "SCHEMA_DESCR": "Banner Bookings & Collections",
+    "SCHEMA_TYPE": "S",
+    "OUTPUT_TYPE": "JSON",
+    "DATABASE_TYPE": "1",
+    "DATABASE_DETAIL": {
+      "DATABASE_NAME": "PostgreSQL",
+      "TYPE": 1
+    }
+  },
+  "LAYOUT_DATA": {
+    "visualLayout": {
+      "ID": "grid",
+      "VisualName": "Grid",
+      "VisualType": "Standard",
+      "VisualIcon": "Grid.svg",
+      "DisplayOrder": "8",
+      "className": "InsightGridTable",
+      "linkOptions": "",
+      "OutputType": "JSON",
+      "title": "Banner Bookings & Collections",
+      "subtitle": "Bookings and collections",
+      "options": [
+        {
+          "optionId": "showGrandTotals",
+          "optionName": "showGrandTotals",
+          "optionHeading": "showGrandTotals",
+          "dataType": "string",
+          "defaultValue": "on",
+          "listOfValues": "off,on",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "showTotals",
+          "optionName": "showTotals",
+          "optionHeading": "showTotals",
+          "dataType": "string",
+          "defaultValue": "on",
+          "listOfValues": "off,on",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "type",
+          "optionName": "type",
+          "optionHeading": "type",
+          "dataType": "string",
+          "defaultValue": "flat",
+          "listOfValues": "compact,flat,classic",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "toolbar",
+          "optionName": "toolbar",
+          "optionHeading": "toolbar",
+          "dataType": "string",
+          "defaultValue": "true",
+          "listOfValues": "true,false",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "autoRefreshSeconds",
+          "optionName": "autoRefreshSeconds",
+          "optionHeading": "autoRefreshSeconds",
+          "dataType": "number",
+          "defaultValue": "0",
+          "listOfValues": "",
+          "allowChange": "true",
+          "optionType": "inner"
+        }
+      ],
+      "ColumnGroups": [
+        {
+          "GroupID": 1,
+          "GroupName": "Columns",
+          "StandardName": "columns",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 2,
+              "NAME": "BOOKING_NO",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "BOOKING_NO",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Booking No",
+              "name": "Booking No",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 3,
+              "NAME": "ADVERTISER_NAME",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "ADVERTISER_NAME",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Advertiser",
+              "name": "Advertiser",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 4,
+              "NAME": "UNIT_NO",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "UNIT_NO",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Unit",
+              "name": "Unit",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 5,
+              "NAME": "START_DATE",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "START_DATE",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Start Date",
+              "name": "Start Date",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              }
+            },
+            {
+              "COLID": 6,
+              "NAME": "END_DATE",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "START_DATE",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "End Date",
+              "name": "End Date",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              }
+            },
+            {
+              "COLID": 7,
+              "NAME": "NO_OF_MONTHS",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "NO_OF_MONTHS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Months",
+              "name": "Months",
+              "type": "number",
+              "JAVATYPE": "java.lang.Integer",
+              "COLTYPE": "NUMBER",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 8,
+              "NAME": "TOTAL_AMOUNT",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "TOTAL_AMOUNT",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Billed",
+              "name": "Billed",
+              "type": "number",
+              "JAVATYPE": "java.math.BigDecimal",
+              "COLTYPE": "NUMBER",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "number",
+                "numberStyle": "currency",
+                "currency": "INR",
+                "decimals": 2
+              }
+            },
+            {
+              "COLID": 9,
+              "NAME": "RECEIVED_AMOUNT",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "TOTAL_AMOUNT",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Received",
+              "name": "Received",
+              "type": "number",
+              "JAVATYPE": "java.math.BigDecimal",
+              "COLTYPE": "NUMBER",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true,
+              "display": {
+                "type": "number",
+                "numberStyle": "currency",
+                "currency": "INR",
+                "decimals": 2
+              }
+            },
+            {
+              "COLID": 10,
+              "NAME": "BOOKING_STATUS",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "BOOKING_STATUS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Booking Status",
+              "name": "Booking Status",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 11,
+              "NAME": "PAYMENT_STATUS",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "PAYMENT_STATUS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Payment Status",
+              "name": "Payment Status",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            },
+            {
+              "COLID": 12,
+              "NAME": "DISPLAY_STATE",
+              "DBTABLE": "CCW_BANNER_BOOKING",
+              "DBNAME": "BOOKING_STATUS",
+              "tableName": "CCW_BANNER_BOOKING",
+              "content": "Display State",
+              "name": "Display State",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Columns",
+              "StandardName": "columns",
+              "checked": true
+            }
+          ]
+        }
+      ],
+      "update": {
+        "ENABLED": false,
+        "TARGET_OBJECT": "ccw_banner_booking",
+        "RECORD_KEY": {
+          "booking_no": "BOOKING_NO"
+        },
+        "SET": [],
+        "CONFIRM": false,
+        "ENABLE_WHEN": ""
+      }
+    },
+    "layoutdata": {}
+  },
+  "SOURCE_SQL": "SELECT b.booking_no AS BOOKING_NO, b.advertiser_name AS ADVERTISER_NAME, b.unit_no AS UNIT_NO, b.start_date AS START_DATE, (b.start_date + make_interval(months => b.no_of_months::int))::date - 1 AS END_DATE, b.no_of_months AS NO_OF_MONTHS, b.total_amount AS TOTAL_AMOUNT, CASE WHEN b.payment_status = 'P' THEN b.total_amount ELSE 0 END AS RECEIVED_AMOUNT, b.booking_status AS BOOKING_STATUS, b.payment_status AS PAYMENT_STATUS, CASE WHEN CURRENT_DATE > (b.start_date + make_interval(months => b.no_of_months::int))::date - 1 THEN 'Ended' WHEN b.booking_status = 'A' AND b.payment_status = 'P' AND CURRENT_DATE >= b.start_date THEN 'Live' ELSE 'Scheduled' END AS DISPLAY_STATE FROM ccw_banner_booking b WHERE b.start_date >= ?.from_date AND b.start_date <= ?.to_date AND b.booking_status IN ?.booking_status AND b.payment_status IN ?.payment_status AND b.advertiser_type IN ?.advertiser_type ORDER BY b.start_date, b.booking_no"
+}

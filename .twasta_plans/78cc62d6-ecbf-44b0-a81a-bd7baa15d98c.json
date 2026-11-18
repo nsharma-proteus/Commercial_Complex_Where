@@ -1,0 +1,35 @@
+{
+  "id": "78cc62d6-ecbf-44b0-a81a-bd7baa15d98c",
+  "project": "Commercial_Complex_Where",
+  "backend": "autoagent",
+  "title": "Change",
+  "kind": "change",
+  "status": "completed",
+  "description": "[The user currently has the \"Banner Booking\" screen open (object ccw_banner_booking, type T). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nafter I have booked a banner and paid I should have the ability to change / replace  the image of the banner",
+  "created_at": 1794908087.3135862,
+  "updated_at": 1794996309.8595223,
+  "todos": [
+    {
+      "id": "change_turn",
+      "step": "change",
+      "label": "after I have booked a banner and paid I should have the ability to change / replace  the image of the banner",
+      "status": "completed",
+      "error": null,
+      "obj_name": null,
+      "obj_type": null,
+      "phase_id": null,
+      "started_at": 1794908087.3077989,
+      "completed_at": 1794908135.950146
+    }
+  ],
+  "phases": [],
+  "originating_prompt": "[The user currently has the \"Banner Booking\" screen open (object ccw_banner_booking, type T). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nafter I have booked a banner and paid I should have the ability to change / replace  the image of the banner",
+  "resume_ref": {
+    "session_id": "150a8a68-ef90-4649-aa14-b974d6d40870",
+    "plan_id": "78cc62d6-ecbf-44b0-a81a-bd7baa15d98c",
+    "scope": null
+  },
+  "depends_on": [],
+  "result_summary": "",
+  "awaiting_answer": false
+}

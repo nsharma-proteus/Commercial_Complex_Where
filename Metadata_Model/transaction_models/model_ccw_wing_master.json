@@ -1,0 +1,438 @@
+{
+  "transaction": {
+    "obj_name": "ccw_wing_master",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Wing Master",
+          "form_descr": "Wings (blocks) of the commercial complex. Units are grouped under wings.",
+          "form_no": "1",
+          "main_table": "CCW_WING_MASTER",
+          "columns": [
+            {
+              "column": {
+                "name": "wing_code",
+                "db_name": "WING_CODE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Wing Code",
+                "descr": "Unique wing code",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Wing code unique",
+                    "error_code": "WING_DUP",
+                    "message": "Wing code {form.wing_code} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "wing_name",
+                "db_name": "WING_NAME",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Wing Name",
+                "descr": "Name of the wing",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "no_of_floors",
+                "db_name": "NO_OF_FLOORS",
+                "group_name": "Basic",
+                "col_type": "NUMBER",
+                "heading": "No. of Floors",
+                "descr": "Number of floors in the wing (at least 1)",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Floors at least 1",
+                    "error_code": "WING_FLOORS",
+                    "message": "No. of floors must be at least 1.",
+                    "expression": "{form.no_of_floors} >= 1"
+                  }
+                ],
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Active or Inactive",
+                "default_value": "A",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Inactive"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Active"
+                    },
+                    {
+                      "when": "I",
+                      "color": "grey",
+                      "label": "Inactive"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Status is a listed value",
+                    "error_code": "WING_STATUS",
+                    "message": "Status must be A (Active) or I (Inactive).",
+                    "expression": "in_list({form.status}, \"A,I\")"
+                  }
+                ],
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Created date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Created by",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Created from terminal",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Last changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Last changed from terminal",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_WING_MASTER",
+                "table_display_name": "Wing master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_WING_MASTER",
+                  "main_table": true,
+                  "table_descr": "Wing master"
+                }
+              ]
+            }
+          },
+          "validations": [],
+          "list_view": {
+            "tabs": {
+              "column": "status",
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          }
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "business_logic",
+            "name": "Wing has no units",
+            "error_code": "WING_HAS_UNITS",
+            "message": "A wing that has Units cannot be deleted. Make it Inactive instead.",
+            "business_logic": {
+              "method": "check_wing_delete",
+              "description": "Block delete of a wing that has units",
+              "spec": "Payload carries WING_CODE. If any row exists in the unit master table (ccw_unit_master, column WING_CODE) with WING_CODE equal to this wing's code, return {\"error\": \"A wing that has Units cannot be deleted. Make it Inactive instead.\"}; otherwise return None. If the unit master table does not exist yet, return None."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": [],
+    "vector_search": {
+      "enabled": true,
+      "columns": [
+        "wing_name",
+        "status"
+      ],
+      "key_column": "wing_code",
+      "display_column": "wing_name",
+      "allow_alias": true,
+      "auto": true,
+      "reason": "named as a master; searched by wing_name plus status so same-named records stay distinguishable"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "OBJ_NAME": "CCW_BANNER_INVOICE",
+  "OBJ_TYPE": "R",
+  "TITLE": "Banner Booking Invoice",
+  "REPORT": {
+    "MAIN_JRXML": "ccw_banner_invoice.jrxml",
+    "JRXML_FILES": ["ccw_banner_invoice.jrxml"],
+    "DEFAULT_OUTPUT_FORMAT": "pdf",
+    "OUTPUT_FORMATS": ["html", "pdf"],
+    "PARAMETERS": [{"name": "BOOKING_NO", "java_class": "java.lang.String"}]
+  },
+  "SQLMODEL": {
+    "DATABASE_DETAIL": {"CONNECTION_ID": ""},
+    "CRITERIA": {"query": {"condition": "and", "rules": [
+      {
+        "id": "Criteria_1",
+        "field": "BOOKING_NO",
+        "COLTYPE": "string", "currentFieldType": "string",
+        "operator": "=", "queryOption": "P", "prevOption": "P",
+        "promptLabel": "Booking No (% = all approved)",
+        "value": "%", "chipValue": [],
+        "JASPER_PARAM": "BOOKING_NO",
+        "lookup": "", "lookup_sql": "SELECT booking_no, advertiser_name FROM ccw_banner_booking WHERE booking_status = 'A' ORDER BY booking_no DESC",
+        "lookup_sql_data_col": "booking_no", "lookup_title": "Approved Bookings",
+        "options": [], "item_change": null
+      }
+    ]}}
+  }
+}

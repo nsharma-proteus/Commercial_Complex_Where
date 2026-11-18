@@ -1,0 +1,24 @@
+{
+  "object_name": "ccw_facility_team_member_master",
+  "tables": {
+    "CCW_FACILITY_TEAM_MEMBER": [
+      "CHG_USER",
+      "SPECIALISATION",
+      "ADD_TERM",
+      "ADD_USER",
+      "STAFF_CODE",
+      "CHG_TERM",
+      "ADD_DATE",
+      "CHG_DATE",
+      "MOBILE_NO",
+      "STATUS",
+      "ROLE",
+      "EMAIL",
+      "STAFF_NAME"
+    ],
+    "CCW_FACILITY_REQ_CATEGORY": [
+      "NAME",
+      "REQUEST_CATEGORY_CODE"
+    ]
+  }
+}

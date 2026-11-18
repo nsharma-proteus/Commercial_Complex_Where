@@ -1,0 +1,1 @@
+[1] Banner Rate Plan: plan_code(V10), plan_name(V100), effective_from(D), status(V1), rate_per_slot_per_month(N12,2), tax_pct(N5,2), min_months(N3), max_carousel_slots(N3), seconds_per_banner(N3), image_size_guidance(V500), add_date(DT), add_user(V10), add_term(V15), chg_date(DT), chg_user(V10), chg_term(V15)

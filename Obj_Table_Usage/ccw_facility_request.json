@@ -1,0 +1,45 @@
+{
+  "object_name": "ccw_facility_request",
+  "tables": {
+    "CCW_FACILITY_REQUEST": [
+      "RAISED_BY_CONTACT_NO",
+      "CHG_DATE",
+      "CHG_TERM",
+      "STATUS",
+      "LOCATION_DETAIL",
+      "CHG_USER",
+      "PRIORITY",
+      "RESOLUTION_NOTE",
+      "ADD_TERM",
+      "ATTACHMENT",
+      "DESCRIPTION",
+      "ADD_DATE",
+      "CLOSED_ON",
+      "UNIT_NO",
+      "ASSIGNED_TO",
+      "REQUEST_CATEGORY",
+      "ADD_USER",
+      "REQUEST_NO",
+      "RAISED_BY_EMAIL",
+      "RESOLVED_ON",
+      "RAISED_BY_NAME",
+      "REQUEST_DATE_TIME"
+    ],
+    "CCW_FACILITY_REQ_CATEGORY": [
+      "NAME",
+      "REQUEST_CATEGORY_CODE"
+    ],
+    "CCW_FACILITY_TEAM_MEMBER": [
+      "STAFF_NAME",
+      "STAFF_CODE"
+    ],
+    "CCW_FR_UPDATE": [
+      "REMARK",
+      "REQUEST_NO",
+      "UPDATE_DATE_TIME",
+      "UPDATED_BY",
+      "STATUS",
+      "LINE_NO"
+    ]
+  }
+}

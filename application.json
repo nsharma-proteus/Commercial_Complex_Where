@@ -1,0 +1,520 @@
+{
+  "application": {
+    "id": "ccw",
+    "title": "Commercial Complex Portal",
+    "description": "Portal for a commercial complex: units and profiles, business directory, notices and events, business queries, ad banners and billing, guest entry and security, facility requests.",
+    "icon": "apartment",
+    "theme_color": "#1565C0",
+    "group": "NA",
+    "generated": true,
+    "data_isolation": "own",
+    "preview_schema_name": "commercial_complex_where",
+    "auth": {
+      "providers": [
+        "project-users"
+      ],
+      "requireLogin": true,
+      "defaultRoles": [
+        "member"
+      ]
+    },
+    "db_mode": "postgres",
+    "biz_logic": "python",
+    "app_type": "transaction"
+  },
+  "auth": {
+    "providers": [
+      "project-users"
+    ],
+    "requireLogin": true,
+    "defaultRoles": [
+      "member"
+    ]
+  },
+  "navigation": [
+    {
+      "id": "ccw.1",
+      "title": "Master Data",
+      "parent_id": "",
+      "icon_image": "settings",
+      "description": "Master data",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.1",
+      "functional_specs": "Group for master data"
+    },
+    {
+      "id": "ccw.1.1",
+      "title": "Wing Master",
+      "parent_id": "ccw.1",
+      "icon_image": "domain",
+      "description": "Wings of the complex",
+      "obj_name": "ccw_wing_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.1",
+      "functional_specs": "Maintain wings (code, name, floors, status)"
+    },
+    {
+      "id": "ccw.1.2",
+      "title": "Unit Master",
+      "parent_id": "ccw.1",
+      "icon_image": "store",
+      "description": "Units of the complex",
+      "obj_name": "ccw_unit_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.2",
+      "functional_specs": "Register shops/offices with wing, floor, type, area and occupancy"
+    },
+    {
+      "id": "ccw.1.3",
+      "title": "Business Category Master",
+      "parent_id": "ccw.1",
+      "icon_image": "category",
+      "description": "Business types",
+      "obj_name": "ccw_business_category_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.3",
+      "functional_specs": "Business categories used for directory and query routing"
+    },
+    {
+      "id": "ccw.1.4",
+      "title": "Announcement Category Master",
+      "parent_id": "ccw.1",
+      "icon_image": "campaign",
+      "description": "Notice and event categories",
+      "obj_name": "ccw_announcement_category_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.4",
+      "functional_specs": "Categories for notices and events"
+    },
+    {
+      "id": "ccw.1.5",
+      "title": "Facility Request Category Master",
+      "parent_id": "ccw.1",
+      "icon_image": "build",
+      "description": "Facility concern categories",
+      "obj_name": "ccw_facility_request_category_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.5",
+      "functional_specs": "Request categories with target resolution hours"
+    },
+    {
+      "id": "ccw.1.6",
+      "title": "Facility Team Member Master",
+      "parent_id": "ccw.1",
+      "icon_image": "engineering",
+      "description": "Facility staff and security",
+      "obj_name": "ccw_facility_team_member_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.6",
+      "functional_specs": "Facility staff, guards and supervisors"
+    },
+    {
+      "id": "ccw.1.7",
+      "title": "Guest Purpose Master",
+      "parent_id": "ccw.1",
+      "icon_image": "list_alt",
+      "description": "Guest visit purposes",
+      "obj_name": "ccw_guest_purpose_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.7",
+      "functional_specs": "Standard reasons for a guest visit"
+    },
+    {
+      "id": "ccw.1.8",
+      "title": "Banner Rate Plan Master",
+      "parent_id": "ccw.1",
+      "icon_image": "price_change",
+      "description": "Banner commercial terms",
+      "obj_name": "ccw_banner_rate_plan_master",
+      "obj_type": "T",
+      "menu_path": "ccw.1.8",
+      "functional_specs": "Rate, slots, tax and timing for carousel banners"
+    },
+    {
+      "id": "ccw.2",
+      "title": "Units & Profiles",
+      "parent_id": "",
+      "icon_image": "badge",
+      "description": "Units and profiles",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.2",
+      "functional_specs": "Group for profiles and parking"
+    },
+    {
+      "id": "ccw.2.1",
+      "title": "Member Profile",
+      "parent_id": "ccw.2",
+      "icon_image": "person",
+      "description": "Owner profile of a unit",
+      "obj_name": "ccw_member_profile",
+      "obj_type": "T",
+      "menu_path": "ccw.2.1",
+      "functional_specs": "Owner business profile, joint owners, occupancy and tenant access flags"
+    },
+    {
+      "id": "ccw.2.2",
+      "title": "Tenant Profile",
+      "parent_id": "ccw.2",
+      "icon_image": "supervisor_account",
+      "description": "Tenant of a rented unit",
+      "obj_name": "ccw_tenant_profile",
+      "obj_type": "T",
+      "menu_path": "ccw.2.2",
+      "functional_specs": "Tenant profile with add, remove and re-activate"
+    },
+    {
+      "id": "ccw.2.3",
+      "title": "Unit Parking",
+      "parent_id": "ccw.2",
+      "icon_image": "local_parking",
+      "description": "Parking slots and vehicles",
+      "obj_name": "ccw_unit_parking",
+      "obj_type": "T",
+      "menu_path": "ccw.2.3",
+      "functional_specs": "Parking slots per unit with registered vehicles"
+    },
+    {
+      "id": "ccw.2.4",
+      "title": "Unit Occupancy Overview",
+      "parent_id": "ccw.2",
+      "icon_image": "table_view",
+      "description": "Occupancy by wing",
+      "obj_name": "ccw_unit_occupancy_overview",
+      "obj_type": "V",
+      "menu_path": "ccw.2.4",
+      "functional_specs": "Grid grouped by wing with occupancy, tenant, parking and profile completion"
+    },
+    {
+      "id": "ccw.3",
+      "title": "Business Directory",
+      "parent_id": "",
+      "icon_image": "contacts",
+      "description": "Directory",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.3",
+      "functional_specs": "Group for directory"
+    },
+    {
+      "id": "ccw.3.1",
+      "title": "Business Directory",
+      "parent_id": "ccw.3",
+      "icon_image": "manage_search",
+      "description": "Searchable directory",
+      "obj_name": "ccw_business_directory",
+      "obj_type": "V",
+      "menu_path": "ccw.3.1",
+      "functional_specs": "Grid of businesses per unit with search and tap-to-call"
+    },
+    {
+      "id": "ccw.4",
+      "title": "Notices & Events",
+      "parent_id": "",
+      "icon_image": "notifications",
+      "description": "Notices and events",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.4",
+      "functional_specs": "Group for announcements"
+    },
+    {
+      "id": "ccw.4.1",
+      "title": "Notice",
+      "parent_id": "ccw.4",
+      "icon_image": "announcement",
+      "description": "Publish notices",
+      "obj_name": "ccw_notice",
+      "obj_type": "T",
+      "menu_path": "ccw.4.1",
+      "functional_specs": "Create, publish and withdraw notices"
+    },
+    {
+      "id": "ccw.4.2",
+      "title": "Event",
+      "parent_id": "ccw.4",
+      "icon_image": "event",
+      "description": "Announce events",
+      "obj_name": "ccw_event",
+      "obj_type": "T",
+      "menu_path": "ccw.4.2",
+      "functional_specs": "Create, publish and cancel events"
+    },
+    {
+      "id": "ccw.4.3",
+      "title": "Notice Board",
+      "parent_id": "ccw.4",
+      "icon_image": "dashboard_customize",
+      "description": "Current notices",
+      "obj_name": "ccw_notice_board",
+      "obj_type": "V",
+      "menu_path": "ccw.4.3",
+      "functional_specs": "Feeds of current notices with important pinned"
+    },
+    {
+      "id": "ccw.4.4",
+      "title": "Event Calendar",
+      "parent_id": "ccw.4",
+      "icon_image": "calendar_month",
+      "description": "Events calendar",
+      "obj_name": "ccw_event_calendar",
+      "obj_type": "V",
+      "menu_path": "ccw.4.4",
+      "functional_specs": "Calendar with month, week and list views"
+    },
+    {
+      "id": "ccw.5",
+      "title": "Business Queries",
+      "parent_id": "",
+      "icon_image": "question_answer",
+      "description": "Business queries",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.5",
+      "functional_specs": "Group for queries"
+    },
+    {
+      "id": "ccw.5.1",
+      "title": "Business Query",
+      "parent_id": "ccw.5",
+      "icon_image": "help",
+      "description": "Ask the community",
+      "obj_name": "ccw_business_query",
+      "obj_type": "T",
+      "menu_path": "ccw.5.1",
+      "functional_specs": "Raise queries forwarded to businesses in a category, with responses"
+    },
+    {
+      "id": "ccw.5.2",
+      "title": "Queries Received",
+      "parent_id": "ccw.5",
+      "icon_image": "inbox",
+      "description": "Queries forwarded to me",
+      "obj_name": "ccw_queries_received",
+      "obj_type": "V",
+      "menu_path": "ccw.5.2",
+      "functional_specs": "Grid of queries forwarded to the signed-in user's unit"
+    },
+    {
+      "id": "ccw.6",
+      "title": "Ad Banners & Billing",
+      "parent_id": "",
+      "icon_image": "ad_units",
+      "description": "Banners",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.6",
+      "functional_specs": "Group for banners and billing"
+    },
+    {
+      "id": "ccw.6.1",
+      "title": "Banner Booking",
+      "parent_id": "ccw.6",
+      "icon_image": "view_carousel",
+      "description": "Banner booking and payment",
+      "obj_name": "ccw_banner_booking",
+      "obj_type": "T",
+      "menu_path": "ccw.6.1",
+      "functional_specs": "Book, approve, invoice and record payment for banner slots"
+    },
+    {
+      "id": "ccw.6.2",
+      "title": "Banner Carousel",
+      "parent_id": "ccw.6",
+      "icon_image": "slideshow",
+      "description": "Live banner strip",
+      "obj_name": "ccw_banner_carousel",
+      "obj_type": "V",
+      "menu_path": "ccw.6.2",
+      "functional_specs": "Html auto-rotating carousel of Live banners shown on every page"
+    },
+    {
+      "id": "ccw.6.3",
+      "title": "Banner Invoice",
+      "parent_id": "ccw.6",
+      "icon_image": "receipt_long",
+      "description": "Invoice PDF",
+      "obj_name": "ccw_banner_invoice",
+      "obj_type": "R",
+      "menu_path": "ccw.6.3",
+      "functional_specs": "A4 portrait invoice per booking"
+    },
+    {
+      "id": "ccw.6.4",
+      "title": "Banner Bookings & Collections",
+      "parent_id": "ccw.6",
+      "icon_image": "payments",
+      "description": "Bookings and collections",
+      "obj_name": "ccw_banner_bookings_collections",
+      "obj_type": "V",
+      "menu_path": "ccw.6.4",
+      "functional_specs": "Grid with billed and received totals"
+    },
+    {
+      "id": "ccw.6.5",
+      "title": "Banner Slot Availability",
+      "parent_id": "ccw.6",
+      "icon_image": "bar_chart",
+      "description": "Slot capacity by month",
+      "obj_name": "ccw_banner_slot_availability",
+      "obj_type": "V",
+      "menu_path": "ccw.6.5",
+      "functional_specs": "Stacked Column of booked vs available slots with capacity reference"
+    },
+    {
+      "id": "ccw.7",
+      "title": "Guest Entry & Security",
+      "parent_id": "",
+      "icon_image": "security",
+      "description": "Guests and security",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.7",
+      "functional_specs": "Group for guest and gate"
+    },
+    {
+      "id": "ccw.7.1",
+      "title": "Guest Entry",
+      "parent_id": "ccw.7",
+      "icon_image": "how_to_reg",
+      "description": "Guest registration",
+      "obj_name": "ccw_guest_entry",
+      "obj_type": "T",
+      "menu_path": "ccw.7.1",
+      "functional_specs": "Pre-register or walk-in guests, approve, check in and out"
+    },
+    {
+      "id": "ccw.7.2",
+      "title": "Gate Check-In",
+      "parent_id": "ccw.7",
+      "icon_image": "qr_code_scanner",
+      "description": "Guard check-in wizard",
+      "obj_name": "ccw_gate_check_in",
+      "obj_type": "U",
+      "menu_path": "ccw.7.2",
+      "functional_specs": "Wizard over Guest Entry: scan pass or walk-in, approval, confirm, check in"
+    },
+    {
+      "id": "ccw.7.3",
+      "title": "Guest Log",
+      "parent_id": "ccw.7",
+      "icon_image": "history",
+      "description": "Guest log",
+      "obj_name": "ccw_guest_log",
+      "obj_type": "V",
+      "menu_path": "ccw.7.3",
+      "functional_specs": "Grid of guest entries with totals and Inside Now preset"
+    },
+    {
+      "id": "ccw.8",
+      "title": "Facility Requests",
+      "parent_id": "",
+      "icon_image": "handyman",
+      "description": "Facility requests",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.8",
+      "functional_specs": "Group for facility requests"
+    },
+    {
+      "id": "ccw.8.1",
+      "title": "Facility Request",
+      "parent_id": "ccw.8",
+      "icon_image": "support_agent",
+      "description": "Raise and resolve concerns",
+      "obj_name": "ccw_facility_request",
+      "obj_type": "T",
+      "menu_path": "ccw.8.1",
+      "functional_specs": "Raise, assign, work, resolve, close facility requests"
+    },
+    {
+      "id": "ccw.8.3",
+      "title": "Facility Requests by Category and Status",
+      "parent_id": "ccw.8",
+      "icon_image": "stacked_bar_chart",
+      "description": "Requests chart",
+      "obj_name": "ccw_facility_requests_by_category_status",
+      "obj_type": "V",
+      "menu_path": "ccw.8.3",
+      "functional_specs": "Stacked Column of requests by category and status"
+    },
+    {
+      "id": "ccw.9",
+      "title": "Dashboards",
+      "parent_id": "",
+      "icon_image": "dashboard",
+      "description": "Dashboards",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.9",
+      "functional_specs": "Group for dashboards"
+    },
+    {
+      "id": "ccw.9.1",
+      "title": "Member Dashboard",
+      "parent_id": "ccw.9",
+      "icon_image": "space_dashboard",
+      "description": "Owner dashboard",
+      "obj_name": "ccw_member_dashboard",
+      "obj_type": "D",
+      "menu_path": "ccw.9.1",
+      "functional_specs": "Owner view of requests, queries, guests, tenant, notices and events"
+    },
+    {
+      "id": "ccw.9.2",
+      "title": "Tenant Dashboard",
+      "parent_id": "ccw.9",
+      "icon_image": "space_dashboard",
+      "description": "Tenant dashboard",
+      "obj_name": "ccw_tenant_dashboard",
+      "obj_type": "D",
+      "menu_path": "ccw.9.2",
+      "functional_specs": "Tenant view with lease end card"
+    },
+    {
+      "id": "ccw.9.3",
+      "title": "Management Dashboard",
+      "parent_id": "ccw.9",
+      "icon_image": "insights",
+      "description": "Management dashboard",
+      "obj_name": "ccw_management_dashboard",
+      "obj_type": "D",
+      "menu_path": "ccw.9.3",
+      "functional_specs": "Units, occupancy, requests, banner revenue and guests analytics"
+    },
+    {
+      "id": "ccw.9.4",
+      "title": "Facility & Security Dashboard",
+      "parent_id": "ccw.9",
+      "icon_image": "monitor_heart",
+      "description": "Facility and security dashboard",
+      "obj_name": "ccw_facility_security_dashboard",
+      "obj_type": "D",
+      "menu_path": "ccw.9.4",
+      "functional_specs": "Guests inside, request pipeline and overdue requests"
+    },
+    {
+      "id": "ccw.10",
+      "title": "Smart Pages",
+      "parent_id": "",
+      "icon_image": "article",
+      "description": "Smart pages",
+      "obj_name": "",
+      "obj_type": "-",
+      "menu_path": "ccw.10",
+      "functional_specs": "Group for smart pages"
+    },
+    {
+      "id": "ccw.10.1",
+      "title": "Portal Home",
+      "parent_id": "ccw.10",
+      "icon_image": "home",
+      "description": "Welcome page",
+      "obj_name": "ccw_portal_home",
+      "obj_type": "S",
+      "menu_path": "ccw.10.1",
+      "functional_specs": "Welcome page with banner strip, hero, quick-link cards, notice board, event list and directory search"
+    }
+  ]
+}

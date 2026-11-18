@@ -1,0 +1,35 @@
+{
+  "id": "cea137ed-fe6d-4dd5-aa2d-bbe8d66a7fee",
+  "project": "Commercial_Complex_Where",
+  "backend": "autoagent",
+  "title": "Change",
+  "kind": "change",
+  "status": "error",
+  "description": "[The user currently has the \"Member Profile\" screen open (object ccw_member_profile, type T). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nRemove the business category from the main form it noy mandatoty to have the a business category",
+  "created_at": 1794905923.8868914,
+  "updated_at": 1794996309.8577392,
+  "todos": [
+    {
+      "id": "change_turn",
+      "step": "change",
+      "label": "Remove the business category from the main form it noy mandatoty to have the a business category",
+      "status": "error",
+      "error": "Live preview column BUSINESS_CATEGORY is still NOT NULL because the table holds rows; the user must reset the Member Profile preview data and re-open the preview to redeploy.",
+      "obj_name": null,
+      "obj_type": null,
+      "phase_id": null,
+      "started_at": 1794905923.8814948,
+      "completed_at": 1794906005.107223
+    }
+  ],
+  "phases": [],
+  "originating_prompt": "[The user currently has the \"Member Profile\" screen open (object ccw_member_profile, type T). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nRemove the business category from the main form it noy mandatoty to have the a business category",
+  "resume_ref": {
+    "session_id": "150a8a68-ef90-4649-aa14-b974d6d40870",
+    "plan_id": "cea137ed-fe6d-4dd5-aa2d-bbe8d66a7fee",
+    "scope": null
+  },
+  "depends_on": [],
+  "result_summary": "",
+  "awaiting_answer": false
+}

@@ -1,0 +1,24 @@
+{
+ "DASHBOARD": {
+  "DASHBOARD_ID": "CCW_TENANT_DASHBOARD",
+  "DASHBOARD_TYPE": "S",
+  "DASHBOARD_NAME": "Tenant Dashboard",
+  "DASHBOARD_DESCR": "Tenant view of notices, events, guests and queries. Assumption: no existing visuals for KPI cards or lease end date, so those tiles are not included.",
+  "CREATED_BY": "admin",
+  "CREATED_DATE": "2026-11-16",
+  "REFRESH_INTERVAL_SECONDS": 0,
+  "THEME_COLOR": "default",
+  "GLOBAL_CRITERIA": [
+   {"PARAM_NAME": "UNIT_NO", "PROMPT_LABEL": "Unit", "DEFAULT_VALUE": "%", "DATA_TYPE": "string", "OPERATOR": "like", "BROADCAST_TO": ["VIS_GUESTS"]}
+  ],
+  "VISUALS": [
+   {"VISUAL_ID": "VIS_BANNER", "VISUAL_NAME": "Banner Carousel", "POSITION": {"X": 0, "Y": 0, "WIDTH": 12, "HEIGHT": 2}, "VISUAL_CONFIG_REF": "model_ccw_banner_carousel.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_NOTICES", "VISUAL_NAME": "Latest Notices", "POSITION": {"X": 0, "Y": 2, "WIDTH": 6, "HEIGHT": 4}, "VISUAL_CONFIG_REF": "model_ccw_notice_board.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_EVENTS", "VISUAL_NAME": "Upcoming Events", "POSITION": {"X": 6, "Y": 2, "WIDTH": 6, "HEIGHT": 4}, "VISUAL_CONFIG_REF": "model_ccw_event_calendar.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_QUERIES", "VISUAL_NAME": "Queries Received", "POSITION": {"X": 0, "Y": 6, "WIDTH": 6, "HEIGHT": 5}, "VISUAL_CONFIG_REF": "model_ccw_queries_received.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_GUESTS", "VISUAL_NAME": "Guests", "POSITION": {"X": 6, "Y": 6, "WIDTH": 6, "HEIGHT": 5}, "VISUAL_CONFIG_REF": "model_ccw_guest_log.json",
+    "CRITERIA_BINDINGS": [{"VISUAL_PARAM": "unit_no", "BIND_TYPE": "global", "GLOBAL_PARAM": "UNIT_NO"}]}
+  ],
+  "DRILL_THROUGH": []
+ }
+}

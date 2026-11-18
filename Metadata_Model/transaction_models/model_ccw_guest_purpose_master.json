@@ -1,0 +1,386 @@
+{
+  "transaction": {
+    "obj_name": "ccw_guest_purpose_master",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Guest Purpose",
+          "form_descr": "Standard reasons for a guest visit",
+          "form_no": "1",
+          "main_table": "CCW_GUEST_PURPOSE_MASTER",
+          "columns": [
+            {
+              "column": {
+                "name": "purpose_code",
+                "db_name": "PURPOSE_CODE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Purpose Code",
+                "descr": "Unique code of the guest purpose",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Purpose code unique",
+                    "error_code": "PURPOSE_CODE_DUP",
+                    "message": "Purpose code {form.purpose_code} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "purpose_name",
+                "db_name": "PURPOSE_NAME",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Purpose Name",
+                "descr": "Reason for the guest visit (e.g. Business Meeting, Delivery, Courier, Service/Repair, Interview, Personal, Other)",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Purpose name unique",
+                    "error_code": "PURPOSE_NAME_DUP",
+                    "message": "Purpose name {form.purpose_name} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Active or Inactive",
+                "mandatory": true,
+                "default_value": "A",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Inactive"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Active"
+                    },
+                    {
+                      "when": "I",
+                      "color": "grey",
+                      "label": "Inactive"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Status is a listed value",
+                    "error_code": "STATUS_LIST",
+                    "message": "Status must be one of: A, I.",
+                    "expression": "in_list({form.status}, \"A,I\")"
+                  }
+                ],
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Record creation date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "User who created the record",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Terminal that created the record",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "User who last changed the record",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Terminal of last change",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "table_display_name": "Guest purpose master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_GUEST_PURPOSE_MASTER",
+                  "main_table": true,
+                  "table_descr": "Guest purpose master"
+                }
+              ]
+            }
+          },
+          "validations": []
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": [],
+    "vector_search": {
+      "enabled": true,
+      "columns": [
+        "purpose_name",
+        "status"
+      ],
+      "key_column": "purpose_code",
+      "display_column": "purpose_name",
+      "allow_alias": true,
+      "auto": true,
+      "reason": "named as a master; searched by purpose_name plus status so same-named records stay distinguishable"
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "report": {
+    "ok": true,
+    "summary": "PASS",
+    "project": "Commercial_Complex_Where",
+    "obj_name": "ccw_banner_booking",
+    "passed": 13,
+    "failed": 0,
+    "steps": [
+      {
+        "name": "deploy schema",
+        "status": "PASS",
+        "issue": null,
+        "detail": "schema=commercial_complex_where",
+        "check": "record"
+      },
+      {
+        "name": "add record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "txn_id=20",
+        "check": "record"
+      },
+      {
+        "name": "list records",
+        "status": "PASS",
+        "issue": null,
+        "detail": "20 row(s)",
+        "check": "record"
+      },
+      {
+        "name": "load record",
+        "status": "PASS",
+        "issue": null,
+        "detail": null,
+        "check": "record"
+      },
+      {
+        "name": "edit record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "changed advertiser_name",
+        "check": "record"
+      },
+      {
+        "name": "delete record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "deleted=1",
+        "check": "record"
+      },
+      {
+        "name": "action 'Approve': add a record it accepts",
+        "status": "PASS",
+        "issue": null,
+        "detail": "txn_id=20",
+        "check": "action:Approve"
+      },
+      {
+        "name": "action 'Approve': run",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it refused the record this test just added — \"Only management can approve a banner booking\". The button is for a record in another state; the behaviour check presses it on one",
+        "check": "action:Approve"
+      },
+      {
+        "name": "action 'Approve': keep the test record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "kept 20 as test data — the button may have written records that point at it; clean it under Testing → Test data",
+        "check": "action:Approve"
+      },
+      {
+        "name": "action 'Reject'",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it asks the user to type or scan a value (REJECTION_REASON) and this test has none to give — put a working one in transaction.unit_test.sample as \"REJECTION_REASON\" to have it pressed",
+        "check": "action:Reject"
+      },
+      {
+        "name": "action 'Cancel': add a record it accepts",
+        "status": "PASS",
+        "issue": null,
+        "detail": "txn_id=21",
+        "check": "action:Cancel"
+      },
+      {
+        "name": "action 'Cancel': run",
+        "status": "PASS",
+        "issue": null,
+        "detail": "Booking cancelled",
+        "check": "action:Cancel"
+      },
+      {
+        "name": "action 'Cancel': keep the test record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "kept 21 as test data — the button may have written records that point at it; clean it under Testing → Test data",
+        "check": "action:Cancel"
+      },
+      {
+        "name": "action 'Record Payment': add a record it accepts",
+        "status": "PASS",
+        "issue": null,
+        "detail": "txn_id=22 · booking_status=A, payment_mode=C, payment_reference=T29A116, payment_date=2026-11-17",
+        "check": "action:Record Payment"
+      },
+      {
+        "name": "action 'Record Payment': run",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it refused the record this test just added — \"Only management can record a payment\". The button is for a record in another state; the behaviour check presses it on one",
+        "check": "action:Record Payment"
+      },
+      {
+        "name": "action 'Record Payment': keep the test record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "kept 22 as test data — the button may have written records that point at it; clean it under Testing → Test data",
+        "check": "action:Record Payment"
+      },
+      {
+        "name": "action 'Print Invoice'",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it opens a report — that happens in the browser, so the browser test cases check it",
+        "check": "action:Print Invoice"
+      }
+    ],
+    "checks": [
+      {
+        "id": "record",
+        "kind": "record",
+        "name": "",
+        "label": "Add, list, open, edit and delete a record",
+        "steps": 6,
+        "status": "passed",
+        "first_failure": null
+      },
+      {
+        "id": "action:Approve",
+        "kind": "action",
+        "name": "Approve",
+        "label": "Action 'Approve'",
+        "steps": 3,
+        "status": "passed",
+        "first_failure": null
+      },
+      {
+        "id": "action:Reject",
+        "kind": "action",
+        "name": "Reject",
+        "label": "Action 'Reject'",
+        "steps": 1,
+        "status": "skipped",
+        "first_failure": null
+      },
+      {
+        "id": "action:Cancel",
+        "kind": "action",
+        "name": "Cancel",
+        "label": "Action 'Cancel'",
+        "steps": 3,
+        "status": "passed",
+        "first_failure": null
+      },
+      {
+        "id": "action:Record Payment",
+        "kind": "action",
+        "name": "Record Payment",
+        "label": "Action 'Record Payment'",
+        "steps": 3,
+        "status": "passed",
+        "first_failure": null
+      },
+      {
+        "id": "action:Print Invoice",
+        "kind": "action",
+        "name": "Print Invoice",
+        "label": "Action 'Print Invoice'",
+        "steps": 1,
+        "status": "skipped",
+        "first_failure": null
+      }
+    ],
+    "first_failure": null,
+    "emitted_events": [],
+    "kept_records": [
+      {
+        "obj": "ccw_banner_booking",
+        "txn_id": "20",
+        "check": "action:Approve"
+      },
+      {
+        "obj": "ccw_banner_booking",
+        "txn_id": "21",
+        "check": "action:Cancel"
+      },
+      {
+        "obj": "ccw_banner_booking",
+        "txn_id": "22",
+        "check": "action:Record Payment"
+      }
+    ]
+  },
+  "at": "2026-11-17T09:35:28+00:00",
+  "by": "nilay.sharma@proteustech.in",
+  "via": "Ask-AI"
+}

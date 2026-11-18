@@ -1,0 +1,64 @@
+{
+  "table_name": "CCW_BUSINESS_CATEGORY",
+  "objects": [
+    {
+      "object_name": "ccw_business_category_master",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "CHG_USER",
+        "ADD_TERM",
+        "CATEGORY_NAME",
+        "ADD_USER",
+        "CHG_TERM",
+        "ADD_DATE",
+        "CHG_DATE",
+        "DESCRIPTION",
+        "STATUS",
+        "CATEGORY_CODE"
+      ]
+    },
+    {
+      "object_name": "ccw_member_profile",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "CATEGORY_NAME",
+        "CATEGORY_CODE"
+      ],
+      "join_info": {
+        "column": "CATEGORY_CODE",
+        "join_table": "CCW_MEMBER_PROFILE",
+        "join_column": "BUSINESS_CATEGORY"
+      }
+    },
+    {
+      "object_name": "ccw_tenant_profile",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "CATEGORY_CODE",
+        "CATEGORY_NAME"
+      ],
+      "join_info": {
+        "column": "CATEGORY_CODE",
+        "join_table": "CCW_TENANT_PROFILE",
+        "join_column": "BUSINESS_CATEGORY"
+      }
+    },
+    {
+      "object_name": "ccw_business_query",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "CATEGORY_CODE",
+        "CATEGORY_NAME"
+      ],
+      "join_info": {
+        "column": "CATEGORY_CODE",
+        "join_table": "CCW_BUSINESS_QUERY",
+        "join_column": "TARGET_BUSINESS_CATEGORY"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+[1] Facility Team Member: staff_code(V10), staff_name(V100), role(V1), mobile_no(V15), email(V100), specialisation(V10), specialisation_name(V100), status(V1), add_date(DT), add_user(V10), add_term(V15), chg_date(DT), chg_user(V10), chg_term(V15)

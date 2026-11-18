@@ -1,0 +1,1487 @@
+{
+  "transaction": {
+    "obj_name": "ccw_guest_entry",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Guest Entry",
+          "form_descr": "Pre-register or walk-in guests, approve, check in and out",
+          "form_no": "1",
+          "main_table": "CCW_GUEST_ENTRY",
+          "row_security": {
+            "rules": [
+              {
+                "column": "UNIT_NO",
+                "op": "in",
+                "sql": "SELECT unit_no FROM CCW_MEMBER_OWNER WHERE LOWER(owner_email) = LOWER(:user_email) UNION SELECT unit_no FROM CCW_TENANT_PROFILE WHERE LOWER(tenant_email) = LOWER(:user_email) AND tenant_status = 'A'"
+              }
+            ],
+            "exempt_roles": [
+              "admin",
+              "func-admin",
+              "management",
+              "security",
+              "security-guard",
+              "supervisor"
+            ]
+          },
+          "open_groups": [
+            "Guest",
+            "Visit"
+          ],
+          "columns": [
+            {
+              "column": {
+                "name": "guest_entry_no",
+                "db_name": "GUEST_ENTRY_NO",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "Guest Entry No",
+                "descr": "Auto-generated entry number",
+                "key": true,
+                "default_value": "auto_generate()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "entry_type",
+                "db_name": "ENTRY_TYPE",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "Entry Type",
+                "descr": "Pre-Registered or Walk-In",
+                "default_value": "P",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "radio",
+                  "values": [
+                    {
+                      "data": "P",
+                      "display": "Pre-Registered"
+                    },
+                    {
+                      "data": "W",
+                      "display": "Walk-In"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Entry type is a listed value",
+                    "error_code": "GE_TYPE",
+                    "message": "Entry type must be P or W.",
+                    "expression": "in_list({form.entry_type}, \"P,W\")"
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "fill": [
+                    {
+                      "form_col": "status",
+                      "expr": "iif({form.entry_type} == \"W\", \"W\", \"E\")"
+                    }
+                  ],
+                  "protect": [
+                    {
+                      "form_col": "id_proof_type",
+                      "when": "{form.entry_type} != \"W\""
+                    },
+                    {
+                      "form_col": "id_proof_no",
+                      "when": "{form.entry_type} != \"W\""
+                    }
+                  ]
+                },
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "guest_name",
+                "db_name": "GUEST_NAME",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "Guest Name",
+                "descr": "Name of the guest",
+                "mandatory": true,
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "guest_mobile",
+                "db_name": "GUEST_MOBILE",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "Guest Mobile",
+                "descr": "Guest mobile number",
+                "mandatory": true,
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "no_of_persons",
+                "db_name": "NO_OF_PERSONS",
+                "group_name": "Guest",
+                "col_type": "NUMBER",
+                "heading": "No of Persons",
+                "descr": "Number of persons (at least 1)",
+                "default_value": "1",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "At least 1 person",
+                    "error_code": "GE_PERSONS",
+                    "message": "No of persons must be at least 1.",
+                    "expression": "{form.no_of_persons} >= 1"
+                  }
+                ],
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "guest_company",
+                "db_name": "GUEST_COMPANY",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "Guest Company",
+                "descr": "Guest's company / organisation",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "vehicle_no",
+                "db_name": "VEHICLE_NO",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "Vehicle No",
+                "descr": "Guest vehicle number",
+                "text_case": "upper",
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "20",
+                "width": 200,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "id_proof_type",
+                "db_name": "ID_PROOF_TYPE",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "ID Proof Type",
+                "descr": "Mandatory for Walk-In",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Aadhaar"
+                    },
+                    {
+                      "data": "P",
+                      "display": "PAN"
+                    },
+                    {
+                      "data": "D",
+                      "display": "Driving Licence"
+                    },
+                    {
+                      "data": "S",
+                      "display": "Passport"
+                    },
+                    {
+                      "data": "V",
+                      "display": "Voter ID"
+                    },
+                    {
+                      "data": "O",
+                      "display": "Other"
+                    }
+                  ]
+                },
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "ID Proof Type is a listed value",
+                    "error_code": "ID_PROOF_TYPE_LIST",
+                    "message": "ID Proof Type must be one of: A, P, D, S, V, O",
+                    "expression": "is_empty({form.id_proof_type}) or in_list({form.id_proof_type}, \"A,P,D,S,V,O\")"
+                  }
+                ],
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "id_proof_no",
+                "db_name": "ID_PROOF_NO",
+                "group_name": "Guest",
+                "col_type": "VARCHAR",
+                "heading": "ID Proof No",
+                "descr": "Mandatory for Walk-In",
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "30",
+                "width": 300,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "purpose",
+                "db_name": "PURPOSE",
+                "group_name": "Visit",
+                "col_type": "VARCHAR",
+                "heading": "Purpose",
+                "descr": "Purpose of visit",
+                "mandatory": true,
+                "lookup": "CCW_GUEST_PURPOSE_MASTER(PURPOSE_NAME, PURPOSE_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Purpose exists",
+                    "message": "Purpose not found.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_GUEST_PURPOSE_MASTER",
+                      "match_column": "PURPOSE_CODE",
+                      "conditions": [
+                        {
+                          "column": "STATUS",
+                          "op": "=",
+                          "source": "const",
+                          "value": "A"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "purpose_name",
+                "db_name": "PURPOSE_NAME",
+                "table_name": "CCW_GUEST_PURPOSE_MASTER",
+                "group_name": "Visit",
+                "col_type": "VARCHAR",
+                "heading": "Purpose Name",
+                "descr": "Purpose name (from master)",
+                "protect": "1",
+                "inline_with": "PURPOSE",
+                "x": "110",
+                "y": "110",
+                "col_id": "11",
+                "table_display_name": "Guest purpose master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Visit",
+                "col_type": "VARCHAR",
+                "heading": "Unit Visited",
+                "descr": "Unit being visited",
+                "mandatory": true,
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "lookup_filter": "STATUS = 'A'",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Unit exists",
+                    "message": "Unit not found in Unit Master.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_UNIT_MASTER",
+                      "match_column": "UNIT_NO"
+                    }
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_PROFILE",
+                  "match_table_col": "UNIT_NO",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "person_to_meet",
+                      "table_col": "CONTACT_PERSON"
+                    }
+                  ]
+                },
+                "x": "120",
+                "y": "120",
+                "col_id": "12",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "person_to_meet",
+                "db_name": "PERSON_TO_MEET",
+                "group_name": "Visit",
+                "col_type": "VARCHAR",
+                "heading": "Person to Meet",
+                "descr": "Person being visited (defaults to the unit's contact person)",
+                "x": "130",
+                "y": "130",
+                "col_id": "13",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "expected_date",
+                "db_name": "EXPECTED_DATE",
+                "group_name": "Visit",
+                "col_type": "DATE",
+                "heading": "Expected Date",
+                "descr": "Date of visit (today for Walk-In)",
+                "default_value": "today()",
+                "mandatory": true,
+                "x": "140",
+                "y": "140",
+                "col_id": "14",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "valid_from_time",
+                "db_name": "VALID_FROM_TIME",
+                "group_name": "Visit",
+                "col_type": "TIME",
+                "heading": "Valid From",
+                "descr": "Pass valid from (Pre-Registered)",
+                "x": "150",
+                "y": "150",
+                "col_id": "15",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "valid_to_time",
+                "db_name": "VALID_TO_TIME",
+                "group_name": "Visit",
+                "col_type": "TIME",
+                "heading": "Valid To",
+                "descr": "Pass valid until (must be after valid from)",
+                "x": "160",
+                "y": "160",
+                "col_id": "16",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "pass_code",
+                "db_name": "PASS_CODE",
+                "group_name": "Pass",
+                "col_type": "VARCHAR",
+                "heading": "Pass Code",
+                "descr": "Unique 6-character pass code, generated on save for Pre-Registered entries",
+                "protect": "1",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Pass code unique",
+                    "error_code": "GE_PASS_DUP",
+                    "message": "Pass code {form.pass_code} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "170",
+                "y": "170",
+                "col_id": "17",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "6",
+                "width": 60,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "pass_qr",
+                "db_name": "PASS_QR",
+                "group_name": "Pass",
+                "col_type": "VARCHAR",
+                "heading": "Pass QR",
+                "descr": "QR payload (the pass code), generated on save",
+                "protect": "1",
+                "display": {
+                  "type": "qr"
+                },
+                "x": "180",
+                "y": "180",
+                "col_id": "18",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "200",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "registered_by",
+                "db_name": "REGISTERED_BY",
+                "group_name": "Pass",
+                "col_type": "VARCHAR",
+                "heading": "Registered By",
+                "descr": "User who registered the entry",
+                "default_value": ":user_email",
+                "protect": "1",
+                "x": "190",
+                "y": "190",
+                "col_id": "19",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Status",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Changed by actions; starts Expected (Pre-Registered) or Awaiting Approval (Walk-In)",
+                "default_value": "E",
+                "protect": "1",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "E",
+                      "display": "Expected"
+                    },
+                    {
+                      "data": "W",
+                      "display": "Awaiting Approval"
+                    },
+                    {
+                      "data": "A",
+                      "display": "Approved"
+                    },
+                    {
+                      "data": "J",
+                      "display": "Rejected"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Checked In"
+                    },
+                    {
+                      "data": "O",
+                      "display": "Checked Out"
+                    },
+                    {
+                      "data": "C",
+                      "display": "Cancelled"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "E",
+                      "color": "blue",
+                      "label": "Expected"
+                    },
+                    {
+                      "when": "W",
+                      "color": "amber",
+                      "label": "Awaiting Approval"
+                    },
+                    {
+                      "when": "A",
+                      "color": "teal",
+                      "label": "Approved"
+                    },
+                    {
+                      "when": "J",
+                      "color": "red",
+                      "label": "Rejected"
+                    },
+                    {
+                      "when": "I",
+                      "color": "green",
+                      "label": "Checked In"
+                    },
+                    {
+                      "when": "O",
+                      "color": "grey",
+                      "label": "Checked Out"
+                    },
+                    {
+                      "when": "C",
+                      "color": "grey",
+                      "label": "Cancelled"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "x": "200",
+                "y": "200",
+                "col_id": "20",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "list_state",
+                "group_name": "Status",
+                "col_type": "VARCHAR",
+                "heading": "Display State",
+                "descr": "Derived: an Expected entry past its date shows as Expired",
+                "protect": "1",
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "Expired",
+                      "color": "orange"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "sql_expression": "CASE WHEN {CCW_GUEST_ENTRY}.status = 'E' AND {CCW_GUEST_ENTRY}.expected_date < CURRENT_DATE THEN 'Expired' ELSE NULL END",
+                "x": "210",
+                "y": "210",
+                "col_id": "21",
+                "db_name": "list_state",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "20",
+                "width": 200,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "approved_via",
+                "db_name": "APPROVED_VIA",
+                "group_name": "Status",
+                "col_type": "VARCHAR",
+                "heading": "Approved Via",
+                "descr": "App or Phone (set by Approve actions)",
+                "protect": "1",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "App"
+                    },
+                    {
+                      "data": "P",
+                      "display": "Phone"
+                    }
+                  ]
+                },
+                "x": "220",
+                "y": "220",
+                "col_id": "22",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "approved_by",
+                "db_name": "APPROVED_BY",
+                "group_name": "Status",
+                "col_type": "VARCHAR",
+                "heading": "Approved By",
+                "descr": "Resident (or phone approver name) who approved/rejected",
+                "protect": "1",
+                "x": "230",
+                "y": "230",
+                "col_id": "23",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "check_in_time",
+                "db_name": "CHECK_IN_TIME",
+                "group_name": "Gate",
+                "col_type": "DATETIME",
+                "heading": "Check In Time",
+                "descr": "Set by Check In",
+                "protect": "1",
+                "x": "240",
+                "y": "240",
+                "col_id": "24",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "checked_in_by",
+                "db_name": "CHECKED_IN_BY",
+                "group_name": "Gate",
+                "col_type": "VARCHAR",
+                "heading": "Checked In By",
+                "descr": "Security user who checked the guest in",
+                "protect": "1",
+                "x": "250",
+                "y": "250",
+                "col_id": "25",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "check_out_time",
+                "db_name": "CHECK_OUT_TIME",
+                "group_name": "Gate",
+                "col_type": "DATETIME",
+                "heading": "Check Out Time",
+                "descr": "Set by Check Out (after check in)",
+                "protect": "1",
+                "x": "260",
+                "y": "260",
+                "col_id": "26",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "security_remark",
+                "db_name": "SECURITY_REMARK",
+                "group_name": "Gate",
+                "col_type": "VARCHAR",
+                "heading": "Security Remark",
+                "descr": "Required for a check-in outside the valid window or on a different date",
+                "protect": "1",
+                "x": "270",
+                "y": "270",
+                "col_id": "27",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Audit: added on",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "280",
+                "y": "280",
+                "col_id": "28",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Audit: added by",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "290",
+                "y": "290",
+                "col_id": "29",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added Terminal",
+                "descr": "Audit: added from",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "300",
+                "y": "300",
+                "col_id": "30",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Audit: changed on",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "310",
+                "y": "310",
+                "col_id": "31",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Audit: changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "320",
+                "y": "320",
+                "col_id": "32",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed Terminal",
+                "descr": "Audit: changed from",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "330",
+                "y": "330",
+                "col_id": "33",
+                "table_name": "CCW_GUEST_ENTRY",
+                "table_display_name": "Guest entry",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_GUEST_ENTRY",
+                  "main_table": true,
+                  "table_descr": "Guest entry"
+                },
+                {
+                  "table": "CCW_GUEST_PURPOSE_MASTER",
+                  "main_table": false,
+                  "table_descr": "Guest purpose master",
+                  "column": "PURPOSE_CODE",
+                  "join_table": "CCW_GUEST_ENTRY",
+                  "join_column": "PURPOSE",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "list_view": {
+            "edit_lock": {
+              "expression": "{form.status} != \"E\"",
+              "reason": "Only Expected entries can be edited."
+            },
+            "tabs": {
+              "column": "STATUS",
+              "values": [
+                "E",
+                "W",
+                "A",
+                "I",
+                "O",
+                "J",
+                "C"
+              ],
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          },
+          "validations": [
+            {
+              "type": "expression",
+              "name": "Pre-registered date not past",
+              "error_code": "GE_DATE",
+              "message": "Expected date cannot be in the past.",
+              "expression": "{form.entry_type} != \"P\" or {form.status} != \"E\" or {form.expected_date} >= today()"
+            },
+            {
+              "type": "expression",
+              "name": "Valid to after valid from",
+              "error_code": "GE_WINDOW",
+              "message": "Valid To time must be after Valid From time.",
+              "expression": "{form.entry_type} != \"P\" or is_empty({form.valid_from_time}) or is_empty({form.valid_to_time}) or {form.valid_to_time} > {form.valid_from_time}"
+            },
+            {
+              "type": "expression",
+              "name": "Walk-in ID proof",
+              "error_code": "GE_ID",
+              "message": "ID proof type and number are mandatory for a Walk-In guest.",
+              "expression": "{form.entry_type} != \"W\" or (not_empty({form.id_proof_type}) and not_empty({form.id_proof_no}))"
+            },
+            {
+              "type": "expression",
+              "name": "Walk-in is today",
+              "error_code": "GE_WALKIN_DATE",
+              "message": "A Walk-In guest's expected date is today.",
+              "expression": "{form.entry_type} != \"W\" or {form.status} != \"W\" or {form.expected_date} == today()"
+            },
+            {
+              "type": "expression",
+              "name": "Checkout after checkin",
+              "error_code": "GE_CHECKOUT",
+              "message": "Check out time must be after check in time.",
+              "expression": "is_empty({form.check_out_time}) or {form.check_out_time} > {form.check_in_time}"
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Expected only",
+            "message": "Only Expected entries can be deleted.",
+            "expression": "{form.status} == \"E\""
+          }
+        ]
+      },
+      {
+        "name": "Approve",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "business_logic": {
+          "method": "approve_walkin",
+          "description": "Resident approves a Walk-In guest",
+          "spec": "Allowed only when STATUS='W' (Awaiting Approval). The signed-in user's email must match CCW_MEMBER_OWNER.OWNER_EMAIL for the entry's UNIT_NO, or CCW_TENANT_PROFILE.TENANT_EMAIL for that unit with TENANT_STATUS='A' (case-insensitive); otherwise error 'Only a member or active tenant of this unit can approve'. Set STATUS='A', APPROVED_VIA='A' (App), APPROVED_BY = the user's name/email. Notify the security desk / unit contacts. Return {\"message\":\"Guest approved\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Awaiting approval",
+            "message": "Only entries Awaiting Approval can be approved.",
+            "expression": "{form.status} == \"W\""
+          }
+        ],
+        "visible_when": "{form.status} == \"W\""
+      },
+      {
+        "name": "Approve by Phone",
+        "handler": "message",
+        "scope": "row",
+        "capture": {
+          "mode": "text",
+          "prompt": "Name of the resident who approved by phone",
+          "field": "APPROVED_BY"
+        },
+        "business_logic": {
+          "method": "approve_walkin_by_phone",
+          "description": "Security records a phone approval",
+          "spec": "For security/management users only. Allowed only when STATUS='W'. Require a non-blank APPROVED_BY (the name of the person who approved) from the payload. Set STATUS='A', APPROVED_VIA='P' (Phone), APPROVED_BY from the payload. Return {\"message\":\"Approval recorded by phone\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Awaiting approval",
+            "message": "Only entries Awaiting Approval can be approved.",
+            "expression": "{form.status} == \"W\""
+          }
+        ],
+        "visible_when": "{form.status} == \"W\""
+      },
+      {
+        "name": "Reject",
+        "handler": "message",
+        "scope": "row",
+        "business_logic": {
+          "method": "reject_walkin",
+          "description": "Resident rejects a Walk-In guest",
+          "spec": "Allowed only when STATUS='W' and only for a member (CCW_MEMBER_OWNER.OWNER_EMAIL) or active tenant (CCW_TENANT_PROFILE.TENANT_EMAIL, TENANT_STATUS='A') of the entry's UNIT_NO, matched to the signed-in user's email (case-insensitive). Set STATUS='J' (Rejected), APPROVED_VIA='A', APPROVED_BY = the user. The record is then locked. Return {\"message\":\"Guest rejected\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Awaiting approval",
+            "message": "Only entries Awaiting Approval can be rejected.",
+            "expression": "{form.status} == \"W\""
+          }
+        ],
+        "visible_when": "{form.status} == \"W\"",
+        "confirmation": {
+          "mode": "reconfirm",
+          "message": "Reject guest {form.guest_name}?"
+        }
+      },
+      {
+        "name": "Check In",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "capture": {
+          "mode": "text",
+          "prompt": "Security remark (mandatory if outside the valid time window or on a different date)",
+          "field": "SECURITY_REMARK"
+        },
+        "business_logic": {
+          "method": "check_in_guest",
+          "description": "Check the guest in",
+          "spec": "Allowed only when STATUS is 'E' (Expected, and EXPECTED_DATE = today) or 'A' (Approved); an Expected entry on a different date, or an entry checked in outside VALID_FROM_TIME..VALID_TO_TIME (when set), requires a non-blank SECURITY_REMARK from the payload, else error. Set STATUS='I', CHECK_IN_TIME = now, CHECKED_IN_BY = signed-in user's email, SECURITY_REMARK from the payload when given. Notify the unit contacts (unit owners from CCW_MEMBER_OWNER and the active tenant). Return {\"message\":\"Guest checked in\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Expected or Approved",
+            "message": "Only Expected or Approved entries can be checked in.",
+            "expression": "in_list({form.status}, \"E,A\")"
+          }
+        ],
+        "visible_when": "in_list({form.status}, \"E,A\")"
+      },
+      {
+        "name": "Check Out",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "business_logic": {
+          "method": "check_out_guest",
+          "description": "Check the guest out",
+          "spec": "Allowed only when STATUS='I'. Set STATUS='O' and CHECK_OUT_TIME = now (must be after CHECK_IN_TIME). Notify the unit contacts. Return {\"message\":\"Guest checked out\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Checked in",
+            "message": "Only Checked In entries can be checked out.",
+            "expression": "{form.status} == \"I\""
+          }
+        ],
+        "visible_when": "{form.status} == \"I\""
+      },
+      {
+        "name": "Cancel",
+        "handler": "message",
+        "scope": "row",
+        "business_logic": {
+          "method": "cancel_guest_entry",
+          "description": "Cancel the entry",
+          "spec": "Allowed for the registering user, residents of the unit, or security/management, when STATUS is 'E', 'W' or 'A'. Set STATUS='C'; the record is then locked. Return {\"message\":\"Entry cancelled\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Cancellable",
+            "message": "Only Expected, Awaiting Approval or Approved entries can be cancelled.",
+            "expression": "in_list({form.status}, \"E,W,A\")"
+          }
+        ],
+        "visible_when": "in_list({form.status}, \"E,W,A\")",
+        "confirmation": {
+          "mode": "reconfirm",
+          "message": "Cancel the entry for {form.guest_name}?"
+        }
+      },
+      {
+        "name": "Scan QR Code",
+        "handler": "message",
+        "scope": "form",
+        "capture": {
+          "mode": "scan",
+          "prompt": "Scan the guest's pass QR (or type the 6-character code)",
+          "field": "SCANNED_CODE"
+        },
+        "business_logic": {
+          "method": "scan_guest_pass",
+          "description": "Look up an entry by scanned pass",
+          "spec": "Normalise SCANNED_CODE (trim, upper-case, strip any wrapper such as a URL or KEY=value prefix) and find the CCW_GUEST_ENTRY with that PASS_CODE; error 'Pass not found' otherwise. Return {\"message\": ...} summarising GUEST_ENTRY_NO, GUEST_NAME, UNIT_NO, purpose, EXPECTED_DATE, valid window and STATUS, plus a warning when the date or time window does not match or the status is not Expected/Approved (already used or cancelled)."
+        }
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [
+      {
+        "mode": "business_logic",
+        "business_logic": {
+          "method": "prepare_guest_entry",
+          "description": "Generate pass code/QR and notify the unit for walk-ins",
+          "spec": "On action='add' only. For ENTRY_TYPE='P' (Pre-Registered): generate a random unique 6-character upper-case alphanumeric PASS_CODE (no ambiguous characters; retry until no CCW_GUEST_ENTRY row has it) and set PASS_QR to the same value (the QR payload) on the header row, STATUS='E'. For ENTRY_TYPE='W' (Walk-In): STATUS='W', EXPECTED_DATE = today, no pass code. Enforce that a Pre-Registered entry's pass is returned to the user in the success message ('Pass code: XXXXXX')."
+        }
+      }
+    ],
+    "post_commit": [
+      {
+        "mode": "business_logic",
+        "business_logic": {
+          "method": "notify_walkin_registered",
+          "description": "Ask the unit to approve a Walk-In",
+          "spec": "On action='add' with ENTRY_TYPE='W': create an in-app notification and email to every owner of the entry's UNIT_NO (CCW_MEMBER_OWNER.OWNER_EMAIL with LOGIN_ENABLED='Y') and to the active tenant with login (CCW_TENANT_PROFILE, TENANT_STATUS='A', LOGIN_ENABLED='Y') asking them to Approve or Reject the guest (name, company, purpose, persons). Never blocks the save."
+        }
+      }
+    ],
+    "attach_docs": [],
+    "follow_up_actions": []
+  }
+}

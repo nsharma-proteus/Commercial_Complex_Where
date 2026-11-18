@@ -1,0 +1,85 @@
+{
+  "table_name": "CCW_FR_UPDATE",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "REQUEST_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Parent request",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "LINE_NO",
+      "data_type": "NUMBER",
+      "size": "4",
+      "key": true,
+      "description": "Line number",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "UPDATE_DATE_TIME",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "When the update was made",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "UPDATED_BY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "User who made the update",
+      "sequence": 4
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Request status at this update",
+      "sequence": 5,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "O",
+          "label": "Open"
+        },
+        {
+          "value": "A",
+          "label": "Assigned"
+        },
+        {
+          "value": "P",
+          "label": "In Progress"
+        },
+        {
+          "value": "R",
+          "label": "Resolved"
+        },
+        {
+          "value": "C",
+          "label": "Closed"
+        },
+        {
+          "value": "X",
+          "label": "Cancelled"
+        }
+      ]
+    },
+    {
+      "column_name": "REMARK",
+      "data_type": "VARCHAR",
+      "size": "1000",
+      "key": false,
+      "description": "Comment or note",
+      "sequence": 6
+    }
+  ]
+}

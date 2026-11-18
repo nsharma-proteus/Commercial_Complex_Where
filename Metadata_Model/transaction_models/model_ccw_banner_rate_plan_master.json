@@ -1,0 +1,649 @@
+{
+  "transaction": {
+    "obj_name": "ccw_banner_rate_plan_master",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Banner Rate Plan",
+          "form_descr": "Commercial terms for carousel banners: rate, slots, tax and timing. A rate change applies to new bookings only (bookings copy the rate when created).",
+          "form_no": "1",
+          "main_table": "CCW_BANNER_RATE_PLAN_MASTER",
+          "columns": [
+            {
+              "column": {
+                "name": "plan_code",
+                "db_name": "PLAN_CODE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Plan Code",
+                "descr": "Unique code of the rate plan",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Plan code unique",
+                    "error_code": "PLAN_CODE_DUP",
+                    "message": "Plan code {form.plan_code} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "plan_name",
+                "db_name": "PLAN_NAME",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Plan Name",
+                "descr": "Name of the banner rate plan",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "effective_from",
+                "db_name": "EFFECTIVE_FROM",
+                "group_name": "Basic",
+                "col_type": "DATE",
+                "heading": "Effective From",
+                "descr": "Date from which the plan applies",
+                "mandatory": true,
+                "default_value": "today()",
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Active or Inactive",
+                "mandatory": true,
+                "default_value": "A",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Inactive"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Active"
+                    },
+                    {
+                      "when": "I",
+                      "color": "grey",
+                      "label": "Inactive"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Status is a listed value",
+                    "error_code": "STATUS_LIST",
+                    "message": "Status must be one of: A, I.",
+                    "expression": "in_list({form.status}, \"A,I\")"
+                  }
+                ],
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "rate_per_slot_per_month",
+                "db_name": "RATE_PER_SLOT_PER_MONTH",
+                "group_name": "Commercial Terms",
+                "col_type": "NUMBER",
+                "heading": "Rate per Slot per Month",
+                "descr": "Monthly rate for one carousel slot",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Rate greater than 0",
+                    "error_code": "RATE_MIN",
+                    "message": "Rate per slot per month must be greater than 0.",
+                    "expression": "{form.rate_per_slot_per_month} > 0"
+                  }
+                ],
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "12,2",
+                "width": 130,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "tax_pct",
+                "db_name": "TAX_PCT",
+                "group_name": "Commercial Terms",
+                "col_type": "NUMBER",
+                "heading": "Tax %",
+                "descr": "Tax percentage applied on the booking amount",
+                "mandatory": true,
+                "default_value": "0",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Tax between 0 and 100",
+                    "error_code": "TAX_RANGE",
+                    "message": "Tax % must be between 0 and 100.",
+                    "expression": "{form.tax_pct} >= 0 and {form.tax_pct} <= 100"
+                  }
+                ],
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "5,2",
+                "width": 60,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "min_months",
+                "db_name": "MIN_MONTHS",
+                "group_name": "Commercial Terms",
+                "col_type": "NUMBER",
+                "heading": "Minimum Months",
+                "descr": "Minimum number of months per booking",
+                "mandatory": true,
+                "default_value": "1",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Min months at least 1",
+                    "error_code": "MIN_MONTHS",
+                    "message": "Minimum months must be at least 1.",
+                    "expression": "{form.min_months} >= 1"
+                  }
+                ],
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "max_carousel_slots",
+                "db_name": "MAX_CAROUSEL_SLOTS",
+                "group_name": "Carousel",
+                "col_type": "NUMBER",
+                "heading": "Max Carousel Slots",
+                "descr": "Banners that can be live on any day",
+                "mandatory": true,
+                "default_value": "1",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Max slots at least 1",
+                    "error_code": "MAX_SLOTS",
+                    "message": "Max carousel slots must be at least 1.",
+                    "expression": "{form.max_carousel_slots} >= 1"
+                  }
+                ],
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "seconds_per_banner",
+                "db_name": "SECONDS_PER_BANNER",
+                "group_name": "Carousel",
+                "col_type": "NUMBER",
+                "heading": "Seconds per Banner",
+                "descr": "Seconds each banner is shown before the carousel rotates",
+                "mandatory": true,
+                "default_value": "5",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Seconds greater than 0",
+                    "error_code": "SECONDS_MIN",
+                    "message": "Seconds per banner must be greater than 0.",
+                    "expression": "{form.seconds_per_banner} > 0"
+                  }
+                ],
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "image_size_guidance",
+                "db_name": "IMAGE_SIZE_GUIDANCE",
+                "group_name": "Carousel",
+                "col_type": "VARCHAR",
+                "heading": "Image Size Guidance",
+                "descr": "Text shown to advertisers about banner image size",
+                "edit_mask": {
+                  "mask": "textarea"
+                },
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Record creation date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "110",
+                "y": "110",
+                "col_id": "11",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "User who created the record",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "120",
+                "y": "120",
+                "col_id": "12",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Terminal that created the record",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "130",
+                "y": "130",
+                "col_id": "13",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "140",
+                "y": "140",
+                "col_id": "14",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "User who last changed the record",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "150",
+                "y": "150",
+                "col_id": "15",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Terminal of last change",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "160",
+                "y": "160",
+                "col_id": "16",
+                "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+                "table_display_name": "Banner rate plan master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_BANNER_RATE_PLAN_MASTER",
+                  "main_table": true,
+                  "table_descr": "Banner rate plan master"
+                }
+              ]
+            }
+          },
+          "validations": [
+            {
+              "type": "builtin",
+              "name": "One Active plan per effective date",
+              "error_code": "PLAN_ACTIVE_DUP",
+              "message": "Another Active plan already exists with the same Effective From date. Only one plan can be Active for a given date.",
+              "builtin": {
+                "kind": "sql_range",
+                "sql": "SELECT CASE WHEN {form.status} = 'A' THEN (SELECT COUNT(*) FROM CCW_BANNER_RATE_PLAN_MASTER WHERE STATUS = 'A' AND EFFECTIVE_FROM = {form.effective_from} AND PLAN_CODE <> {form.plan_code}) ELSE 0 END",
+                "range_max": {
+                  "source": "const",
+                  "value": "0"
+                },
+                "on_no_row": "pass",
+                "on_error": "fail"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "business_logic",
+            "name": "Plan not used in a booking",
+            "error_code": "PLAN_IN_USE",
+            "message": "This plan has been used in a banner booking and cannot be deleted. Make it Inactive instead.",
+            "business_logic": {
+              "method": "check_plan_not_used",
+              "description": "Block delete when the plan is used in any booking",
+              "spec": "Input: the plan row (PLAN_CODE). If table CCW_BANNER_BOOKING does not yet exist, return nothing (pass). Otherwise count rows in CCW_BANNER_BOOKING that reference this PLAN_CODE (the booking's rate-plan column, expected PLAN_CODE). If count > 0 return {\"error\": \"Plan <PLAN_CODE> is used in <n> banner booking(s) and cannot be deleted. Make it Inactive instead.\"}; else return nothing."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": [],
+    "vector_search": {
+      "enabled": true,
+      "columns": [
+        "plan_name",
+        "status"
+      ],
+      "key_column": "plan_code",
+      "display_column": "plan_name",
+      "allow_alias": true,
+      "auto": true,
+      "reason": "named as a master; searched by plan_name plus status so same-named records stay distinguishable"
+    }
+  }
+}

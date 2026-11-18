@@ -1,0 +1,71 @@
+{
+  "table_name": "CCW_MEMBER_PROFILE",
+  "objects": [
+    {
+      "object_name": "ccw_member_profile",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "SHOW_IN_DIRECTORY",
+        "BUSINESS_CATEGORY",
+        "CONTACT_NO_1",
+        "BUSINESS_NAME",
+        "CHG_USER",
+        "LOGO",
+        "UNIT_NO",
+        "SHOW_TENANT_IN_DIRECTORY",
+        "WEBSITE",
+        "EMAIL",
+        "CONTACT_NO_2",
+        "OCCUPANCY_TYPE",
+        "CONTACT_PERSON",
+        "ADD_USER",
+        "ADD_DATE",
+        "PROFILE_STATUS",
+        "BUSINESS_DESCRIPTION",
+        "CHG_DATE",
+        "ALLOW_TENANT_TO_UPDATE_PROFILE",
+        "ADD_TERM",
+        "CHG_TERM",
+        "TENANT_LOGIN_ALLOWED"
+      ],
+      "join_info": {
+        "column": "BUSINESS_CATEGORY",
+        "join_table": "CCW_BUSINESS_CATEGORY",
+        "join_column": "CATEGORY_CODE"
+      }
+    },
+    {
+      "object_name": "ccw_member_profile",
+      "form_no": "2",
+      "usage_type": "M",
+      "referred_columns": [
+        "UNIT_NO"
+      ],
+      "join_info": {
+        "column": "UNIT_NO",
+        "join_table": "CCW_MEMBER_OWNER",
+        "join_column": "UNIT_NO"
+      }
+    },
+    {
+      "object_name": "ccw_tenant_profile",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "CONTACT_NO_1",
+        "SHOW_TENANT_IN_DIRECTORY",
+        "OCCUPANCY_TYPE",
+        "UNIT_NO",
+        "BUSINESS_NAME",
+        "TENANT_LOGIN_ALLOWED",
+        "ALLOW_TENANT_TO_UPDATE_PROFILE"
+      ],
+      "join_info": {
+        "column": "UNIT_NO",
+        "join_table": "CCW_TENANT_PROFILE",
+        "join_column": "UNIT_NO"
+      }
+    }
+  ]
+}

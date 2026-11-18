@@ -1,0 +1,350 @@
+{
+  "table_name": "CCW_GUEST_ENTRY",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "GUEST_ENTRY_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Auto-generated entry number",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "ENTRY_TYPE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Pre-Registered or Walk-In",
+      "sequence": 2,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "P",
+          "label": "Pre-Registered"
+        },
+        {
+          "value": "W",
+          "label": "Walk-In"
+        }
+      ]
+    },
+    {
+      "column_name": "GUEST_NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Name of the guest",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "GUEST_MOBILE",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Guest mobile number",
+      "sequence": 4,
+      "mandatory": true
+    },
+    {
+      "column_name": "NO_OF_PERSONS",
+      "data_type": "NUMBER",
+      "size": "3",
+      "key": false,
+      "description": "Number of persons (at least 1)",
+      "sequence": 5,
+      "mandatory": true
+    },
+    {
+      "column_name": "GUEST_COMPANY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Guest's company / organisation",
+      "sequence": 6
+    },
+    {
+      "column_name": "VEHICLE_NO",
+      "data_type": "VARCHAR",
+      "size": "20",
+      "key": false,
+      "description": "Guest vehicle number",
+      "sequence": 7
+    },
+    {
+      "column_name": "ID_PROOF_TYPE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Mandatory for Walk-In",
+      "sequence": 8,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Aadhaar"
+        },
+        {
+          "value": "P",
+          "label": "PAN"
+        },
+        {
+          "value": "D",
+          "label": "Driving Licence"
+        },
+        {
+          "value": "S",
+          "label": "Passport"
+        },
+        {
+          "value": "V",
+          "label": "Voter ID"
+        },
+        {
+          "value": "O",
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "column_name": "ID_PROOF_NO",
+      "data_type": "VARCHAR",
+      "size": "30",
+      "key": false,
+      "description": "Mandatory for Walk-In",
+      "sequence": 9
+    },
+    {
+      "column_name": "PURPOSE",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Purpose of visit",
+      "sequence": 10,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_GUEST_PURPOSE_MASTER",
+        "display_column": "PURPOSE_NAME",
+        "value_column": "PURPOSE_CODE"
+      }
+    },
+    {
+      "column_name": "UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Unit being visited",
+      "sequence": 11,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_UNIT_MASTER",
+        "display_column": "UNIT_NO",
+        "value_column": "UNIT_NO"
+      }
+    },
+    {
+      "column_name": "PERSON_TO_MEET",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Person being visited (defaults to the unit's contact person)",
+      "sequence": 12
+    },
+    {
+      "column_name": "EXPECTED_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Date of visit (today for Walk-In)",
+      "sequence": 13,
+      "mandatory": true
+    },
+    {
+      "column_name": "VALID_FROM_TIME",
+      "data_type": "TIME",
+      "size": "",
+      "key": false,
+      "description": "Pass valid from (Pre-Registered)",
+      "sequence": 14
+    },
+    {
+      "column_name": "VALID_TO_TIME",
+      "data_type": "TIME",
+      "size": "",
+      "key": false,
+      "description": "Pass valid until (must be after valid from)",
+      "sequence": 15
+    },
+    {
+      "column_name": "PASS_CODE",
+      "data_type": "VARCHAR",
+      "size": "6",
+      "key": false,
+      "description": "Unique 6-character pass code, generated on save for Pre-Registered entries",
+      "sequence": 16
+    },
+    {
+      "column_name": "PASS_QR",
+      "data_type": "VARCHAR",
+      "size": "200",
+      "key": false,
+      "description": "QR payload (the pass code), generated on save",
+      "sequence": 17
+    },
+    {
+      "column_name": "REGISTERED_BY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "User who registered the entry",
+      "sequence": 18
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Changed by actions; starts Expected (Pre-Registered) or Awaiting Approval (Walk-In)",
+      "sequence": 19,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "E",
+          "label": "Expected"
+        },
+        {
+          "value": "W",
+          "label": "Awaiting Approval"
+        },
+        {
+          "value": "A",
+          "label": "Approved"
+        },
+        {
+          "value": "J",
+          "label": "Rejected"
+        },
+        {
+          "value": "I",
+          "label": "Checked In"
+        },
+        {
+          "value": "O",
+          "label": "Checked Out"
+        },
+        {
+          "value": "C",
+          "label": "Cancelled"
+        }
+      ]
+    },
+    {
+      "column_name": "APPROVED_VIA",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "App or Phone (set by Approve actions)",
+      "sequence": 20,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "App"
+        },
+        {
+          "value": "P",
+          "label": "Phone"
+        }
+      ]
+    },
+    {
+      "column_name": "APPROVED_BY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Resident (or phone approver name) who approved/rejected",
+      "sequence": 21
+    },
+    {
+      "column_name": "CHECK_IN_TIME",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Set by Check In",
+      "sequence": 22
+    },
+    {
+      "column_name": "CHECKED_IN_BY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Security user who checked the guest in",
+      "sequence": 23
+    },
+    {
+      "column_name": "CHECK_OUT_TIME",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Set by Check Out (after check in)",
+      "sequence": 24
+    },
+    {
+      "column_name": "SECURITY_REMARK",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Required for a check-in outside the valid window or on a different date",
+      "sequence": 25
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: added on",
+      "sequence": 26
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: added by",
+      "sequence": 27
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: added from",
+      "sequence": 28
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: changed on",
+      "sequence": 29
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: changed by",
+      "sequence": 30
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: changed from",
+      "sequence": 31
+    }
+  ]
+}

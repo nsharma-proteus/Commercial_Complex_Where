@@ -1,0 +1,62 @@
+{
+  "status": "inconclusive",
+  "ts": 1794826975,
+  "checks": [
+    {
+      "check": "Flow: masters (wing, unit, categories, rate plan, purposes) then member profile with joint owners, tenant profile, parking with vehicles",
+      "status": "inconclusive",
+      "observed": "Only a wing create was accepted by the engine; stored values could not be read because the DB role has no connection slots left",
+      "why": "run-select and db_inspect fail with 'too many connections for role'",
+      "object": "ccw_member_profile",
+      "kind": "flow"
+    },
+    {
+      "check": "Flow: notice publish to expiry, event publish/cancel",
+      "status": "inconclusive",
+      "observed": "Not run",
+      "why": "No read-back available (DB connections exhausted)",
+      "object": "ccw_notice",
+      "kind": "flow"
+    },
+    {
+      "check": "Flow: business query forwarded to recipients, response, close/reopen",
+      "status": "inconclusive",
+      "observed": "Not run",
+      "why": "No read-back available (DB connections exhausted)",
+      "object": "ccw_business_query",
+      "kind": "flow"
+    },
+    {
+      "check": "Flow: banner booking, approve, record payment, cancel/reject",
+      "status": "inconclusive",
+      "observed": "Not run",
+      "why": "No read-back available (DB connections exhausted)",
+      "object": "ccw_banner_booking",
+      "kind": "flow"
+    },
+    {
+      "check": "Flow: guest entry and security check-in/out; facility request assign/resolve/close",
+      "status": "inconclusive",
+      "observed": "Not run",
+      "why": "No read-back available (DB connections exhausted)",
+      "object": "ccw_guest_entry",
+      "kind": "flow"
+    },
+    {
+      "check": "Rules spanning two screens (rent/owner block, tenant flags, delete blocks, parking ownership, notice board window)",
+      "status": "inconclusive",
+      "observed": "Not run",
+      "why": "No read-back available (DB connections exhausted)",
+      "object": "ccw_member_profile",
+      "kind": "rule"
+    },
+    {
+      "check": "Figures on 10 lists and 4 dashboards",
+      "status": "inconclusive",
+      "observed": "Not run; visual-data and dashboard-data read the same database",
+      "why": "DB role connection limit reached",
+      "object": "ccw_management_dashboard",
+      "kind": "figure"
+    }
+  ]
+}

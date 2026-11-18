@@ -1,0 +1,48 @@
+{
+  "table_name": "CCW_GUEST_ENTRY",
+  "objects": [
+    {
+      "object_name": "ccw_guest_entry",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "ID_PROOF_NO",
+        "CHECK_OUT_TIME",
+        "CHG_DATE",
+        "CHG_TERM",
+        "GUEST_COMPANY",
+        "CHECK_IN_TIME",
+        "PERSON_TO_MEET",
+        "VALID_FROM_TIME",
+        "STATUS",
+        "ENTRY_TYPE",
+        "PASS_CODE",
+        "APPROVED_BY",
+        "GUEST_NAME",
+        "CHG_USER",
+        "GUEST_MOBILE",
+        "EXPECTED_DATE",
+        "VALID_TO_TIME",
+        "APPROVED_VIA",
+        "PURPOSE",
+        "SECURITY_REMARK",
+        "ADD_TERM",
+        "PASS_QR",
+        "VEHICLE_NO",
+        "ADD_DATE",
+        "NO_OF_PERSONS",
+        "REGISTERED_BY",
+        "UNIT_NO",
+        "ADD_USER",
+        "ID_PROOF_TYPE",
+        "GUEST_ENTRY_NO",
+        "CHECKED_IN_BY"
+      ],
+      "join_info": {
+        "column": "PURPOSE",
+        "join_table": "CCW_GUEST_PURPOSE_MASTER",
+        "join_column": "PURPOSE_CODE"
+      }
+    }
+  ]
+}

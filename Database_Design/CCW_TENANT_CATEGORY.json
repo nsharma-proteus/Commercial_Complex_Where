@@ -1,0 +1,86 @@
+{
+  "table_name": "CCW_TENANT_CATEGORY",
+  "table_description": "Additional business categories of a tenant profile (the primary category stays on CCW_TENANT_PROFILE.BUSINESS_CATEGORY)",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Parent unit",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "LINE_NO",
+      "data_type": "NUMBER",
+      "size": "4",
+      "key": true,
+      "description": "Category line number",
+      "sequence": 2
+    },
+    {
+      "column_name": "CATEGORY_CODE",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Additional business category",
+      "sequence": 3,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_BUSINESS_CATEGORY",
+        "display_column": "CATEGORY_NAME",
+        "value_column": "CATEGORY_CODE"
+      }
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Created date",
+      "sequence": 4
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Created by",
+      "sequence": 5
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Created from terminal",
+      "sequence": 6
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Last change date",
+      "sequence": 7
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Last changed by",
+      "sequence": 8
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Last changed from terminal",
+      "sequence": 9
+    }
+  ]
+}

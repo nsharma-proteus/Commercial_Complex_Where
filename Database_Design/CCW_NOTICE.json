@@ -1,0 +1,207 @@
+{
+  "table_name": "CCW_NOTICE",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "NOTICE_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Auto-generated notice number",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "TITLE",
+      "data_type": "VARCHAR",
+      "size": "200",
+      "key": false,
+      "description": "Notice title",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "ANNOUNCEMENT_CATEGORY",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Announcement category",
+      "sequence": 3,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_ANNOUNCE_CATEGORY",
+        "display_column": "NAME",
+        "value_column": "ANNOUNCEMENT_CATEGORY_CODE"
+      }
+    },
+    {
+      "column_name": "PUBLISH_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Date the notice starts showing",
+      "sequence": 4,
+      "mandatory": true
+    },
+    {
+      "column_name": "EXPIRY_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Date the notice stops showing (blank = until withdrawn)",
+      "sequence": 5
+    },
+    {
+      "column_name": "IS_IMPORTANT",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Pinned on top of the Notice Board",
+      "sequence": 6,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "NOTICE_BODY",
+      "data_type": "TEXT",
+      "size": "",
+      "key": false,
+      "description": "Full notice text",
+      "sequence": 7,
+      "mandatory": true
+    },
+    {
+      "column_name": "ATTACHMENT",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Supporting document",
+      "sequence": 8
+    },
+    {
+      "column_name": "AUDIENCE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Who receives the notice",
+      "sequence": 9,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "All Members & Tenants"
+        },
+        {
+          "value": "O",
+          "label": "Owners Only"
+        },
+        {
+          "value": "W",
+          "label": "Specific Wing"
+        }
+      ]
+    },
+    {
+      "column_name": "WING_CODE",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Wing (mandatory when audience is Specific Wing)",
+      "sequence": 10,
+      "lookup": {
+        "table": "CCW_WING_MASTER",
+        "display_column": "WING_NAME",
+        "value_column": "WING_CODE"
+      }
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Draft / Published / Withdrawn; changed by Publish and Withdraw",
+      "sequence": 11,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "D",
+          "label": "Draft"
+        },
+        {
+          "value": "P",
+          "label": "Published"
+        },
+        {
+          "value": "W",
+          "label": "Withdrawn"
+        }
+      ]
+    },
+    {
+      "column_name": "PUBLISHED_BY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "User who created/published the notice",
+      "sequence": 12
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: added on",
+      "sequence": 13
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: added by",
+      "sequence": 14
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: added from",
+      "sequence": 15
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: changed on",
+      "sequence": 16
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: changed by",
+      "sequence": 17
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: changed from",
+      "sequence": 18
+    }
+  ]
+}

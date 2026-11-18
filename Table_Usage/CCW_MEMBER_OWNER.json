@@ -1,0 +1,24 @@
+{
+  "table_name": "CCW_MEMBER_OWNER",
+  "objects": [
+    {
+      "object_name": "ccw_member_profile",
+      "form_no": "2",
+      "usage_type": "R",
+      "referred_columns": [
+        "IS_PRIMARY_OWNER",
+        "UNIT_NO",
+        "OWNER_MOBILE",
+        "OWNER_NAME",
+        "OWNER_EMAIL",
+        "LINE_NO",
+        "LOGIN_ENABLED"
+      ],
+      "join_info": {
+        "column": "UNIT_NO",
+        "join_table": "CCW_MEMBER_PROFILE",
+        "join_column": "UNIT_NO"
+      }
+    }
+  ]
+}

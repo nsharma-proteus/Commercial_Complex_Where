@@ -1,0 +1,442 @@
+{
+  "transaction": {
+    "obj_name": "ccw_business_category_master",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Business Category",
+          "form_descr": "Business types used for directory search and routing of business queries.",
+          "form_no": "1",
+          "main_table": "CCW_BUSINESS_CATEGORY",
+          "columns": [
+            {
+              "column": {
+                "name": "category_code",
+                "db_name": "CATEGORY_CODE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Category Code",
+                "descr": "Unique category code",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Category code unique",
+                    "error_code": "CAT_CODE_DUP",
+                    "message": "Category code {form.category_code} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "category_name",
+                "db_name": "CATEGORY_NAME",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Category Name",
+                "descr": "Business type, e.g. Lawyer, Chartered Accountant",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Category name unique",
+                    "error_code": "CAT_NAME_DUP",
+                    "message": "Category name {form.category_name} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "description",
+                "db_name": "DESCRIPTION",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Description",
+                "descr": "What businesses belong to this category",
+                "edit_mask": {
+                  "mask": "textarea"
+                },
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Active or Inactive",
+                "default_value": "A",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Inactive"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Active"
+                    },
+                    {
+                      "when": "I",
+                      "color": "grey",
+                      "label": "Inactive"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Status is a listed value",
+                    "error_code": "CAT_STATUS",
+                    "message": "Status must be A or I.",
+                    "expression": "in_list({form.status}, \"A,I\")"
+                  }
+                ],
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Created date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Created by",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Created from terminal",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Last changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Last changed from terminal",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "table_display_name": "Business category master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_BUSINESS_CATEGORY",
+                  "main_table": true,
+                  "table_descr": "Business category master"
+                }
+              ]
+            }
+          },
+          "validations": [],
+          "list_view": {
+            "tabs": {
+              "column": "status",
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          }
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "business_logic",
+            "name": "Category not in use",
+            "error_code": "CAT_IN_USE",
+            "message": "A category in use by a profile or query cannot be deleted. Make it Inactive instead.",
+            "business_logic": {
+              "method": "check_category_delete",
+              "description": "Block delete of a category used by profiles or queries",
+              "spec": "Payload carries CATEGORY_CODE. If any row exists with BUSINESS_CATEGORY equal to this code in the Member Profile table (ccw_member_profile), the Tenant Profile table (ccw_tenant_profile), or with TARGET_BUSINESS_CATEGORY equal to it in the Business Query table (ccw_business_query), return {\"error\": \"A category in use by a profile or query cannot be deleted. Make it Inactive instead.\"}; otherwise return None. Skip any of those tables that do not exist yet."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": [],
+    "vector_search": {
+      "enabled": true,
+      "columns": [
+        "category_name",
+        "status"
+      ],
+      "key_column": "category_code",
+      "display_column": "category_name",
+      "allow_alias": true,
+      "auto": true,
+      "reason": "named as a master; searched by category_name plus status so same-named records stay distinguishable"
+    }
+  }
+}

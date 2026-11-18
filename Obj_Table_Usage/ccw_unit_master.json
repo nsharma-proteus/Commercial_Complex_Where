@@ -1,0 +1,25 @@
+{
+  "object_name": "ccw_unit_master",
+  "tables": {
+    "CCW_UNIT_MASTER": [
+      "WING_CODE",
+      "OCCUPANCY_STATUS",
+      "CHG_USER",
+      "ADD_TERM",
+      "UNIT_TYPE",
+      "ADD_USER",
+      "UNIT_NO",
+      "CHG_TERM",
+      "ADD_DATE",
+      "CHG_DATE",
+      "AREA_SQFT",
+      "STATUS",
+      "FLOOR_NO"
+    ],
+    "CCW_WING_MASTER": [
+      "WING_CODE",
+      "WING_NAME",
+      "NO_OF_FLOORS"
+    ]
+  }
+}

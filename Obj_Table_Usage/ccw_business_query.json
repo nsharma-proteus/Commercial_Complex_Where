@@ -1,0 +1,46 @@
+{
+  "object_name": "ccw_business_query",
+  "tables": {
+    "CCW_BUSINESS_QUERY": [
+      "CLOSURE_REMARK",
+      "RAISED_BY_UNIT_NO",
+      "SUBJECT",
+      "QUERY_NO",
+      "ADD_USER",
+      "CHG_DATE",
+      "CHG_TERM",
+      "DESCRIPTION",
+      "RAISED_BY_EMAIL",
+      "TARGET_BUSINESS_CATEGORY",
+      "CHG_USER",
+      "ADD_DATE",
+      "RAISED_BY_NAME",
+      "QUERY_DATE",
+      "STATUS",
+      "CLOSED_ON",
+      "ADD_TERM"
+    ],
+    "CCW_BUSINESS_CATEGORY": [
+      "CATEGORY_CODE",
+      "CATEGORY_NAME"
+    ],
+    "CCW_BQ_RECIPIENT": [
+      "QUERY_NO",
+      "VIEWED",
+      "BUSINESS_NAME",
+      "RECIPIENT_EMAIL",
+      "LINE_NO",
+      "FORWARDED_ON",
+      "UNIT_NO"
+    ],
+    "CCW_BQ_RESPONSE": [
+      "RESPONSE_TEXT",
+      "QUERY_NO",
+      "RESPONDER_BUSINESS_NAME",
+      "RESPONSE_DATE",
+      "RESPONDER_CONTACT_NO",
+      "LINE_NO",
+      "RESPONDER_UNIT_NO"
+    ]
+  }
+}

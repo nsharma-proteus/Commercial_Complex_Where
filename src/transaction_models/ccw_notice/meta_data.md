@@ -1,0 +1,1 @@
+[1] Notice: notice_no(V10), title(V200), announcement_category(V10), category_name(V100), publish_date(D), expiry_date(D), is_important(V1), notice_body(TEXT), attachment(V500), audience(V1), wing_code(V10), wing_name(V100), status(V1), published_by(V100), add_date(DT), add_user(V10), add_term(V15), chg_date(DT), chg_user(V10), chg_term(V15)

@@ -1,0 +1,35 @@
+{
+  "id": "11804eb5-1607-4c31-8291-7f0706e89ab4",
+  "project": "Commercial_Complex_Where",
+  "backend": "autoagent",
+  "title": "Change",
+  "kind": "change",
+  "status": "completed",
+  "description": "[The user currently has the \"Portal Home\" screen open (object ccw_portal_home, type S). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nnow I am getting this error on the banner \nDISPLAY_ORDER: 1\nBANNER_IMAGE: /api/designers/documents/raw?project=Commercial_Complex_Where&file=5f5ea14b42af3ec8.png&name=Gemini_Generated_Image_4zojfn4zojfn4zoj.png&dt=ccw_banner_booking_banner_image&rid=16\nBANNER_TITLE: Proteus Technologies Pvt Ltd\nCLICK_URL:\nSECONDS_PER_BANNER: 5",
+  "created_at": 1794907150.9050038,
+  "updated_at": 1794996309.8589008,
+  "todos": [
+    {
+      "id": "change_turn",
+      "step": "change",
+      "label": "now I am getting this error on the banner ",
+      "status": "completed",
+      "error": null,
+      "obj_name": null,
+      "obj_type": null,
+      "phase_id": null,
+      "started_at": 1794907150.9003203,
+      "completed_at": 1794907260.6257827
+    }
+  ],
+  "phases": [],
+  "originating_prompt": "[The user currently has the \"Portal Home\" screen open (object ccw_portal_home, type S). Resolve \"this\", \"this form/page/screen\", or \"here\" to this object unless they name a different one.]\n\nnow I am getting this error on the banner \nDISPLAY_ORDER: 1\nBANNER_IMAGE: /api/designers/documents/raw?project=Commercial_Complex_Where&file=5f5ea14b42af3ec8.png&name=Gemini_Generated_Image_4zojfn4zojfn4zoj.png&dt=ccw_banner_booking_banner_image&rid=16\nBANNER_TITLE: Proteus Technologies Pvt Ltd\nCLICK_URL:\nSECONDS_PER_BANNER: 5",
+  "resume_ref": {
+    "session_id": "150a8a68-ef90-4649-aa14-b974d6d40870",
+    "plan_id": "11804eb5-1607-4c31-8291-7f0706e89ab4",
+    "scope": null
+  },
+  "depends_on": [],
+  "result_summary": "",
+  "awaiting_answer": false
+}

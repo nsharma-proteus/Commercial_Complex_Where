@@ -1,0 +1,43 @@
+{
+  "object_name": "ccw_tenant_profile",
+  "tables": {
+    "CCW_TENANT_PROFILE": [
+      "ADD_TERM",
+      "ADD_DATE",
+      "CHG_TERM",
+      "TENANT_COMPANY_NAME",
+      "CHG_USER",
+      "LOGIN_ENABLED",
+      "CONTACT_NO_2",
+      "TENANT_STATUS",
+      "LOGO",
+      "CONTACT_NO_1",
+      "REMOVED_ON",
+      "LEASE_END_DATE",
+      "LEASE_START_DATE",
+      "ADD_USER",
+      "UNIT_NO",
+      "BUSINESS_DESCRIPTION",
+      "SHOW_IN_DIRECTORY",
+      "BUSINESS_CATEGORY",
+      "CONTACT_PERSON",
+      "REMOVAL_REASON",
+      "CHG_DATE",
+      "TENANT_EMAIL",
+      "ADDED_BY"
+    ],
+    "CCW_MEMBER_PROFILE": [
+      "CONTACT_NO_1",
+      "SHOW_TENANT_IN_DIRECTORY",
+      "OCCUPANCY_TYPE",
+      "UNIT_NO",
+      "BUSINESS_NAME",
+      "TENANT_LOGIN_ALLOWED",
+      "ALLOW_TENANT_TO_UPDATE_PROFILE"
+    ],
+    "CCW_BUSINESS_CATEGORY": [
+      "CATEGORY_CODE",
+      "CATEGORY_NAME"
+    ]
+  }
+}

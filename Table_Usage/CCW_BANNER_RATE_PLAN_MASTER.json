@@ -1,0 +1,28 @@
+{
+  "table_name": "CCW_BANNER_RATE_PLAN_MASTER",
+  "objects": [
+    {
+      "object_name": "ccw_banner_rate_plan_master",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "MIN_MONTHS",
+        "CHG_USER",
+        "MAX_CAROUSEL_SLOTS",
+        "ADD_TERM",
+        "RATE_PER_SLOT_PER_MONTH",
+        "ADD_USER",
+        "TAX_PCT",
+        "SECONDS_PER_BANNER",
+        "CHG_TERM",
+        "ADD_DATE",
+        "CHG_DATE",
+        "EFFECTIVE_FROM",
+        "PLAN_NAME",
+        "STATUS",
+        "PLAN_CODE",
+        "IMAGE_SIZE_GUIDANCE"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "object_name": "ccw_facility_request_category_master",
+  "tables": {
+    "CCW_FACILITY_REQ_CATEGORY": [
+      "NAME",
+      "CHG_USER",
+      "REQUEST_CATEGORY_CODE",
+      "TARGET_RESOLUTION_HOURS",
+      "ADD_USER",
+      "ADD_TERM",
+      "CHG_TERM",
+      "ADD_DATE",
+      "CHG_DATE",
+      "STATUS"
+    ]
+  }
+}

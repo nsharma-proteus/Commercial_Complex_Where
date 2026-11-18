@@ -1,0 +1,92 @@
+{
+  "table_name": "CCW_GUEST_PURPOSE_MASTER",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "PURPOSE_CODE",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Unique code of the guest purpose",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "PURPOSE_NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Reason for the guest visit (e.g. Business Meeting, Delivery, Courier, Service/Repair, Interview, Personal, Other)",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Active or Inactive",
+      "sequence": 3,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Active"
+        },
+        {
+          "value": "I",
+          "label": "Inactive"
+        }
+      ]
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Record creation date",
+      "sequence": 4
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who created the record",
+      "sequence": 5
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal that created the record",
+      "sequence": 6
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Last change date",
+      "sequence": 7
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who last changed the record",
+      "sequence": 8
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal of last change",
+      "sequence": 9
+    }
+  ]
+}

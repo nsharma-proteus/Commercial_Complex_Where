@@ -1,0 +1,33 @@
+{
+  "object_name": "ccw_notice",
+  "tables": {
+    "CCW_NOTICE": [
+      "NOTICE_NO",
+      "WING_CODE",
+      "PUBLISHED_BY",
+      "ADD_USER",
+      "ADD_TERM",
+      "PUBLISH_DATE",
+      "ATTACHMENT",
+      "CHG_DATE",
+      "CHG_TERM",
+      "EXPIRY_DATE",
+      "NOTICE_BODY",
+      "CHG_USER",
+      "AUDIENCE",
+      "ADD_DATE",
+      "ANNOUNCEMENT_CATEGORY",
+      "STATUS",
+      "TITLE",
+      "IS_IMPORTANT"
+    ],
+    "CCW_ANNOUNCE_CATEGORY": [
+      "NAME",
+      "ANNOUNCEMENT_CATEGORY_CODE"
+    ],
+    "CCW_WING_MASTER": [
+      "WING_CODE",
+      "WING_NAME"
+    ]
+  }
+}

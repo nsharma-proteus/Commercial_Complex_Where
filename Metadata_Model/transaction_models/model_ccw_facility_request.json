@@ -1,0 +1,1519 @@
+{
+  "transaction": {
+    "obj_name": "ccw_facility_request",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Facility Request",
+          "form_descr": "Raise, assign, work, resolve and close facility requests",
+          "form_no": "1",
+          "main_table": "CCW_FACILITY_REQUEST",
+          "row_security": {
+            "rules": [
+              {
+                "column": "UNIT_NO",
+                "op": "in",
+                "sql": "SELECT unit_no FROM CCW_MEMBER_OWNER WHERE LOWER(owner_email) = LOWER(:user_email) UNION SELECT unit_no FROM CCW_TENANT_PROFILE WHERE LOWER(tenant_email) = LOWER(:user_email) AND tenant_status = 'A'"
+              }
+            ],
+            "exempt_roles": [
+              "admin",
+              "func-admin",
+              "management",
+              "facility-team",
+              "supervisor",
+              "security"
+            ]
+          },
+          "open_groups": [
+            "Request",
+            "Assignment"
+          ],
+          "columns": [
+            {
+              "column": {
+                "name": "request_no",
+                "db_name": "REQUEST_NO",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Request No",
+                "descr": "Auto-generated request number",
+                "key": true,
+                "default_value": "auto_generate()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "request_date_time",
+                "db_name": "REQUEST_DATE_TIME",
+                "group_name": "Request",
+                "col_type": "DATETIME",
+                "heading": "Requested On",
+                "descr": "Date and time raised",
+                "default_value": "now()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "raised_by_email",
+                "db_name": "RAISED_BY_EMAIL",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Raised By Email",
+                "descr": "Raiser email (defaults to the signed-in user)",
+                "default_value": ":user_email",
+                "mandatory": true,
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_OWNER",
+                  "match_table_col": "OWNER_EMAIL",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "unit_no",
+                      "table_col": "UNIT_NO"
+                    },
+                    {
+                      "form_col": "raised_by_name",
+                      "table_col": "OWNER_NAME"
+                    },
+                    {
+                      "form_col": "raised_by_contact_no",
+                      "table_col": "OWNER_MOBILE"
+                    }
+                  ]
+                },
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Unit the request is about (defaults from the user's unit)",
+                "mandatory": true,
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "lookup_filter": "STATUS = 'A'",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Unit exists",
+                    "message": "Unit not found in Unit Master.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_UNIT_MASTER",
+                      "match_column": "UNIT_NO"
+                    }
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_PROFILE",
+                  "match_table_col": "UNIT_NO",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "raised_by_name",
+                      "table_col": "CONTACT_PERSON"
+                    },
+                    {
+                      "form_col": "raised_by_contact_no",
+                      "table_col": "CONTACT_NO_1"
+                    }
+                  ]
+                },
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "raised_by_name",
+                "db_name": "RAISED_BY_NAME",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Raised By",
+                "descr": "Name of the raiser",
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "raised_by_contact_no",
+                "db_name": "RAISED_BY_CONTACT_NO",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Contact No",
+                "descr": "Raiser contact number",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "request_category",
+                "db_name": "REQUEST_CATEGORY",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Category",
+                "descr": "Facility request category (drives the target resolution time)",
+                "mandatory": true,
+                "lookup": "CCW_FACILITY_REQ_CATEGORY(NAME, REQUEST_CATEGORY_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Category exists",
+                    "message": "Request category not found.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_FACILITY_REQ_CATEGORY",
+                      "match_column": "REQUEST_CATEGORY_CODE",
+                      "conditions": [
+                        {
+                          "column": "STATUS",
+                          "op": "=",
+                          "source": "const",
+                          "value": "A"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "category_name",
+                "db_name": "NAME",
+                "table_name": "CCW_FACILITY_REQ_CATEGORY",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Category Name",
+                "descr": "Category name (from master)",
+                "protect": "1",
+                "inline_with": "REQUEST_CATEGORY",
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_display_name": "Facility request category master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "priority",
+                "db_name": "PRIORITY",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Priority",
+                "descr": "Low / Medium / High / Urgent",
+                "default_value": "M",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "L",
+                      "display": "Low"
+                    },
+                    {
+                      "data": "M",
+                      "display": "Medium"
+                    },
+                    {
+                      "data": "H",
+                      "display": "High"
+                    },
+                    {
+                      "data": "U",
+                      "display": "Urgent"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Priority is a listed value",
+                    "error_code": "FR_PRIORITY",
+                    "message": "Priority must be L, M, H or U.",
+                    "expression": "in_list({form.priority}, \"L,M,H,U\")"
+                  }
+                ],
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "L",
+                      "color": "grey",
+                      "label": "Low"
+                    },
+                    {
+                      "when": "M",
+                      "color": "blue",
+                      "label": "Medium"
+                    },
+                    {
+                      "when": "H",
+                      "color": "orange",
+                      "label": "High"
+                    },
+                    {
+                      "when": "U",
+                      "color": "red",
+                      "label": "Urgent"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "location_detail",
+                "db_name": "LOCATION_DETAIL",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Location Detail",
+                "descr": "Where exactly (floor, passage, room)",
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "200",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "description",
+                "db_name": "DESCRIPTION",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Description",
+                "descr": "Details of the concern",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "textarea"
+                },
+                "x": "110",
+                "y": "110",
+                "col_id": "11",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "1000",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "attachment",
+                "db_name": "ATTACHMENT",
+                "group_name": "Request",
+                "col_type": "VARCHAR",
+                "heading": "Attachment",
+                "descr": "Photo or document",
+                "edit_mask": {
+                  "mask": "document"
+                },
+                "x": "120",
+                "y": "120",
+                "col_id": "12",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "assigned_to",
+                "db_name": "ASSIGNED_TO",
+                "group_name": "Assignment",
+                "col_type": "VARCHAR",
+                "heading": "Assigned To",
+                "descr": "Facility team member (set before pressing Assign)",
+                "lookup": "CCW_FACILITY_TEAM_MEMBER(STAFF_NAME, STAFF_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Active team member",
+                    "message": "Assigned To must be an active Facility Team Member.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_FACILITY_TEAM_MEMBER",
+                      "match_column": "STAFF_CODE",
+                      "conditions": [
+                        {
+                          "column": "STATUS",
+                          "op": "=",
+                          "source": "const",
+                          "value": "A"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "x": "130",
+                "y": "130",
+                "col_id": "13",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "assigned_to_name",
+                "db_name": "STAFF_NAME",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "group_name": "Assignment",
+                "col_type": "VARCHAR",
+                "heading": "Assignee Name",
+                "descr": "Assignee name (from master)",
+                "protect": "1",
+                "inline_with": "ASSIGNED_TO",
+                "x": "140",
+                "y": "140",
+                "col_id": "14",
+                "table_display_name": "Facility team member master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "target_date_time",
+                "group_name": "Assignment",
+                "col_type": "DATETIME",
+                "heading": "Target Date/Time",
+                "descr": "Calculated: requested on + category target resolution hours",
+                "protect": "1",
+                "sql_expression": "{CCW_FACILITY_REQUEST}.request_date_time + CAST({CCW_FACILITY_REQ_CATEGORY}.target_resolution_hours AS integer) * INTERVAL '1 hour'",
+                "x": "150",
+                "y": "150",
+                "col_id": "15",
+                "db_name": "target_date_time",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "is_overdue",
+                "group_name": "Assignment",
+                "col_type": "VARCHAR",
+                "heading": "Overdue",
+                "descr": "Derived: Y when the target has passed and the request is not Resolved, Closed or Cancelled",
+                "protect": "1",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "Y",
+                      "color": "red",
+                      "label": "Overdue"
+                    },
+                    {
+                      "when": "N",
+                      "color": "grey",
+                      "label": "No"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "sql_expression": "CASE WHEN {CCW_FACILITY_REQUEST}.status NOT IN ('R','C','X') AND {CCW_FACILITY_REQUEST}.request_date_time + CAST({CCW_FACILITY_REQ_CATEGORY}.target_resolution_hours AS integer) * INTERVAL '1 hour' < CURRENT_TIMESTAMP THEN 'Y' ELSE 'N' END",
+                "x": "160",
+                "y": "160",
+                "col_id": "16",
+                "db_name": "is_overdue",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Assignment",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Open / Assigned / In Progress / Resolved / Closed / Cancelled; changed by actions",
+                "default_value": "O",
+                "protect": "1",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "O",
+                      "display": "Open"
+                    },
+                    {
+                      "data": "A",
+                      "display": "Assigned"
+                    },
+                    {
+                      "data": "P",
+                      "display": "In Progress"
+                    },
+                    {
+                      "data": "R",
+                      "display": "Resolved"
+                    },
+                    {
+                      "data": "C",
+                      "display": "Closed"
+                    },
+                    {
+                      "data": "X",
+                      "display": "Cancelled"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "O",
+                      "color": "blue",
+                      "label": "Open"
+                    },
+                    {
+                      "when": "A",
+                      "color": "teal",
+                      "label": "Assigned"
+                    },
+                    {
+                      "when": "P",
+                      "color": "amber",
+                      "label": "In Progress"
+                    },
+                    {
+                      "when": "R",
+                      "color": "green",
+                      "label": "Resolved"
+                    },
+                    {
+                      "when": "C",
+                      "color": "grey",
+                      "label": "Closed"
+                    },
+                    {
+                      "when": "X",
+                      "color": "red",
+                      "label": "Cancelled"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "x": "170",
+                "y": "170",
+                "col_id": "17",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "resolution_note",
+                "db_name": "RESOLUTION_NOTE",
+                "group_name": "Resolution",
+                "col_type": "VARCHAR",
+                "heading": "Resolution Note",
+                "descr": "Filled by Resolve",
+                "protect": "1",
+                "x": "180",
+                "y": "180",
+                "col_id": "18",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "1000",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "resolved_on",
+                "db_name": "RESOLVED_ON",
+                "group_name": "Resolution",
+                "col_type": "DATETIME",
+                "heading": "Resolved On",
+                "descr": "Filled by Resolve",
+                "protect": "1",
+                "x": "190",
+                "y": "190",
+                "col_id": "19",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "closed_on",
+                "db_name": "CLOSED_ON",
+                "group_name": "Resolution",
+                "col_type": "DATETIME",
+                "heading": "Closed On",
+                "descr": "Filled by Close",
+                "protect": "1",
+                "x": "200",
+                "y": "200",
+                "col_id": "20",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Audit: added on",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "210",
+                "y": "210",
+                "col_id": "21",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Audit: added by",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "220",
+                "y": "220",
+                "col_id": "22",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added Terminal",
+                "descr": "Audit: added from",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "230",
+                "y": "230",
+                "col_id": "23",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Audit: changed on",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "240",
+                "y": "240",
+                "col_id": "24",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Audit: changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "250",
+                "y": "250",
+                "col_id": "25",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed Terminal",
+                "descr": "Audit: changed from",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "260",
+                "y": "260",
+                "col_id": "26",
+                "table_name": "CCW_FACILITY_REQUEST",
+                "table_display_name": "Facility request",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_FACILITY_REQUEST",
+                  "main_table": true,
+                  "table_descr": "Facility request"
+                },
+                {
+                  "table": "CCW_FACILITY_REQ_CATEGORY",
+                  "main_table": false,
+                  "table_descr": "Facility request category master",
+                  "column": "REQUEST_CATEGORY_CODE",
+                  "join_table": "CCW_FACILITY_REQUEST",
+                  "join_column": "REQUEST_CATEGORY",
+                  "join_type": "left"
+                },
+                {
+                  "table": "CCW_FACILITY_TEAM_MEMBER",
+                  "main_table": false,
+                  "table_descr": "Facility team member master",
+                  "column": "STAFF_CODE",
+                  "join_table": "CCW_FACILITY_REQUEST",
+                  "join_column": "ASSIGNED_TO",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "list_view": {
+            "edit_lock": {
+              "expression": "{form.status} != \"O\"",
+              "reason": "Only Open requests can be edited."
+            },
+            "tabs": {
+              "column": "STATUS",
+              "values": [
+                "O",
+                "A",
+                "P",
+                "R",
+                "C",
+                "X"
+              ],
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          },
+          "validations": []
+        }
+      },
+      {
+        "sql_model": {
+          "form_title": "Updates",
+          "form_descr": "Status history and comments (system generated)",
+          "form_no": "2",
+          "parent_form_no": "1",
+          "parent_key_col": "REQUEST_NO",
+          "main_table": "CCW_FR_UPDATE",
+          "lines_locked": true,
+          "display_in_group": "Updates",
+          "columns": [
+            {
+              "column": {
+                "name": "request_no",
+                "db_name": "REQUEST_NO",
+                "group_name": "Updates",
+                "col_type": "VARCHAR",
+                "heading": "Request No",
+                "descr": "Parent request",
+                "key": true,
+                "hidden": 1,
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_FR_UPDATE",
+                "table_display_name": "Request update",
+                "db_size": "10",
+                "width": 100,
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "line_no",
+                "db_name": "LINE_NO",
+                "group_name": "Updates",
+                "col_type": "NUMBER",
+                "heading": "Line",
+                "descr": "Line number",
+                "key": true,
+                "default_value": "auto_generate_line_no()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_FR_UPDATE",
+                "table_display_name": "Request update",
+                "db_size": "4",
+                "width": 50,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "update_date_time",
+                "db_name": "UPDATE_DATE_TIME",
+                "group_name": "Updates",
+                "col_type": "DATETIME",
+                "heading": "Updated On",
+                "descr": "When the update was made",
+                "default_value": "now()",
+                "mandatory": true,
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_FR_UPDATE",
+                "table_display_name": "Request update",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "updated_by",
+                "db_name": "UPDATED_BY",
+                "group_name": "Updates",
+                "col_type": "VARCHAR",
+                "heading": "Updated By",
+                "descr": "User who made the update",
+                "default_value": ":user_email",
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_FR_UPDATE",
+                "table_display_name": "Request update",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Updates",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Request status at this update",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "O",
+                      "display": "Open"
+                    },
+                    {
+                      "data": "A",
+                      "display": "Assigned"
+                    },
+                    {
+                      "data": "P",
+                      "display": "In Progress"
+                    },
+                    {
+                      "data": "R",
+                      "display": "Resolved"
+                    },
+                    {
+                      "data": "C",
+                      "display": "Closed"
+                    },
+                    {
+                      "data": "X",
+                      "display": "Cancelled"
+                    }
+                  ]
+                },
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_FR_UPDATE",
+                "table_display_name": "Request update",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "remark",
+                "db_name": "REMARK",
+                "group_name": "Updates",
+                "col_type": "VARCHAR",
+                "heading": "Remark",
+                "descr": "Comment or note",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_FR_UPDATE",
+                "table_display_name": "Request update",
+                "db_size": "1000",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_FR_UPDATE",
+                  "main_table": true,
+                  "table_descr": "Request update"
+                },
+                {
+                  "table": "CCW_FACILITY_REQUEST",
+                  "main_table": false,
+                  "table_descr": "Parent request",
+                  "column": "REQUEST_NO",
+                  "join_table": "CCW_FR_UPDATE",
+                  "join_column": "REQUEST_NO",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": []
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Edit",
+        "handler": "system",
+        "system_op": "edit",
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Open only",
+            "message": "Only Open requests can be edited.",
+            "expression": "{form.status} == \"O\""
+          }
+        ]
+      },
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Open only",
+            "message": "Only Open requests can be deleted.",
+            "expression": "{form.status} == \"O\""
+          },
+          {
+            "type": "business_logic",
+            "name": "No updates",
+            "message": "A request with updates cannot be deleted.",
+            "business_logic": {
+              "method": "check_request_deletable",
+              "description": "Delete guard",
+              "spec": "Return {\"error\":\"A request with updates cannot be deleted.\"} when any row exists in CCW_FR_UPDATE for the payload REQUEST_NO; otherwise None."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Assign",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "business_logic": {
+          "method": "assign_request",
+          "description": "Assign the request to a facility team member",
+          "spec": "For facility team / management users only. Allowed only when STATUS='O'. ASSIGNED_TO (saved on the record) must be non-blank and an active CCW_FACILITY_TEAM_MEMBER (STATUS='A'), else error. Set STATUS='A'. Insert a CCW_FR_UPDATE line (next LINE_NO, UPDATE_DATE_TIME=now, UPDATED_BY=signed-in user email, STATUS='A', REMARK='Assigned to <STAFF_NAME>'). Notify the raiser (RAISED_BY_EMAIL) by in-app notification and email; notify the assigned team member (EMAIL of CCW_FACILITY_TEAM_MEMBER). If the request category is Security (REQUEST_CATEGORY or its NAME equals 'Security', case-insensitive) also notify every active team member with ROLE='S' (Supervisor). Return {\"message\":\"Request assigned\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Open",
+            "message": "Only Open requests can be assigned.",
+            "expression": "{form.status} == \"O\""
+          },
+          {
+            "type": "expression",
+            "name": "Assignee entered",
+            "message": "Select Assigned To (and save) before assigning.",
+            "expression": "not_empty({form.assigned_to})"
+          }
+        ],
+        "visible_when": "{form.status} == \"O\""
+      },
+      {
+        "name": "Start Work",
+        "handler": "message",
+        "scope": "row",
+        "business_logic": {
+          "method": "start_request_work",
+          "description": "Start work on the request",
+          "spec": "Facility team / management only. Allowed only when STATUS='A'. Set STATUS='P'. Insert a CCW_FR_UPDATE line (STATUS='P', REMARK='Work started'). Notify the raiser by in-app notification and email, and the Supervisor(s) (CCW_FACILITY_TEAM_MEMBER ROLE='S', STATUS='A') if the category is Security. Return {\"message\":\"Work started\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Assigned",
+            "message": "Only Assigned requests can be started.",
+            "expression": "{form.status} == \"A\""
+          }
+        ],
+        "visible_when": "{form.status} == \"A\""
+      },
+      {
+        "name": "Resolve",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "capture": {
+          "mode": "text",
+          "prompt": "Resolution note",
+          "field": "RESOLUTION_NOTE"
+        },
+        "business_logic": {
+          "method": "resolve_request",
+          "description": "Resolve the request",
+          "spec": "Facility team / management only. Allowed only when STATUS='P'. RESOLUTION_NOTE from the payload is mandatory (error if blank). Set STATUS='R', RESOLUTION_NOTE, RESOLVED_ON=now. Insert a CCW_FR_UPDATE line (STATUS='R', REMARK=RESOLUTION_NOTE). Notify the raiser by in-app notification and email, and the Supervisor(s) if the category is Security. Return {\"message\":\"Request resolved\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be In Progress",
+            "message": "Only In Progress requests can be resolved.",
+            "expression": "{form.status} == \"P\""
+          }
+        ],
+        "visible_when": "{form.status} == \"P\""
+      },
+      {
+        "name": "Close",
+        "handler": "message",
+        "scope": "row",
+        "business_logic": {
+          "method": "close_request",
+          "description": "Close a resolved request",
+          "spec": "Allowed for the raiser's unit (members/tenants of the request's UNIT_NO matched by email), facility team or management. Allowed only when STATUS='R'. Set STATUS='C', CLOSED_ON=now. Insert a CCW_FR_UPDATE line (STATUS='C', REMARK='Closed'). Notify the raiser by in-app notification and email, and the Supervisor(s) if the category is Security. Return {\"message\":\"Request closed\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Resolved",
+            "message": "Only Resolved requests can be closed.",
+            "expression": "{form.status} == \"R\""
+          }
+        ],
+        "visible_when": "{form.status} == \"R\""
+      },
+      {
+        "name": "Reopen",
+        "handler": "message",
+        "scope": "row",
+        "capture": {
+          "mode": "text",
+          "prompt": "Reason for reopening",
+          "field": "REMARK"
+        },
+        "business_logic": {
+          "method": "reopen_request",
+          "description": "Reopen a resolved request",
+          "spec": "Allowed only for the raiser (signed-in email equals RAISED_BY_EMAIL, case-insensitive) or management. Allowed only when STATUS='R'. Set STATUS='P' (back to In Progress), clear RESOLVED_ON. Insert a CCW_FR_UPDATE line (STATUS='P', REMARK = captured REMARK, or 'Reopened' when blank). Notify the raiser, the assigned team member (EMAIL) and, if the category is Security, the Supervisor(s) by in-app notification and email. Return {\"message\":\"Request reopened\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Resolved",
+            "message": "Only Resolved requests can be reopened.",
+            "expression": "{form.status} == \"R\""
+          }
+        ],
+        "visible_when": "{form.status} == \"R\""
+      },
+      {
+        "name": "Cancel",
+        "handler": "message",
+        "scope": "row",
+        "capture": {
+          "mode": "text",
+          "prompt": "Reason for cancelling",
+          "field": "REMARK"
+        },
+        "business_logic": {
+          "method": "cancel_request",
+          "description": "Cancel an Open or Assigned request",
+          "spec": "Allowed for the raiser's unit (members/tenants of UNIT_NO matched by email) or management, when STATUS is 'O' or 'A'. Set STATUS='X'. Insert a CCW_FR_UPDATE line (STATUS='X', REMARK = captured REMARK or 'Cancelled'). Notify the raiser, the assigned team member if any, and the Supervisor(s) if the category is Security. Return {\"message\":\"Request cancelled\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Open or Assigned",
+            "message": "Only Open or Assigned requests can be cancelled.",
+            "expression": "in_list({form.status}, \"O,A\")"
+          }
+        ],
+        "visible_when": "in_list({form.status}, \"O,A\")",
+        "confirmation": {
+          "mode": "reconfirm",
+          "message": "Cancel request {form.request_no}?"
+        }
+      },
+      {
+        "name": "Add Comment",
+        "handler": "message",
+        "scope": "row",
+        "capture": {
+          "mode": "text",
+          "prompt": "Comment",
+          "field": "REMARK"
+        },
+        "business_logic": {
+          "method": "add_request_comment",
+          "description": "Add a comment to the request",
+          "spec": "Allowed for members/tenants of the request's UNIT_NO (matched by email), facility team and management, on any status other than 'X' (Cancelled). Require non-blank REMARK. Insert a CCW_FR_UPDATE line with the request's current STATUS and the comment as REMARK; do not change STATUS. Return {\"message\":\"Comment added\"}."
+        },
+        "visible_when": "{form.status} != \"X\""
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [
+      {
+        "mode": "business_logic",
+        "business_logic": {
+          "method": "notify_request_raised",
+          "description": "Notify the supervisor of a Security request",
+          "spec": "On action='add' only: if the request category is Security (REQUEST_CATEGORY or its CCW_FACILITY_REQ_CATEGORY.NAME equals 'Security', case-insensitive), send an in-app notification and email to every active CCW_FACILITY_TEAM_MEMBER with ROLE='S' (Supervisor) with the request number, unit, priority and description. Never blocks the save."
+        }
+      }
+    ],
+    "attach_docs": [],
+    "follow_up_actions": []
+  }
+}

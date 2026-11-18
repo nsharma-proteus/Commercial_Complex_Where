@@ -1,0 +1,519 @@
+{
+  "DATA_SOURCE_MODE": "sql",
+  "SQLMODEL": {
+    "SQLModel": {
+      "COLUMNS": [
+        {
+          "COLUMN": [
+            {
+              "COLID": 2,
+              "NAME": "TITLE",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "TITLE",
+              "tableName": "CCW_NOTICE",
+              "content": "Title",
+              "name": "Title",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "First Row Left",
+              "StandardName": "FirstRowLeft",
+              "checked": true
+            },
+            {
+              "COLID": 3,
+              "NAME": "IS_IMPORTANT",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "IS_IMPORTANT",
+              "tableName": "CCW_NOTICE",
+              "content": "Important",
+              "name": "Important",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "display": {
+                "type": "status_tag",
+                "map": [
+                  {
+                    "when": "Y",
+                    "color": "red",
+                    "label": "Important",
+                    "icon": "\u25cf"
+                  },
+                  {
+                    "when": "N",
+                    "color": "gray",
+                    "label": ""
+                  }
+                ]
+              },
+              "groupName": "First Row Right",
+              "StandardName": "FirstRowRight",
+              "checked": true
+            },
+            {
+              "COLID": 4,
+              "NAME": "CATEGORY",
+              "DBTABLE": "CCW_ANNOUNCE_CATEGORY",
+              "DBNAME": "NAME",
+              "tableName": "CCW_ANNOUNCE_CATEGORY",
+              "content": "Category",
+              "name": "Category",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Second Row Left",
+              "StandardName": "SecondRowLeft",
+              "checked": true
+            },
+            {
+              "COLID": 5,
+              "NAME": "PUBLISH_DATE",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "PUBLISH_DATE",
+              "tableName": "CCW_NOTICE",
+              "content": "Published",
+              "name": "Published",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              },
+              "groupName": "Second Row Right",
+              "StandardName": "SecondRowRight",
+              "checked": true
+            },
+            {
+              "COLID": 6,
+              "NAME": "SHORT_BODY",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "NOTICE_BODY",
+              "tableName": "CCW_NOTICE",
+              "content": "Notice",
+              "name": "Notice",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Third Row Left",
+              "StandardName": "ThirdRowLeft",
+              "checked": true
+            },
+            {
+              "COLID": 7,
+              "NAME": "EXPIRY_DATE",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "EXPIRY_DATE",
+              "tableName": "CCW_NOTICE",
+              "content": "Expires",
+              "name": "Expires",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              },
+              "groupName": "Third Row Right",
+              "StandardName": "ThirdRowRight",
+              "checked": true
+            }
+          ]
+        }
+      ]
+    },
+    "CRITERIA": {
+      "query": {
+        "rules": [
+          {
+            "id": "Criteria_1",
+            "field": "CCW_NOTICE.ANNOUNCEMENT_CATEGORY",
+            "DBNAME": "ANNOUNCEMENT_CATEGORY",
+            "tableName": "CCW_NOTICE",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "like",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Category",
+            "promptVar": "category",
+            "value": "%",
+            "chipValue": [],
+            "lookup": "CCW_ANNOUNCE_CATEGORY(NAME, ANNOUNCEMENT_CATEGORY_CODE)"
+          },
+          {
+            "id": "Criteria_2",
+            "field": "CCW_NOTICE.WING_CODE",
+            "DBNAME": "WING_CODE",
+            "tableName": "CCW_NOTICE",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "like",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Wing",
+            "promptVar": "wing",
+            "value": "%",
+            "chipValue": [],
+            "lookup": "CCW_WING_MASTER(WING_NAME, WING_CODE)"
+          },
+          {
+            "id": "Criteria_3",
+            "field": "CCW_NOTICE.EXPIRY_DATE",
+            "DBNAME": "EXPIRY_DATE",
+            "tableName": "CCW_NOTICE",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "=",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Show Expired",
+            "promptVar": "show_expired",
+            "value": "N",
+            "chipValue": [],
+            "options": [
+              {
+                "data": "N",
+                "display": "No"
+              },
+              {
+                "data": "Y",
+                "display": "Yes"
+              }
+            ]
+          },
+          {
+            "id": "Criteria_4",
+            "field": "CCW_NOTICE.IS_IMPORTANT",
+            "DBNAME": "IS_IMPORTANT",
+            "tableName": "CCW_NOTICE",
+            "COLTYPE": "string",
+            "currentFieldType": "string",
+            "operator": "like",
+            "queryOption": "P",
+            "prevOption": "P",
+            "customValue": "FixedValue",
+            "promptLabel": "Important Only",
+            "promptVar": "important_only",
+            "value": "%",
+            "chipValue": [],
+            "options": [
+              {
+                "data": "%",
+                "display": "All"
+              },
+              {
+                "data": "Y",
+                "display": "Important only"
+              }
+            ]
+          }
+        ],
+        "condition": "and"
+      }
+    },
+    "VISUAL_NAME": "Feeds",
+    "SCHEMA_NAME": "CCW_NOTICE_BOARD",
+    "SCHEMA_DESCR": "Notice Board",
+    "SCHEMA_TYPE": "S",
+    "OUTPUT_TYPE": "JSON",
+    "DATABASE_TYPE": "1",
+    "DATABASE_DETAIL": {
+      "DATABASE_NAME": "PostgreSQL",
+      "TYPE": 1
+    }
+  },
+  "LAYOUT_DATA": {
+    "visualLayout": {
+      "ID": "feeds",
+      "VisualName": "Feeds",
+      "VisualType": "Standard",
+      "VisualIcon": "Feed.svg",
+      "DisplayOrder": "10",
+      "className": "InsightFeeds",
+      "linkOptions": "",
+      "OutputType": "JSON",
+      "title": "Notice Board",
+      "subtitle": "Current published notices, important ones first",
+      "options": [
+        {
+          "optionId": "chartBackgroundColor",
+          "optionName": "chartBackgroundColor",
+          "optionHeading": "chartBackgroundColor",
+          "dataType": "string",
+          "defaultValue": "White",
+          "listOfValues": "White,Transparent",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "autoRefreshSeconds",
+          "optionName": "autoRefreshSeconds",
+          "optionHeading": "autoRefreshSeconds",
+          "dataType": "number",
+          "defaultValue": "0",
+          "listOfValues": "",
+          "allowChange": "true",
+          "optionType": "inner"
+        },
+        {
+          "optionId": "toolbar",
+          "optionName": "toolbar",
+          "optionHeading": "toolbar",
+          "dataType": "string",
+          "defaultValue": "true",
+          "listOfValues": "true,false",
+          "allowChange": "true",
+          "optionType": "inner"
+        }
+      ],
+      "ColumnGroups": [
+        {
+          "GroupID": 1,
+          "GroupName": "Groups",
+          "StandardName": "Groups",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 1,
+          "COLUMNS": []
+        },
+        {
+          "GroupID": 2,
+          "GroupName": "First Row Left",
+          "StandardName": "FirstRowLeft",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 2,
+              "NAME": "TITLE",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "TITLE",
+              "tableName": "CCW_NOTICE",
+              "content": "Title",
+              "name": "Title",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "First Row Left",
+              "StandardName": "FirstRowLeft",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 3,
+          "GroupName": "First Row Right",
+          "StandardName": "FirstRowRight",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 3,
+              "NAME": "IS_IMPORTANT",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "IS_IMPORTANT",
+              "tableName": "CCW_NOTICE",
+              "content": "Important",
+              "name": "Important",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "display": {
+                "type": "status_tag",
+                "map": [
+                  {
+                    "when": "Y",
+                    "color": "red",
+                    "label": "Important",
+                    "icon": "\u25cf"
+                  },
+                  {
+                    "when": "N",
+                    "color": "gray",
+                    "label": ""
+                  }
+                ]
+              },
+              "groupName": "First Row Right",
+              "StandardName": "FirstRowRight",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 4,
+          "GroupName": "Second Row Left",
+          "StandardName": "SecondRowLeft",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 4,
+              "NAME": "CATEGORY",
+              "DBTABLE": "CCW_ANNOUNCE_CATEGORY",
+              "DBNAME": "NAME",
+              "tableName": "CCW_ANNOUNCE_CATEGORY",
+              "content": "Category",
+              "name": "Category",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Second Row Left",
+              "StandardName": "SecondRowLeft",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 5,
+          "GroupName": "Second Row Right",
+          "StandardName": "SecondRowRight",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 5,
+              "NAME": "PUBLISH_DATE",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "PUBLISH_DATE",
+              "tableName": "CCW_NOTICE",
+              "content": "Published",
+              "name": "Published",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              },
+              "groupName": "Second Row Right",
+              "StandardName": "SecondRowRight",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 6,
+          "GroupName": "Third Row Left",
+          "StandardName": "ThirdRowLeft",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 6,
+              "NAME": "SHORT_BODY",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "NOTICE_BODY",
+              "tableName": "CCW_NOTICE",
+              "content": "Notice",
+              "name": "Notice",
+              "type": "string",
+              "JAVATYPE": "java.lang.String",
+              "COLTYPE": "CHAR",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "groupName": "Third Row Left",
+              "StandardName": "ThirdRowLeft",
+              "checked": true
+            }
+          ]
+        },
+        {
+          "GroupID": 7,
+          "GroupName": "Third Row Right",
+          "StandardName": "ThirdRowRight",
+          "AllowedColumnTypes": "ANY",
+          "MinColumns": 0,
+          "MaxColumns": 0,
+          "COLUMNS": [
+            {
+              "COLID": 7,
+              "NAME": "EXPIRY_DATE",
+              "DBTABLE": "CCW_NOTICE",
+              "DBNAME": "EXPIRY_DATE",
+              "tableName": "CCW_NOTICE",
+              "content": "Expires",
+              "name": "Expires",
+              "type": "date",
+              "JAVATYPE": "java.sql.Date",
+              "COLTYPE": "DATE",
+              "EXPRESSIONTYPE": "C",
+              "DEFAULTFUNCTION": "",
+              "FUNCTION": "",
+              "expression": "",
+              "display": {
+                "type": "date",
+                "datePattern": "dd-MMM-yy"
+              },
+              "groupName": "Third Row Right",
+              "StandardName": "ThirdRowRight",
+              "checked": true
+            }
+          ]
+        }
+      ],
+      "update": {
+        "ENABLED": false,
+        "TARGET_OBJECT": "",
+        "RECORD_KEY": {},
+        "SET": [],
+        "CONFIRM": false,
+        "ENABLE_WHEN": ""
+      }
+    },
+    "layoutdata": {}
+  },
+  "SOURCE_SQL": "SELECT n.title AS TITLE, n.is_important AS IS_IMPORTANT, c.name AS CATEGORY, n.publish_date AS PUBLISH_DATE, LEFT(n.notice_body, 200) AS SHORT_BODY, n.expiry_date AS EXPIRY_DATE FROM ccw_notice n JOIN ccw_announce_category c ON c.announcement_category_code = n.announcement_category WHERE n.status = 'P' AND n.publish_date <= CURRENT_DATE AND (?.show_expired = 'Y' OR n.expiry_date IS NULL OR n.expiry_date >= CURRENT_DATE) AND n.announcement_category LIKE ?.category AND COALESCE(n.wing_code, '') LIKE ?.wing AND n.is_important LIKE ?.important_only ORDER BY CASE WHEN n.is_important = 'Y' THEN 0 ELSE 1 END, n.publish_date DESC, n.notice_no DESC"
+}

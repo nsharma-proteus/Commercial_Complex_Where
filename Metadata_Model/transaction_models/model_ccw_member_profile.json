@@ -1,0 +1,1873 @@
+{
+  "transaction": {
+    "obj_name": "ccw_member_profile",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Member Profile",
+          "form_descr": "Owner business profile of a unit, occupancy decision and tenant access flags. One profile per unit.",
+          "form_no": "1",
+          "main_table": "CCW_MEMBER_PROFILE",
+          "open_groups": [
+            "Business",
+            "Occupancy & Tenant Access"
+          ],
+          "columns": [
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Unit this profile belongs to (one profile per unit)",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "lookup_filter": "STATUS = 'A'",
+                "must_exist_in": "CCW_UNIT_MASTER",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Unit exists",
+                    "error_code": "UNIT_NOT_FOUND",
+                    "message": "Unit {form.unit_no} does not exist in the Unit Master.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_UNIT_MASTER",
+                      "match_column": "UNIT_NO"
+                    }
+                  },
+                  {
+                    "type": "builtin",
+                    "name": "One profile per unit",
+                    "error_code": "PROFILE_DUP",
+                    "message": "A Member Profile already exists for unit {form.unit_no}.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "wing_code",
+                "db_name": "WING_CODE",
+                "table_name": "CCW_UNIT_MASTER",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Wing",
+                "descr": "Wing of the unit (from Unit Master)",
+                "protect": "1",
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_display_name": "Unit master (wing, floor)",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "floor_no",
+                "db_name": "FLOOR_NO",
+                "table_name": "CCW_UNIT_MASTER",
+                "group_name": "Basic",
+                "col_type": "NUMBER",
+                "heading": "Floor",
+                "descr": "Floor of the unit (from Unit Master)",
+                "protect": "1",
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_display_name": "Unit master (wing, floor)",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "profile_status",
+                "db_name": "PROFILE_STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Profile Status",
+                "descr": "Active or Inactive",
+                "mandatory": true,
+                "default_value": "A",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Inactive"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Active"
+                    },
+                    {
+                      "when": "I",
+                      "color": "grey",
+                      "label": "Inactive"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Profile status listed",
+                    "error_code": "PSTATUS_LIST",
+                    "message": "Profile status must be A or I.",
+                    "expression": "in_list({form.profile_status}, \"A,I\")"
+                  }
+                ],
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "business_name",
+                "db_name": "BUSINESS_NAME",
+                "group_name": "Business",
+                "col_type": "VARCHAR",
+                "heading": "Business Name",
+                "descr": "Name of the business run from the unit",
+                "mandatory": true,
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "150",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "business_category",
+                "db_name": "BUSINESS_CATEGORY",
+                "group_name": "Business",
+                "col_type": "VARCHAR",
+                "heading": "Business Category",
+                "descr": "Type of business",
+                "mandatory": false,
+                "lookup": "CCW_BUSINESS_CATEGORY(CATEGORY_NAME, CATEGORY_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "must_exist_in": "CCW_BUSINESS_CATEGORY",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Category exists",
+                    "error_code": "CATEGORY_NOT_FOUND",
+                    "message": "Business category {form.business_category} not found.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_BUSINESS_CATEGORY",
+                      "match_column": "CATEGORY_CODE",
+                      "conditions": [
+                        {
+                          "column": "STATUS",
+                          "op": "=",
+                          "source": "const",
+                          "value": "A"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "business_category_name",
+                "db_name": "CATEGORY_NAME",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "group_name": "Business",
+                "col_type": "VARCHAR",
+                "heading": "Category Name",
+                "descr": "Business category name (from master)",
+                "protect": "1",
+                "inline_with": "business_category",
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_display_name": "Business category master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "business_description",
+                "db_name": "BUSINESS_DESCRIPTION",
+                "group_name": "Business",
+                "col_type": "VARCHAR",
+                "heading": "Business Description",
+                "descr": "What the business does",
+                "edit_mask": {
+                  "mask": "textarea"
+                },
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "1000",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "logo",
+                "db_name": "LOGO",
+                "group_name": "Business",
+                "col_type": "VARCHAR",
+                "heading": "Logo",
+                "descr": "Business logo (uploaded file URL)",
+                "edit_mask": {
+                  "mask": "image"
+                },
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "contact_person",
+                "db_name": "CONTACT_PERSON",
+                "group_name": "Contact",
+                "col_type": "VARCHAR",
+                "heading": "Contact Person",
+                "descr": "Person to contact for the business",
+                "x": "110",
+                "y": "110",
+                "col_id": "10",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "contact_no_1",
+                "db_name": "CONTACT_NO_1",
+                "group_name": "Contact",
+                "col_type": "VARCHAR",
+                "heading": "Contact No 1",
+                "descr": "Primary contact number",
+                "mandatory": true,
+                "display": {
+                  "type": "telephone"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid phone 1",
+                    "error_code": "PHONE1_INVALID",
+                    "message": "Contact No 1 must be a valid phone number.",
+                    "expression": "match({form.contact_no_1}, \"^[+]?[0-9 ()-]{7,15}$\")"
+                  }
+                ],
+                "x": "120",
+                "y": "120",
+                "col_id": "11",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "contact_no_2",
+                "db_name": "CONTACT_NO_2",
+                "group_name": "Contact",
+                "col_type": "VARCHAR",
+                "heading": "Contact No 2",
+                "descr": "Optional second contact number",
+                "display": {
+                  "type": "telephone"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid phone 2",
+                    "error_code": "PHONE2_INVALID",
+                    "message": "Contact No 2 must be a valid phone number.",
+                    "expression": "is_empty({form.contact_no_2}) or match({form.contact_no_2}, \"^[+]?[0-9 ()-]{7,15}$\")"
+                  },
+                  {
+                    "type": "expression",
+                    "name": "Contacts differ",
+                    "error_code": "PHONE_SAME",
+                    "message": "Contact No 1 and Contact No 2 must be different.",
+                    "expression": "is_empty({form.contact_no_2}) or {form.contact_no_1} != {form.contact_no_2}"
+                  }
+                ],
+                "x": "130",
+                "y": "130",
+                "col_id": "12",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "email",
+                "db_name": "EMAIL",
+                "group_name": "Contact",
+                "col_type": "VARCHAR",
+                "heading": "Email",
+                "descr": "Business email address",
+                "mandatory": true,
+                "display": {
+                  "type": "email"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid email",
+                    "error_code": "EMAIL_INVALID",
+                    "message": "Enter a valid email address.",
+                    "expression": "match({form.email}, \"^[^@ ]+@[^@ ]+[.][^@ ]+$\")"
+                  }
+                ],
+                "x": "140",
+                "y": "140",
+                "col_id": "13",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "website",
+                "db_name": "WEBSITE",
+                "group_name": "Contact",
+                "col_type": "VARCHAR",
+                "heading": "Website",
+                "descr": "Business website",
+                "edit_mask": {
+                  "mask": "url"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid website",
+                    "error_code": "WEB_INVALID",
+                    "message": "Website must be a valid web address (http:// or https://).",
+                    "expression": "is_empty({form.website}) or match({form.website}, \"^https?://[^ ]+[.][^ ]+$\")"
+                  }
+                ],
+                "x": "150",
+                "y": "150",
+                "col_id": "14",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "200",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "show_in_directory",
+                "db_name": "SHOW_IN_DIRECTORY",
+                "group_name": "Business",
+                "col_type": "VARCHAR",
+                "heading": "Show in Directory",
+                "descr": "No hides the business from the Business Directory (not from management/security unit lookup)",
+                "mandatory": true,
+                "default_value": "Y",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "x": "100",
+                "y": "100",
+                "col_id": "15",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Show in Directory is a listed value",
+                    "error_code": "SHOW_IN_DIRECTORY_LIST",
+                    "message": "Show in Directory must be one of: Y, N",
+                    "expression": "is_empty({form.show_in_directory}) or in_list({form.show_in_directory}, \"Y,N\")"
+                  }
+                ],
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "occupancy_type",
+                "db_name": "OCCUPANCY_TYPE",
+                "group_name": "Occupancy & Tenant Access",
+                "col_type": "VARCHAR",
+                "heading": "Occupancy Type",
+                "descr": "Owner Used or Given on Rent. Tenant flags apply only when Given on Rent.",
+                "mandatory": true,
+                "default_value": "O",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "O",
+                      "display": "Owner Used"
+                    },
+                    {
+                      "data": "R",
+                      "display": "Given on Rent"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Occupancy listed",
+                    "error_code": "OCC_LIST",
+                    "message": "Occupancy type must be O or R.",
+                    "expression": "in_list({form.occupancy_type}, \"O,R\")"
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "fill": [
+                    {
+                      "form_col": "tenant_login_allowed",
+                      "expr": "iif({form.occupancy_type} == \"R\", {form.tenant_login_allowed}, \"N\")"
+                    },
+                    {
+                      "form_col": "allow_tenant_to_update_profile",
+                      "expr": "iif({form.occupancy_type} == \"R\", {form.allow_tenant_to_update_profile}, \"N\")"
+                    },
+                    {
+                      "form_col": "show_tenant_in_directory",
+                      "expr": "iif({form.occupancy_type} == \"R\", {form.show_tenant_in_directory}, \"N\")"
+                    }
+                  ],
+                  "protect": [
+                    {
+                      "form_col": "tenant_login_allowed",
+                      "when": "{form.occupancy_type} != \"R\""
+                    },
+                    {
+                      "form_col": "allow_tenant_to_update_profile",
+                      "when": "{form.occupancy_type} != \"R\""
+                    },
+                    {
+                      "form_col": "show_tenant_in_directory",
+                      "when": "{form.occupancy_type} != \"R\""
+                    }
+                  ]
+                },
+                "x": "160",
+                "y": "160",
+                "col_id": "16",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "tenant_login_allowed",
+                "db_name": "TENANT_LOGIN_ALLOWED",
+                "group_name": "Occupancy & Tenant Access",
+                "col_type": "VARCHAR",
+                "heading": "Tenant Login Allowed",
+                "descr": "Enabled only when Given on Rent",
+                "default_value": "N",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Tenant login only on rent",
+                    "error_code": "TLOGIN_RENT",
+                    "message": "Tenant login can be allowed only when the unit is Given on Rent.",
+                    "expression": "{form.occupancy_type} == \"R\" or {form.tenant_login_allowed} == \"N\""
+                  },
+                  {
+                    "type": "expression",
+                    "name": "Tenant Login Allowed is a listed value",
+                    "error_code": "TENANT_LOGIN_ALLOWED_LIST",
+                    "message": "Tenant Login Allowed must be one of: Y, N",
+                    "expression": "is_empty({form.tenant_login_allowed}) or in_list({form.tenant_login_allowed}, \"Y,N\")"
+                  }
+                ],
+                "x": "170",
+                "y": "170",
+                "col_id": "17",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "allow_tenant_to_update_profile",
+                "db_name": "ALLOW_TENANT_TO_UPDATE_PROFILE",
+                "group_name": "Occupancy & Tenant Access",
+                "col_type": "VARCHAR",
+                "heading": "Allow Tenant to Update Profile",
+                "descr": "Enabled only when Given on Rent",
+                "default_value": "N",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Tenant edit only on rent",
+                    "error_code": "TEDIT_RENT",
+                    "message": "Tenant profile editing can be allowed only when the unit is Given on Rent.",
+                    "expression": "{form.occupancy_type} == \"R\" or {form.allow_tenant_to_update_profile} == \"N\""
+                  },
+                  {
+                    "type": "expression",
+                    "name": "Allow Tenant to Update Profile is a listed value",
+                    "error_code": "ALLOW_TENANT_TO_UPDATE_PROFILE",
+                    "message": "Allow Tenant to Update Profile must be one of: Y, N",
+                    "expression": "is_empty({form.allow_tenant_to_update_profile}) or in_list({form.allow_tenant_to_update_profile}, \"Y,N\")"
+                  }
+                ],
+                "x": "180",
+                "y": "180",
+                "col_id": "18",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "show_tenant_in_directory",
+                "db_name": "SHOW_TENANT_IN_DIRECTORY",
+                "group_name": "Occupancy & Tenant Access",
+                "col_type": "VARCHAR",
+                "heading": "Show Tenant in Directory",
+                "descr": "Enabled only when Given on Rent",
+                "default_value": "N",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Tenant directory only on rent",
+                    "error_code": "TDIR_RENT",
+                    "message": "Tenant directory visibility can be allowed only when the unit is Given on Rent.",
+                    "expression": "{form.occupancy_type} == \"R\" or {form.show_tenant_in_directory} == \"N\""
+                  },
+                  {
+                    "type": "expression",
+                    "name": "Show Tenant in Directory is a listed value",
+                    "error_code": "SHOW_TENANT_IN_DIRECTORY_LIST",
+                    "message": "Show Tenant in Directory must be one of: Y, N",
+                    "expression": "is_empty({form.show_tenant_in_directory}) or in_list({form.show_tenant_in_directory}, \"Y,N\")"
+                  }
+                ],
+                "x": "190",
+                "y": "190",
+                "col_id": "19",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Record creation date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "200",
+                "y": "200",
+                "col_id": "20",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "User who created the record",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "210",
+                "y": "210",
+                "col_id": "21",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Terminal that created the record",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "220",
+                "y": "220",
+                "col_id": "22",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "230",
+                "y": "230",
+                "col_id": "23",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "User who last changed the record",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "240",
+                "y": "240",
+                "col_id": "24",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Terminal of last change",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "250",
+                "y": "250",
+                "col_id": "25",
+                "table_name": "CCW_MEMBER_PROFILE",
+                "table_display_name": "Member profile",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_MEMBER_PROFILE",
+                  "main_table": true,
+                  "table_descr": "Member profile"
+                },
+                {
+                  "table": "CCW_UNIT_MASTER",
+                  "main_table": false,
+                  "table_descr": "Unit master (wing, floor)",
+                  "column": "UNIT_NO",
+                  "join_table": "CCW_MEMBER_PROFILE",
+                  "join_column": "UNIT_NO",
+                  "join_type": "left"
+                },
+                {
+                  "table": "CCW_BUSINESS_CATEGORY",
+                  "main_table": false,
+                  "table_descr": "Business category master",
+                  "column": "CATEGORY_CODE",
+                  "join_table": "CCW_MEMBER_PROFILE",
+                  "join_column": "BUSINESS_CATEGORY",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": [
+            {
+              "type": "builtin",
+              "name": "At least one joint owner",
+              "error_code": "OWNER_REQUIRED",
+              "message": "At least one Joint Owner is required.",
+              "builtin": {
+                "kind": "child_form_has_entry",
+                "child_form": "2",
+                "min_rows": 1
+              }
+            },
+            {
+              "type": "business_logic",
+              "name": "Occupancy change blocked by active tenant",
+              "error_code": "TENANT_ACTIVE",
+              "message": "Occupancy cannot be changed to Owner Used while the Tenant Profile is Active. Remove the tenant first.",
+              "business_logic": {
+                "method": "check_occupancy_change",
+                "description": "Block Given on Rent to Owner Used while tenant is Active",
+                "spec": "Runs on form save. Only when _action = 'edit'. Read the stored CCW_MEMBER_PROFILE row for UNIT_NO. If the stored OCCUPANCY_TYPE = 'R' and the incoming OCCUPANCY_TYPE = 'O', check CCW_TENANT_PROFILE for a row with UNIT_NO = this unit and TENANT_STATUS = 'A' (Active). If the table CCW_TENANT_PROFILE does not exist yet, pass. If an active tenant exists return {\"error\": \"Occupancy cannot be changed to Owner Used while the Tenant Profile is Active. Use Remove Tenant first.\"}; otherwise return nothing."
+              }
+            }
+          ],
+          "cross_updates": [
+            {
+              "mode": "business_logic",
+              "business_logic": {
+                "method": "sync_unit_occupancy",
+                "description": "Update Unit Master occupancy status on save",
+                "spec": "Fires on every save (add/update) of the header row. UPDATE CCW_UNIT_MASTER SET OCCUPANCY_STATUS = 'O' WHERE UNIT_NO = <UNIT_NO> when OCCUPANCY_TYPE = 'O' (Owner Used), or 'R' when OCCUPANCY_TYPE = 'R' (Given on Rent). Return {\"error\": ...} if no unit row was updated (rowcount 0)."
+              }
+            },
+            {
+              "mode": "business_logic",
+              "business_logic": {
+                "method": "apply_tenant_flags",
+                "description": "Apply tenant access flags to the Tenant Profile",
+                "spec": "Fires on every save of the header row. If table CCW_TENANT_PROFILE does not exist or has no row for UNIT_NO, do nothing. Otherwise for that unit: if TENANT_LOGIN_ALLOWED = 'N' (or OCCUPANCY_TYPE <> 'R') set CCW_TENANT_PROFILE.LOGIN_ENABLED = 'N'; if SHOW_TENANT_IN_DIRECTORY = 'N' (or OCCUPANCY_TYPE <> 'R') set CCW_TENANT_PROFILE.SHOW_IN_DIRECTORY = 'N'. The tenant's edit right (ALLOW_TENANT_TO_UPDATE_PROFILE) is read live from this profile, so it needs no write. Never turn a flag to 'Y' automatically."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "sql_model": {
+          "form_title": "Joint Owners",
+          "form_descr": "Owners of the unit; exactly one is the primary owner",
+          "form_no": "2",
+          "parent_form_no": "1",
+          "parent_key_col": "UNIT_NO",
+          "main_table": "CCW_MEMBER_OWNER",
+          "columns": [
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Parent unit",
+                "key": true,
+                "hidden": 1,
+                "mandatory": true,
+                "x": "60",
+                "y": "60",
+                "col_id": "1",
+                "table_name": "CCW_MEMBER_OWNER",
+                "table_display_name": "Joint owners",
+                "db_size": "10",
+                "width": 100,
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "line_no",
+                "db_name": "LINE_NO",
+                "group_name": "Others",
+                "col_type": "NUMBER",
+                "heading": "Line",
+                "descr": "Owner line number",
+                "key": true,
+                "hidden": 1,
+                "default_value": "auto_generate_line_no()",
+                "protect": "1",
+                "x": "70",
+                "y": "70",
+                "col_id": "2",
+                "table_name": "CCW_MEMBER_OWNER",
+                "table_display_name": "Joint owners",
+                "db_size": "4",
+                "width": 50,
+                "mandatory": false,
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "owner_name",
+                "db_name": "OWNER_NAME",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Owner Name",
+                "descr": "Name of the owner",
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "3",
+                "table_name": "CCW_MEMBER_OWNER",
+                "table_display_name": "Joint owners",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "owner_mobile",
+                "db_name": "OWNER_MOBILE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Owner Mobile",
+                "descr": "Owner mobile number",
+                "display": {
+                  "type": "telephone"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid owner mobile",
+                    "error_code": "OMOBILE_INVALID",
+                    "message": "Owner mobile must be a valid phone number.",
+                    "expression": "is_empty({form.owner_mobile}) or match({form.owner_mobile}, \"^[+]?[0-9 ()-]{7,15}$\")"
+                  }
+                ],
+                "x": "20",
+                "y": "20",
+                "col_id": "4",
+                "table_name": "CCW_MEMBER_OWNER",
+                "table_display_name": "Joint owners",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "owner_email",
+                "db_name": "OWNER_EMAIL",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Owner Email",
+                "descr": "Owner email; unique across all owners and used for sign-in",
+                "mandatory": true,
+                "display": {
+                  "type": "email"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid owner email",
+                    "error_code": "OEMAIL_INVALID",
+                    "message": "Enter a valid owner email address.",
+                    "expression": "match({form.owner_email}, \"^[^@ ]+@[^@ ]+[.][^@ ]+$\")"
+                  },
+                  {
+                    "type": "builtin",
+                    "name": "Owner email unique",
+                    "error_code": "OEMAIL_DUP",
+                    "message": "Owner email {form.owner_email} is already registered for another owner.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "30",
+                "y": "30",
+                "col_id": "5",
+                "table_name": "CCW_MEMBER_OWNER",
+                "table_display_name": "Joint owners",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "is_primary_owner",
+                "db_name": "IS_PRIMARY_OWNER",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Primary Owner",
+                "descr": "Exactly one owner per unit is primary",
+                "mandatory": true,
+                "default_value": "N",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "x": "40",
+                "y": "40",
+                "col_id": "6",
+                "table_name": "CCW_MEMBER_OWNER",
+                "table_display_name": "Joint owners",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Primary Owner is a listed value",
+                    "error_code": "IS_PRIMARY_OWNER_LIST",
+                    "message": "Primary Owner must be one of: Y, N",
+                    "expression": "is_empty({form.is_primary_owner}) or in_list({form.is_primary_owner}, \"Y,N\")"
+                  }
+                ],
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "login_enabled",
+                "db_name": "LOGIN_ENABLED",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Login Enabled",
+                "descr": "Owner may sign in to the portal; a welcome email goes to owners with login enabled",
+                "mandatory": true,
+                "default_value": "Y",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "x": "50",
+                "y": "50",
+                "col_id": "7",
+                "table_name": "CCW_MEMBER_OWNER",
+                "table_display_name": "Joint owners",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Login Enabled is a listed value",
+                    "error_code": "LOGIN_ENABLED_LIST",
+                    "message": "Login Enabled must be one of: Y, N",
+                    "expression": "is_empty({form.login_enabled}) or in_list({form.login_enabled}, \"Y,N\")"
+                  }
+                ],
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_MEMBER_OWNER",
+                  "main_table": true,
+                  "table_descr": "Joint owners"
+                },
+                {
+                  "table": "CCW_MEMBER_PROFILE",
+                  "main_table": false,
+                  "table_descr": "Parent profile",
+                  "column": "UNIT_NO",
+                  "join_table": "CCW_MEMBER_OWNER",
+                  "join_column": "UNIT_NO",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": []
+        }
+      },
+      {
+        "sql_model": {
+          "form_title": "Other Categories",
+          "form_descr": "Additional Business Categories: further categories of the business, besides the primary Business Category above",
+          "form_no": "3",
+          "parent_form_no": "1",
+          "parent_key_col": "UNIT_NO",
+          "main_table": "CCW_MEMBER_CATEGORY",
+          "columns": [
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Parent unit",
+                "key": true,
+                "hidden": 1,
+                "mandatory": true,
+                "x": "60",
+                "y": "60",
+                "col_id": "1",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "10",
+                "width": 100,
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "line_no",
+                "db_name": "LINE_NO",
+                "group_name": "Others",
+                "col_type": "NUMBER",
+                "heading": "Line",
+                "descr": "Category line number",
+                "key": true,
+                "hidden": 1,
+                "default_value": "auto_generate_line_no()",
+                "protect": "1",
+                "x": "70",
+                "y": "70",
+                "col_id": "2",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "4",
+                "width": 50,
+                "mandatory": false,
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "category_code",
+                "db_name": "CATEGORY_CODE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Business Category",
+                "descr": "Additional business category",
+                "mandatory": true,
+                "lookup": "CCW_BUSINESS_CATEGORY(CATEGORY_NAME, CATEGORY_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "must_exist_in": "CCW_BUSINESS_CATEGORY",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Category exists",
+                    "error_code": "ADDLCAT_NOT_FOUND",
+                    "message": "Business category {form.category_code} not found.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_BUSINESS_CATEGORY",
+                      "match_column": "CATEGORY_CODE",
+                      "conditions": [
+                        {
+                          "column": "STATUS",
+                          "op": "=",
+                          "source": "const",
+                          "value": "A"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "builtin",
+                    "name": "Category not repeated",
+                    "error_code": "ADDLCAT_DUP",
+                    "message": "Business category {form.category_code} is already listed for this unit.",
+                    "builtin": {
+                      "kind": "must_be_unique",
+                      "conditions": [
+                        {
+                          "column": "UNIT_NO",
+                          "op": "=",
+                          "source": "form",
+                          "value": "unit_no"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "expression",
+                    "name": "Category differs from primary",
+                    "error_code": "ADDLCAT_IS_PRIMARY",
+                    "message": "Business category {form.category_code} is already the primary Business Category; choose a different additional category.",
+                    "expression": "is_empty({header.business_category}) or {form.category_code} != {header.business_category}"
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "3",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "category_name",
+                "db_name": "CATEGORY_NAME",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Category Name",
+                "descr": "Business category name (from master)",
+                "protect": "1",
+                "inline_with": "category_code",
+                "x": "20",
+                "y": "20",
+                "col_id": "4",
+                "table_display_name": "Business category master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Record creation date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "30",
+                "y": "30",
+                "col_id": "5",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "User who created the record",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "40",
+                "y": "40",
+                "col_id": "6",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Terminal that created the record",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "50",
+                "y": "50",
+                "col_id": "7",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "60",
+                "y": "60",
+                "col_id": "8",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "User who last changed the record",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "70",
+                "y": "70",
+                "col_id": "9",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Terminal of last change",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "80",
+                "y": "80",
+                "col_id": "10",
+                "table_name": "CCW_MEMBER_CATEGORY",
+                "table_display_name": "Additional categories",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_MEMBER_CATEGORY",
+                  "main_table": true,
+                  "table_descr": "Additional categories"
+                },
+                {
+                  "table": "CCW_MEMBER_PROFILE",
+                  "main_table": false,
+                  "table_descr": "Parent profile",
+                  "column": "UNIT_NO",
+                  "join_table": "CCW_MEMBER_CATEGORY",
+                  "join_column": "UNIT_NO",
+                  "join_type": "left"
+                },
+                {
+                  "table": "CCW_BUSINESS_CATEGORY",
+                  "main_table": false,
+                  "table_descr": "Business category master",
+                  "column": "CATEGORY_CODE",
+                  "join_table": "CCW_MEMBER_CATEGORY",
+                  "join_column": "CATEGORY_CODE",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": []
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "business_logic",
+            "name": "Profile deletable",
+            "error_code": "PROFILE_IN_USE",
+            "message": "The unit has open requests or an Active tenant, so the profile cannot be deleted.",
+            "business_logic": {
+              "method": "check_profile_deletable",
+              "description": "Block delete with open requests or Active tenant",
+              "spec": "Input: the profile row (UNIT_NO). If table CCW_TENANT_PROFILE exists and has a row for UNIT_NO with TENANT_STATUS = 'A', return {\"error\": \"Unit <UNIT_NO> has an Active tenant. Remove the tenant first.\"}. If table CCW_FACILITY_REQUEST exists and has rows for UNIT_NO with STATUS NOT IN ('C','X') (not Closed/Cancelled; confirm the real status codes in that table), return {\"error\": \"Unit <UNIT_NO> has open facility requests.\"}. A table that does not exist yet is skipped. Otherwise return nothing."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Add Tenant",
+        "handler": "open",
+        "scope": "row",
+        "open": {
+          "obj_type": "T",
+          "obj_name": "ccw_tenant_profile",
+          "mode": "add",
+          "set": [
+            {
+              "column": "UNIT_NO",
+              "value": "{form.UNIT_NO}",
+              "protect": true
+            }
+          ],
+          "presentation": "navigate"
+        },
+        "visible_when": "{form.occupancy_type} == \"R\"",
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Unit given on rent",
+            "error_code": "ADDTENANT_RENT",
+            "message": "A tenant can be added only when the unit is Given on Rent.",
+            "expression": "{form.occupancy_type} == \"R\""
+          }
+        ]
+      },
+      {
+        "name": "View Tenant Profile",
+        "handler": "open",
+        "scope": "row",
+        "open": {
+          "obj_type": "T",
+          "obj_name": "ccw_tenant_profile",
+          "mode": "edit",
+          "match": {
+            "UNIT_NO": "{form.UNIT_NO}"
+          },
+          "presentation": "navigate"
+        },
+        "visible_when": "{form.occupancy_type} == \"R\""
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "unit_test": {
+      "sample": {
+        "unit_no": "@lookup",
+        "business_name": "Test Traders",
+        "business_category": "@lookup",
+        "contact_no_1": "9876543210",
+        "email": "test@example.com"
+      }
+    },
+    "cross_updates": [],
+    "pre_commit": [
+      {
+        "mode": "business_logic",
+        "business_logic": {
+          "method": "validate_primary_owner",
+          "description": "Exactly one primary joint owner",
+          "spec": "Receives {action, txn_id, header, details}. Take the Joint Owners lines (form 2) from details. If there are no lines return {\"error\": \"At least one Joint Owner is required.\"}. Count lines with IS_PRIMARY_OWNER = 'Y'. If the count is not exactly 1 return {\"error\": \"Exactly one Joint Owner must be marked as Primary Owner.\"}. Also, if the same OWNER_EMAIL (case-insensitive) appears on two lines return an error. Otherwise return nothing."
+        }
+      },
+      {
+        "mode": "business_logic",
+        "business_logic": {
+          "method": "validate_member_categories",
+          "description": "No repeated additional business category in the grid",
+          "spec": "Receives {action, txn_id, header, details}. Take the Other Categories lines (form 3) from details (ignore lines marked deleted). If the same CATEGORY_CODE (trimmed, case-insensitive) appears on two or more lines return {\"error\": \"Business category <code> is listed more than once under Additional Business Categories.\"}. If any line's CATEGORY_CODE equals header BUSINESS_CATEGORY (case-insensitive) return {\"error\": \"Business category <code> is already the primary Business Category.\"}. Otherwise return nothing. This covers duplicates inside one save, which the per-row must-be-unique check cannot see."
+        }
+      }
+    ],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": []
+  }
+}

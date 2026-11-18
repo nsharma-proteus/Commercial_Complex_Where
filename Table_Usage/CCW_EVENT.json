@@ -1,0 +1,37 @@
+{
+  "table_name": "CCW_EVENT",
+  "objects": [
+    {
+      "object_name": "ccw_event",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "WING_CODE",
+        "CHG_DATE",
+        "CHG_TERM",
+        "STATUS",
+        "EVENT_NO",
+        "START_DATE_TIME",
+        "CHG_USER",
+        "ORGANISER_CONTACT_NO",
+        "AUDIENCE",
+        "END_DATE_TIME",
+        "EVENT_IMAGE",
+        "ADD_TERM",
+        "VENUE",
+        "DESCRIPTION",
+        "CANCELLATION_REASON",
+        "ADD_DATE",
+        "ANNOUNCEMENT_CATEGORY",
+        "TITLE",
+        "ADD_USER",
+        "ORGANISER"
+      ],
+      "join_info": {
+        "column": "WING_CODE",
+        "join_table": "CCW_WING_MASTER",
+        "join_column": "WING_CODE"
+      }
+    }
+  ]
+}

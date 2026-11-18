@@ -1,0 +1,953 @@
+{
+  "transaction": {
+    "obj_name": "ccw_unit_parking",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Unit Parking",
+          "form_descr": "Parking slots held by a unit",
+          "form_no": "1",
+          "main_table": "CCW_UNIT_PARKING",
+          "columns": [
+            {
+              "column": {
+                "name": "parking_slot_no",
+                "db_name": "PARKING_SLOT_NO",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Parking Slot No",
+                "descr": "Unique slot number across the complex",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Slot unique",
+                    "error_code": "SLOT_DUP",
+                    "message": "Parking slot {form.parking_slot_no} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Unit holding the slot",
+                "mandatory": true,
+                "text_case": "upper",
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "lookup_filter": "STATUS = 'A'",
+                "must_exist_in": "CCW_UNIT_MASTER",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Unit exists",
+                    "error_code": "UNIT_NOT_FOUND",
+                    "message": "Unit {form.unit_no} not found in Unit Master.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_UNIT_MASTER",
+                      "match_column": "UNIT_NO"
+                    }
+                  }
+                ],
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "wing_code",
+                "db_name": "WING_CODE",
+                "table_name": "CCW_UNIT_MASTER",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Wing",
+                "descr": "Wing of the unit (display)",
+                "protect": "1",
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_display_name": "Unit master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "floor_no",
+                "db_name": "FLOOR_NO",
+                "table_name": "CCW_UNIT_MASTER",
+                "group_name": "Basic",
+                "col_type": "NUMBER",
+                "heading": "Floor",
+                "descr": "Floor of the unit (display)",
+                "protect": "1",
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_display_name": "Unit master",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "slot_location",
+                "db_name": "SLOT_LOCATION",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Slot Location",
+                "descr": "Where the slot is",
+                "mandatory": true,
+                "default_value": "1",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "1",
+                      "display": "Basement 1"
+                    },
+                    {
+                      "data": "2",
+                      "display": "Basement 2"
+                    },
+                    {
+                      "data": "P",
+                      "display": "Podium"
+                    },
+                    {
+                      "data": "O",
+                      "display": "Open"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Location listed",
+                    "error_code": "LOC_LIST",
+                    "message": "Slot location must be one of the listed values.",
+                    "expression": "in_list({form.slot_location}, \"1,2,P,O\")"
+                  }
+                ],
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "slot_type",
+                "db_name": "SLOT_TYPE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Slot Type",
+                "descr": "Car or two-wheeler slot",
+                "mandatory": true,
+                "default_value": "C",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "C",
+                      "display": "Car"
+                    },
+                    {
+                      "data": "T",
+                      "display": "Two-Wheeler"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Type listed",
+                    "error_code": "TYPE_LIST",
+                    "message": "Slot type must be Car or Two-Wheeler.",
+                    "expression": "in_list({form.slot_type}, \"C,T\")"
+                  }
+                ],
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Active or Released",
+                "mandatory": true,
+                "default_value": "A",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "R",
+                      "display": "Released"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Status listed",
+                    "error_code": "STATUS_LIST",
+                    "message": "Status must be Active or Released.",
+                    "expression": "in_list({form.status}, \"A,R\")"
+                  }
+                ],
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "descr": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "descr": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "descr": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "110",
+                "y": "110",
+                "col_id": "11",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "descr": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "120",
+                "y": "120",
+                "col_id": "12",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "descr": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "130",
+                "y": "130",
+                "col_id": "13",
+                "table_name": "CCW_UNIT_PARKING",
+                "table_display_name": "Unit parking slot",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "descr": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_UNIT_PARKING",
+                  "main_table": true,
+                  "table_descr": "Unit parking slot"
+                },
+                {
+                  "table": "CCW_UNIT_MASTER",
+                  "main_table": false,
+                  "table_descr": "Unit master",
+                  "column": "UNIT_NO",
+                  "join_table": "CCW_UNIT_PARKING",
+                  "join_column": "UNIT_NO",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": []
+        }
+      },
+      {
+        "sql_model": {
+          "form_title": "Vehicles",
+          "form_descr": "Vehicles registered against the slot",
+          "form_no": "2",
+          "parent_form_no": "1",
+          "parent_key_col": "PARKING_SLOT_NO",
+          "main_table": "CCW_UNIT_PARKING_VEHICLE",
+          "columns": [
+            {
+              "column": {
+                "name": "parking_slot_no",
+                "db_name": "PARKING_SLOT_NO",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Parking Slot No",
+                "descr": "Parent slot",
+                "key": true,
+                "hidden": 1,
+                "mandatory": true,
+                "x": "80",
+                "y": "80",
+                "col_id": "1",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "10",
+                "width": 100,
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "line_no",
+                "db_name": "LINE_NO",
+                "group_name": "Others",
+                "col_type": "NUMBER",
+                "heading": "Line No",
+                "descr": "Vehicle line",
+                "key": true,
+                "hidden": 1,
+                "default_value": "auto_generate_line_no()",
+                "x": "90",
+                "y": "90",
+                "col_id": "2",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "4",
+                "width": 50,
+                "mandatory": false,
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "vehicle_no",
+                "db_name": "VEHICLE_NO",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Vehicle No",
+                "descr": "Upper case, no spaces; unique across vehicles",
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Vehicle unique",
+                    "error_code": "VEH_DUP",
+                    "message": "Vehicle {form.vehicle_no} is already registered.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "3",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "20",
+                "width": 200,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "vehicle_type",
+                "db_name": "VEHICLE_TYPE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Vehicle Type",
+                "descr": "Type of vehicle",
+                "mandatory": true,
+                "default_value": "C",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "C",
+                      "display": "Car"
+                    },
+                    {
+                      "data": "T",
+                      "display": "Two-Wheeler"
+                    },
+                    {
+                      "data": "O",
+                      "display": "Other"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Vehicle type listed",
+                    "error_code": "VTYPE_LIST",
+                    "message": "Vehicle type must be Car, Two-Wheeler or Other.",
+                    "expression": "in_list({form.vehicle_type}, \"C,T,O\")"
+                  }
+                ],
+                "x": "20",
+                "y": "20",
+                "col_id": "4",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "make_model",
+                "db_name": "MAKE_MODEL",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Make / Model",
+                "descr": "Make and model",
+                "x": "30",
+                "y": "30",
+                "col_id": "5",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "colour",
+                "db_name": "COLOUR",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Colour",
+                "descr": "Vehicle colour",
+                "x": "40",
+                "y": "40",
+                "col_id": "6",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "30",
+                "width": 300,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "used_by",
+                "db_name": "USED_BY",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Used By",
+                "descr": "Owner or Tenant of the unit",
+                "mandatory": true,
+                "default_value": "O",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "O",
+                      "display": "Owner"
+                    },
+                    {
+                      "data": "T",
+                      "display": "Tenant"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Used by listed",
+                    "error_code": "USEDBY_LIST",
+                    "message": "Used By must be Owner or Tenant.",
+                    "expression": "in_list({form.used_by}, \"O,T\")"
+                  },
+                  {
+                    "type": "builtin",
+                    "name": "Tenant must be active",
+                    "error_code": "NO_TENANT",
+                    "message": "Used By = Tenant needs an Active Tenant Profile on this unit.",
+                    "builtin": {
+                      "kind": "sql_range",
+                      "sql": "SELECT CASE WHEN {form.used_by} = 'O' THEN 1 ELSE (SELECT COUNT(*) FROM CCW_TENANT_PROFILE WHERE UNIT_NO = {header.unit_no} AND TENANT_STATUS = 'A') END",
+                      "range_min": {
+                        "source": "const",
+                        "value": "1"
+                      },
+                      "on_no_row": "fail",
+                      "on_error": "fail"
+                    }
+                  }
+                ],
+                "x": "50",
+                "y": "50",
+                "col_id": "7",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "user_name",
+                "db_name": "USER_NAME",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "User Name",
+                "descr": "Person using the vehicle",
+                "x": "60",
+                "y": "60",
+                "col_id": "8",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "user_mobile",
+                "db_name": "USER_MOBILE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "User Mobile",
+                "descr": "Mobile of the user",
+                "x": "70",
+                "y": "70",
+                "col_id": "9",
+                "table_name": "CCW_UNIT_PARKING_VEHICLE",
+                "table_display_name": "Vehicles",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_UNIT_PARKING_VEHICLE",
+                  "main_table": true,
+                  "table_descr": "Vehicles"
+                },
+                {
+                  "table": "CCW_UNIT_PARKING",
+                  "main_table": false,
+                  "table_descr": "Parent slot",
+                  "column": "PARKING_SLOT_NO",
+                  "join_table": "CCW_UNIT_PARKING_VEHICLE",
+                  "join_column": "PARKING_SLOT_NO",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": [],
+          "cross_updates": [
+            {
+              "mode": "business_logic",
+              "business_logic": {
+                "method": "normalize_vehicle",
+                "description": "Store vehicle number upper case without spaces; unique among vehicles",
+                "spec": "Take VEHICLE_NO, remove all spaces and upper-case it. Return an error if another vehicle row (different parking_slot_no/line_no) already has the same normalised number. Otherwise update this vehicle row's VEHICLE_NO to the normalised value.",
+                "language": "python"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "builtin",
+            "name": "No vehicles",
+            "error_code": "HAS_VEH",
+            "message": "A slot with vehicles cannot be deleted. Release it and remove the vehicles first.",
+            "builtin": {
+              "kind": "sql_range",
+              "sql": "SELECT COUNT(*) FROM CCW_UNIT_PARKING_VEHICLE WHERE PARKING_SLOT_NO = {form.parking_slot_no}",
+              "range_max": {
+                "source": "const",
+                "value": "0"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Release Slot",
+        "handler": "message",
+        "scope": "row",
+        "business_logic": {
+          "method": "release_slot",
+          "description": "Release the parking slot",
+          "spec": "Given the slot (PARKING_SLOT_NO), set CCW_UNIT_PARKING.STATUS='R' and stamp chg columns. Return {error} if status is already 'R' or if any row exists in CCW_UNIT_PARKING_VEHICLE for the slot (vehicles must be removed first). Return {message} confirming release."
+        },
+        "visible_when": "{form.status} == \"A\"",
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Slot active",
+            "message": "Only an Active slot can be released.",
+            "expression": "{form.status} == \"A\""
+          },
+          {
+            "type": "builtin",
+            "name": "No vehicles",
+            "error_code": "HAS_VEH",
+            "message": "Remove the vehicles before releasing the slot.",
+            "builtin": {
+              "kind": "sql_range",
+              "sql": "SELECT COUNT(*) FROM CCW_UNIT_PARKING_VEHICLE WHERE PARKING_SLOT_NO = {form.parking_slot_no}",
+              "range_max": {
+                "source": "const",
+                "value": "0"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": []
+  }
+}

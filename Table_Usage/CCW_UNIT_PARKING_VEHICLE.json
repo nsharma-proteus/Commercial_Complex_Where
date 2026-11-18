@@ -1,0 +1,26 @@
+{
+  "table_name": "CCW_UNIT_PARKING_VEHICLE",
+  "objects": [
+    {
+      "object_name": "ccw_unit_parking",
+      "form_no": "2",
+      "usage_type": "R",
+      "referred_columns": [
+        "USER_NAME",
+        "USED_BY",
+        "PARKING_SLOT_NO",
+        "COLOUR",
+        "VEHICLE_NO",
+        "VEHICLE_TYPE",
+        "MAKE_MODEL",
+        "LINE_NO",
+        "USER_MOBILE"
+      ],
+      "join_info": {
+        "column": "PARKING_SLOT_NO",
+        "join_table": "CCW_UNIT_PARKING",
+        "join_column": "PARKING_SLOT_NO"
+      }
+    }
+  ]
+}

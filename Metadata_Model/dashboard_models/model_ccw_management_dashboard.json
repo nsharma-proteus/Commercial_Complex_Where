@@ -1,0 +1,34 @@
+{
+ "DASHBOARD": {
+  "DASHBOARD_ID": "CCW_MANAGEMENT_DASHBOARD",
+  "DASHBOARD_TYPE": "S",
+  "DASHBOARD_NAME": "Management Dashboard",
+  "DASHBOARD_DESCR": "Management view of occupancy, facility requests, banner revenue, guests and notices. KPI cards, occupancy doughnut, profiles-missing bar, guests-per-day line and awaiting-approval grid need dedicated visuals that do not exist yet; existing visuals are wired.",
+  "CREATED_BY": "admin",
+  "CREATED_DATE": "2026-11-16",
+  "REFRESH_INTERVAL_SECONDS": 0,
+  "THEME_COLOR": "default",
+  "GLOBAL_CRITERIA": [
+   {"PARAM_NAME": "FROM_DATE", "PROMPT_LABEL": "From Date", "DEFAULT_VALUE": ":calendar_month_start", "DATA_TYPE": "date", "OPERATOR": ">=", "BROADCAST_TO": ["VIS_REQ_CHART"]},
+   {"PARAM_NAME": "TO_DATE", "PROMPT_LABEL": "To Date", "DEFAULT_VALUE": ":calendar_today", "DATA_TYPE": "date", "OPERATOR": "<=", "BROADCAST_TO": ["VIS_REQ_CHART"]},
+   {"PARAM_NAME": "WING_CODE", "PROMPT_LABEL": "Wing", "DEFAULT_VALUE": "%", "DATA_TYPE": "string", "OPERATOR": "like", "BROADCAST_TO": ["VIS_REQ_CHART", "VIS_OCCUPANCY"]}
+  ],
+  "VISUALS": [
+   {"VISUAL_ID": "VIS_BANNER", "VISUAL_NAME": "Banner Carousel", "POSITION": {"X": 0, "Y": 0, "WIDTH": 12, "HEIGHT": 2}, "VISUAL_CONFIG_REF": "model_ccw_banner_carousel.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_REQ_CHART", "VISUAL_NAME": "Facility Requests by Category and Status", "POSITION": {"X": 0, "Y": 2, "WIDTH": 6, "HEIGHT": 4}, "VISUAL_CONFIG_REF": "model_ccw_facility_requests_by_category_status.json",
+    "CRITERIA_BINDINGS": [
+     {"VISUAL_PARAM": "from_date", "BIND_TYPE": "global", "GLOBAL_PARAM": "FROM_DATE"},
+     {"VISUAL_PARAM": "to_date", "BIND_TYPE": "global", "GLOBAL_PARAM": "TO_DATE"},
+     {"VISUAL_PARAM": "wing_code", "BIND_TYPE": "global", "GLOBAL_PARAM": "WING_CODE"}]},
+   {"VISUAL_ID": "VIS_SLOTS", "VISUAL_NAME": "Banner Slot Availability", "POSITION": {"X": 6, "Y": 2, "WIDTH": 6, "HEIGHT": 4}, "VISUAL_CONFIG_REF": "model_ccw_banner_slot_availability.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_BOOKINGS", "VISUAL_NAME": "Banner Bookings & Collections", "POSITION": {"X": 0, "Y": 6, "WIDTH": 12, "HEIGHT": 5}, "VISUAL_CONFIG_REF": "model_ccw_banner_bookings_collections.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_OCCUPANCY", "VISUAL_NAME": "Unit Occupancy Overview", "POSITION": {"X": 0, "Y": 11, "WIDTH": 12, "HEIGHT": 5}, "VISUAL_CONFIG_REF": "model_ccw_unit_occupancy_overview.json",
+    "CRITERIA_BINDINGS": [{"VISUAL_PARAM": "wing_code", "BIND_TYPE": "global", "GLOBAL_PARAM": "WING_CODE"}]},
+   {"VISUAL_ID": "VIS_NOTICES", "VISUAL_NAME": "Notices", "POSITION": {"X": 0, "Y": 16, "WIDTH": 6, "HEIGHT": 4}, "VISUAL_CONFIG_REF": "model_ccw_notice_board.json", "CRITERIA_BINDINGS": []},
+   {"VISUAL_ID": "VIS_EVENTS", "VISUAL_NAME": "Events", "POSITION": {"X": 6, "Y": 16, "WIDTH": 6, "HEIGHT": 4}, "VISUAL_CONFIG_REF": "model_ccw_event_calendar.json", "CRITERIA_BINDINGS": []}
+  ],
+  "DRILL_THROUGH": [
+   {"SOURCE_VISUAL_ID": "VIS_SLOTS", "TARGET_TYPE": "visual", "TARGET_VISUAL_ID": "ccw_banner_bookings_collections", "PARAM_MAPPING": {}}
+  ]
+ }
+}

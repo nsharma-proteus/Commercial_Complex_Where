@@ -1,0 +1,143 @@
+{
+  "table_name": "CCW_UNIT_PARKING",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "PARKING_SLOT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Unique slot number across the complex",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Unit holding the slot",
+      "sequence": 2,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_UNIT_MASTER",
+        "display_column": "UNIT_NO",
+        "value_column": "UNIT_NO"
+      }
+    },
+    {
+      "column_name": "SLOT_LOCATION",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Where the slot is",
+      "sequence": 3,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "1",
+          "label": "Basement 1"
+        },
+        {
+          "value": "2",
+          "label": "Basement 2"
+        },
+        {
+          "value": "P",
+          "label": "Podium"
+        },
+        {
+          "value": "O",
+          "label": "Open"
+        }
+      ]
+    },
+    {
+      "column_name": "SLOT_TYPE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Car or two-wheeler slot",
+      "sequence": 4,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "C",
+          "label": "Car"
+        },
+        {
+          "value": "T",
+          "label": "Two-Wheeler"
+        }
+      ]
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Active or Released",
+      "sequence": 5,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Active"
+        },
+        {
+          "value": "R",
+          "label": "Released"
+        }
+      ]
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "",
+      "sequence": 6
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "",
+      "sequence": 7
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "",
+      "sequence": 8
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "",
+      "sequence": 9
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "",
+      "sequence": 10
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "",
+      "sequence": 11
+    }
+  ]
+}

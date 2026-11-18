@@ -1,0 +1,35 @@
+{
+  "table_name": "CCW_GUEST_PURPOSE_MASTER",
+  "objects": [
+    {
+      "object_name": "ccw_guest_purpose_master",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "CHG_USER",
+        "ADD_TERM",
+        "ADD_USER",
+        "CHG_TERM",
+        "ADD_DATE",
+        "CHG_DATE",
+        "STATUS",
+        "PURPOSE_NAME",
+        "PURPOSE_CODE"
+      ]
+    },
+    {
+      "object_name": "ccw_guest_entry",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "PURPOSE_NAME",
+        "PURPOSE_CODE"
+      ],
+      "join_info": {
+        "column": "PURPOSE_CODE",
+        "join_table": "CCW_GUEST_ENTRY",
+        "join_column": "PURPOSE"
+      }
+    }
+  ]
+}

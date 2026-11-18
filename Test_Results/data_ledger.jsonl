@@ -1,0 +1,21 @@
+{"event": "created", "at": "2026-11-16T09:37:36+00:00", "run_id": "unit-20261116-093736", "case": "unit:ccw_announcement_category_master:record", "obj": "ccw_announcement_category_master", "txn_id": "TF00AA4", "via": "unit"}
+{"event": "created", "at": "2026-11-16T10:07:15+00:00", "run_id": "unit-20261116-100715", "case": "unit:ccw_unit_master:record", "obj": "ccw_unit_master", "txn_id": "CD238AZT10", "via": "unit"}
+{"event": "created", "at": "2026-11-16T10:13:16+00:00", "run_id": "unit-20261116-101316", "case": "unit:ccw_unit_master:record", "obj": "ccw_unit_master", "txn_id": "8E758EZT10", "via": "unit"}
+{"event": "created", "at": "2026-11-16T11:38:03+00:00", "run_id": "unit-20261116-113803", "case": "unit:ccw_tenant_profile:action:Re-activate", "obj": "ccw_tenant_profile", "txn_id": "ZT101", "via": "unit"}
+{"event": "settled", "at": "2026-11-16T11:38:03+00:00", "run_id": "unit-20261116-113803", "obj": "ccw_tenant_profile", "txn_id": "ZT101", "fingerprint": "5d5ee21a33428d2f"}
+{"event": "created", "at": "2026-11-16T11:38:46+00:00", "run_id": "unit-20261116-113846", "case": "unit:ccw_tenant_profile:action:Re-activate", "obj": "ccw_tenant_profile", "txn_id": "ZT101", "via": "unit"}
+{"event": "settled", "at": "2026-11-16T11:38:46+00:00", "run_id": "unit-20261116-113846", "obj": "ccw_tenant_profile", "txn_id": "ZT101", "fingerprint": "6831125da1d40a3d"}
+{"event": "created", "at": "2026-11-16T11:39:07+00:00", "run_id": "unit-20261116-113907", "case": "unit:ccw_tenant_profile:action:Re-activate", "obj": "ccw_tenant_profile", "txn_id": "ZT101", "via": "unit"}
+{"event": "settled", "at": "2026-11-16T11:39:07+00:00", "run_id": "unit-20261116-113907", "obj": "ccw_tenant_profile", "txn_id": "ZT101", "fingerprint": "f54ddf40e0a5a3ed"}
+{"event": "created", "at": "2026-11-17T09:35:24+00:00", "run_id": "unit-20261117-093524", "case": "unit:ccw_banner_booking:action:Approve", "obj": "ccw_banner_booking", "txn_id": "17", "via": "unit"}
+{"event": "created", "at": "2026-11-17T09:35:24+00:00", "run_id": "unit-20261117-093524", "case": "unit:ccw_banner_booking:action:Cancel", "obj": "ccw_banner_booking", "txn_id": "18", "via": "unit"}
+{"event": "created", "at": "2026-11-17T09:35:24+00:00", "run_id": "unit-20261117-093524", "case": "unit:ccw_banner_booking:action:Record Payment", "obj": "ccw_banner_booking", "txn_id": "19", "via": "unit"}
+{"event": "settled", "at": "2026-11-17T09:35:24+00:00", "run_id": "unit-20261117-093524", "obj": "ccw_banner_booking", "txn_id": "17", "fingerprint": "53d760582a7feb4b"}
+{"event": "settled", "at": "2026-11-17T09:35:24+00:00", "run_id": "unit-20261117-093524", "obj": "ccw_banner_booking", "txn_id": "18", "fingerprint": "c934177ef56e384d"}
+{"event": "settled", "at": "2026-11-17T09:35:24+00:00", "run_id": "unit-20261117-093524", "obj": "ccw_banner_booking", "txn_id": "19", "fingerprint": "b77b3500b7681cf3"}
+{"event": "created", "at": "2026-11-17T09:35:28+00:00", "run_id": "unit-20261117-093528", "case": "unit:ccw_banner_booking:action:Approve", "obj": "ccw_banner_booking", "txn_id": "20", "via": "unit"}
+{"event": "created", "at": "2026-11-17T09:35:28+00:00", "run_id": "unit-20261117-093528", "case": "unit:ccw_banner_booking:action:Cancel", "obj": "ccw_banner_booking", "txn_id": "21", "via": "unit"}
+{"event": "created", "at": "2026-11-17T09:35:28+00:00", "run_id": "unit-20261117-093528", "case": "unit:ccw_banner_booking:action:Record Payment", "obj": "ccw_banner_booking", "txn_id": "22", "via": "unit"}
+{"event": "settled", "at": "2026-11-17T09:35:28+00:00", "run_id": "unit-20261117-093528", "obj": "ccw_banner_booking", "txn_id": "20", "fingerprint": "1815084398958e11"}
+{"event": "settled", "at": "2026-11-17T09:35:28+00:00", "run_id": "unit-20261117-093528", "obj": "ccw_banner_booking", "txn_id": "21", "fingerprint": "34147aaea4fc1240"}
+{"event": "settled", "at": "2026-11-17T09:35:28+00:00", "run_id": "unit-20261117-093528", "obj": "ccw_banner_booking", "txn_id": "22", "fingerprint": "b43a0745ec763ea5"}

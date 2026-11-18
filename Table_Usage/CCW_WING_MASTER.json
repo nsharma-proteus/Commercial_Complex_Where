@@ -1,0 +1,65 @@
+{
+  "table_name": "CCW_WING_MASTER",
+  "objects": [
+    {
+      "object_name": "ccw_wing_master",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "WING_CODE",
+        "CHG_USER",
+        "ADD_TERM",
+        "NO_OF_FLOORS",
+        "ADD_USER",
+        "CHG_TERM",
+        "ADD_DATE",
+        "CHG_DATE",
+        "STATUS",
+        "WING_NAME"
+      ]
+    },
+    {
+      "object_name": "ccw_unit_master",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "WING_CODE",
+        "WING_NAME",
+        "NO_OF_FLOORS"
+      ],
+      "join_info": {
+        "column": "WING_CODE",
+        "join_table": "CCW_UNIT_MASTER",
+        "join_column": "WING_CODE"
+      }
+    },
+    {
+      "object_name": "ccw_notice",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "WING_CODE",
+        "WING_NAME"
+      ],
+      "join_info": {
+        "column": "WING_CODE",
+        "join_table": "CCW_NOTICE",
+        "join_column": "WING_CODE"
+      }
+    },
+    {
+      "object_name": "ccw_event",
+      "form_no": "1",
+      "usage_type": "M",
+      "referred_columns": [
+        "WING_CODE",
+        "WING_NAME"
+      ],
+      "join_info": {
+        "column": "WING_CODE",
+        "join_table": "CCW_EVENT",
+        "join_column": "WING_CODE"
+      }
+    }
+  ]
+}

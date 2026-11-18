@@ -1,0 +1,24 @@
+{
+  "table_name": "CCW_BQ_RECIPIENT",
+  "objects": [
+    {
+      "object_name": "ccw_business_query",
+      "form_no": "2",
+      "usage_type": "M",
+      "referred_columns": [
+        "QUERY_NO",
+        "VIEWED",
+        "BUSINESS_NAME",
+        "RECIPIENT_EMAIL",
+        "LINE_NO",
+        "FORWARDED_ON",
+        "UNIT_NO"
+      ],
+      "join_info": {
+        "column": "QUERY_NO",
+        "join_table": "CCW_BUSINESS_QUERY",
+        "join_column": "QUERY_NO"
+      }
+    }
+  ]
+}

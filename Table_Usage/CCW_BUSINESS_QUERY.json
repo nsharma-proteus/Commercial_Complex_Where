@@ -1,0 +1,60 @@
+{
+  "table_name": "CCW_BUSINESS_QUERY",
+  "objects": [
+    {
+      "object_name": "ccw_business_query",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "CLOSURE_REMARK",
+        "SUBJECT",
+        "RAISED_BY_UNIT_NO",
+        "QUERY_NO",
+        "CLOSED_ON",
+        "ADD_USER",
+        "CHG_DATE",
+        "CHG_TERM",
+        "DESCRIPTION",
+        "RAISED_BY_EMAIL",
+        "TARGET_BUSINESS_CATEGORY",
+        "CHG_USER",
+        "ADD_DATE",
+        "QUERY_DATE",
+        "STATUS",
+        "RAISED_BY_NAME",
+        "ADD_TERM"
+      ],
+      "join_info": {
+        "column": "TARGET_BUSINESS_CATEGORY",
+        "join_table": "CCW_BUSINESS_CATEGORY",
+        "join_column": "CATEGORY_CODE"
+      }
+    },
+    {
+      "object_name": "ccw_business_query",
+      "form_no": "2",
+      "usage_type": "R",
+      "referred_columns": [
+        "QUERY_NO"
+      ],
+      "join_info": {
+        "column": "QUERY_NO",
+        "join_table": "CCW_BQ_RECIPIENT",
+        "join_column": "QUERY_NO"
+      }
+    },
+    {
+      "object_name": "ccw_business_query",
+      "form_no": "3",
+      "usage_type": "R",
+      "referred_columns": [
+        "QUERY_NO"
+      ],
+      "join_info": {
+        "column": "QUERY_NO",
+        "join_table": "CCW_BQ_RESPONSE",
+        "join_column": "QUERY_NO"
+      }
+    }
+  ]
+}

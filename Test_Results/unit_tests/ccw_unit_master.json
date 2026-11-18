@@ -1,0 +1,86 @@
+{
+  "report": {
+    "ok": true,
+    "summary": "PASS",
+    "project": "Commercial_Complex_Where",
+    "obj_name": "ccw_unit_master",
+    "passed": 6,
+    "failed": 0,
+    "steps": [
+      {
+        "name": "deploy schema",
+        "status": "PASS",
+        "issue": null,
+        "detail": "schema=commercial_complex_where",
+        "check": "record"
+      },
+      {
+        "name": "add record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "txn_id=47F634ZT10",
+        "check": "record"
+      },
+      {
+        "name": "list records",
+        "status": "PASS",
+        "issue": null,
+        "detail": "2 row(s)",
+        "check": "record"
+      },
+      {
+        "name": "load record",
+        "status": "PASS",
+        "issue": null,
+        "detail": null,
+        "check": "record"
+      },
+      {
+        "name": "edit record",
+        "status": "PASS",
+        "issue": null,
+        "detail": null,
+        "check": "record"
+      },
+      {
+        "name": "delete record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "deleted=1",
+        "check": "record"
+      },
+      {
+        "name": "action 'Import'",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it imports a file the user picks — that happens in the browser, so the browser test cases check it",
+        "check": "action:Import"
+      }
+    ],
+    "checks": [
+      {
+        "id": "record",
+        "kind": "record",
+        "name": "",
+        "label": "Add, list, open, edit and delete a record",
+        "steps": 6,
+        "status": "passed",
+        "first_failure": null
+      },
+      {
+        "id": "action:Import",
+        "kind": "action",
+        "name": "Import",
+        "label": "Action 'Import'",
+        "steps": 1,
+        "status": "skipped",
+        "first_failure": null
+      }
+    ],
+    "first_failure": null,
+    "emitted_events": []
+  },
+  "at": "2026-11-16T11:55:26+00:00",
+  "by": "nilay.sharma@proteustech.in",
+  "via": "Ask-AI"
+}

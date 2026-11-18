@@ -1,0 +1,44 @@
+{
+ "DATA_SOURCE_MODE": "sql",
+ "SQLMODEL": {
+  "SQLModel": {"COLUMNS": [{"COLUMN": [
+   {"COLID": 2, "NAME": "REQUEST_CATEGORY", "DBTABLE": "CCW_FACILITY_REQ_CATEGORY", "DBNAME": "NAME", "tableName": "CCW_FACILITY_REQ_CATEGORY", "content": "Category", "name": "Category", "type": "string", "JAVATYPE": "java.lang.String", "COLTYPE": "CHAR", "EXPRESSIONTYPE": "C", "DEFAULTFUNCTION": "", "FUNCTION": "", "expression": "", "groupName": "Rows", "StandardName": "Rows", "checked": true},
+   {"COLID": 3, "NAME": "STATUS", "DBTABLE": "CCW_FACILITY_REQUEST", "DBNAME": "STATUS", "tableName": "CCW_FACILITY_REQUEST", "content": "Status", "name": "Status", "type": "string", "JAVATYPE": "java.lang.String", "COLTYPE": "CHAR", "EXPRESSIONTYPE": "C", "DEFAULTFUNCTION": "", "FUNCTION": "", "expression": "", "groupName": "Columns", "StandardName": "Columns", "checked": true},
+   {"COLID": 4, "NAME": "REQUEST_COUNT", "DBTABLE": "CCW_FACILITY_REQUEST", "DBNAME": "REQUEST_NO", "tableName": "CCW_FACILITY_REQUEST", "content": "Requests", "name": "Requests", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "COUNT", "FUNCTION": "COUNT", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true}
+  ]}]},
+  "CRITERIA": {"query": {"rules": [
+   {"id": "Criteria_1", "field": "CCW_FACILITY_REQUEST.REQUEST_DATE_TIME", "DBNAME": "REQUEST_DATE_TIME", "tableName": "CCW_FACILITY_REQUEST", "COLTYPE": "date", "currentFieldType": "date", "operator": ">=", "queryOption": "P", "prevOption": "P", "customValue": "FixedValue", "promptLabel": "From Date", "promptVar": "from_date", "value": ":calendar_month_start", "chipValue": []},
+   {"id": "Criteria_2", "field": "CCW_FACILITY_REQUEST.REQUEST_DATE_TIME", "DBNAME": "REQUEST_DATE_TIME", "tableName": "CCW_FACILITY_REQUEST", "COLTYPE": "date", "currentFieldType": "date", "operator": "<=", "queryOption": "P", "prevOption": "P", "customValue": "FixedValue", "promptLabel": "To Date", "promptVar": "to_date", "value": ":calendar_today", "chipValue": []},
+   {"id": "Criteria_3", "field": "CCW_UNIT_MASTER.WING_CODE", "DBNAME": "WING_CODE", "tableName": "CCW_UNIT_MASTER", "COLTYPE": "string", "currentFieldType": "string", "operator": "like", "queryOption": "P", "prevOption": "P", "customValue": "FixedValue", "promptLabel": "Wing", "promptVar": "wing_code", "value": "%", "chipValue": [], "lookup": "CCW_WING_MASTER(WING_NAME, WING_CODE)"}
+  ], "condition": "and"}},
+  "VISUAL_NAME": "Stacked Column",
+  "SCHEMA_NAME": "CCW_FACILITY_REQUESTS_BY_CATEGORY_STATUS",
+  "SCHEMA_DESCR": "Facility Requests by Category and Status",
+  "SCHEMA_TYPE": "S",
+  "OUTPUT_TYPE": "JSON",
+  "DATABASE_TYPE": "1",
+  "DATABASE_DETAIL": {"DATABASE_NAME": "PostgreSQL", "TYPE": 1}
+ },
+ "LAYOUT_DATA": {
+  "visualLayout": {
+   "ID": "stacked_column", "VisualName": "Stacked Column", "VisualType": "Standard", "VisualIcon": "Stacked_Column.svg", "DisplayOrder": "6", "className": "InsightStackedChart", "linkOptions": "", "OutputType": "JSON",
+   "title": "Facility Requests by Category and Status", "subtitle": "",
+   "options": [
+    {"optionId": "sortingColumns", "optionName": "sortingColumns", "optionHeading": "sortingColumns", "dataType": "string", "defaultValue": "", "listOfValues": "", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "themeColor", "optionName": "themeColor", "optionHeading": "themeColor", "dataType": "string", "defaultValue": "Default", "listOfValues": "Default,Blue,Green,Orange,Pink,Purple,Yellow,Red", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "toolbar", "optionName": "toolbar", "optionHeading": "toolbar", "dataType": "string", "defaultValue": "true", "listOfValues": "true,false", "allowChange": "true", "optionType": "inner"},
+    {"optionId": "autoRefreshSeconds", "optionName": "autoRefreshSeconds", "optionHeading": "autoRefreshSeconds", "dataType": "number", "defaultValue": "0", "listOfValues": "", "allowChange": "true", "optionType": "inner"}
+   ],
+   "ColumnGroups": [
+    {"GroupID": 1, "GroupName": "Rows", "StandardName": "Rows", "AllowedColumnTypes": "ANY", "MinColumns": 0, "MaxColumns": 0, "COLUMNS": [
+     {"COLID": 2, "NAME": "REQUEST_CATEGORY", "DBTABLE": "CCW_FACILITY_REQ_CATEGORY", "DBNAME": "NAME", "tableName": "CCW_FACILITY_REQ_CATEGORY", "content": "Category", "name": "Category", "type": "string", "JAVATYPE": "java.lang.String", "COLTYPE": "CHAR", "EXPRESSIONTYPE": "C", "DEFAULTFUNCTION": "", "FUNCTION": "", "expression": "", "groupName": "Rows", "StandardName": "Rows", "checked": true}]},
+    {"GroupID": 2, "GroupName": "Columns", "StandardName": "Columns", "AllowedColumnTypes": "ANY", "MinColumns": 0, "MaxColumns": 0, "COLUMNS": [
+     {"COLID": 3, "NAME": "STATUS", "DBTABLE": "CCW_FACILITY_REQUEST", "DBNAME": "STATUS", "tableName": "CCW_FACILITY_REQUEST", "content": "Status", "name": "Status", "type": "string", "JAVATYPE": "java.lang.String", "COLTYPE": "CHAR", "EXPRESSIONTYPE": "C", "DEFAULTFUNCTION": "", "FUNCTION": "", "expression": "", "groupName": "Columns", "StandardName": "Columns", "checked": true}]},
+    {"GroupID": 3, "GroupName": "Values", "StandardName": "Values", "AllowedColumnTypes": "ANY", "MinColumns": 0, "MaxColumns": 0, "COLUMNS": [
+     {"COLID": 4, "NAME": "REQUEST_COUNT", "DBTABLE": "CCW_FACILITY_REQUEST", "DBNAME": "REQUEST_NO", "tableName": "CCW_FACILITY_REQUEST", "content": "Requests", "name": "Requests", "type": "number", "JAVATYPE": "java.lang.Integer", "COLTYPE": "NUMBER", "EXPRESSIONTYPE": "G", "DEFAULTFUNCTION": "COUNT", "FUNCTION": "COUNT", "ALIGNMENT": 2, "expression": "", "groupName": "Values", "StandardName": "Values", "checked": true}]}
+   ]
+  },
+  "layoutdata": {}
+ },
+ "SOURCE_SQL": "SELECT c.name AS REQUEST_CATEGORY, f.status AS STATUS, COUNT(f.request_no) AS REQUEST_COUNT FROM ccw_facility_request f JOIN ccw_facility_req_category c ON c.request_category_code = f.request_category JOIN ccw_unit_master u ON u.unit_no = f.unit_no WHERE f.request_date_time >= ?.from_date AND f.request_date_time < CAST(?.to_date AS date) + 1 AND u.wing_code LIKE ?.wing_code GROUP BY c.name, f.status ORDER BY c.name, f.status"
+}

@@ -1,0 +1,155 @@
+{
+  "report": {
+    "ok": true,
+    "summary": "PASS",
+    "project": "Commercial_Complex_Where",
+    "obj_name": "ccw_tenant_profile",
+    "passed": 9,
+    "failed": 0,
+    "steps": [
+      {
+        "name": "deploy schema",
+        "status": "PASS",
+        "issue": null,
+        "detail": "schema=commercial_complex_where",
+        "check": "record"
+      },
+      {
+        "name": "add record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "txn_id=ZT101",
+        "check": "record"
+      },
+      {
+        "name": "list records",
+        "status": "PASS",
+        "issue": null,
+        "detail": "1 row(s)",
+        "check": "record"
+      },
+      {
+        "name": "load record",
+        "status": "PASS",
+        "issue": null,
+        "detail": null,
+        "check": "record"
+      },
+      {
+        "name": "edit record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "changed tenant_company_name",
+        "check": "record"
+      },
+      {
+        "name": "delete record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "deleted=1",
+        "check": "record"
+      },
+      {
+        "name": "action 'Remove Tenant'",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it asks the user to type or scan a value (REMOVAL_REASON) and this test has none to give — put a working one in transaction.unit_test.sample as \"REMOVAL_REASON\" to have it pressed",
+        "check": "action:Remove Tenant"
+      },
+      {
+        "name": "action 'Re-activate': add a record it accepts",
+        "status": "PASS",
+        "issue": null,
+        "detail": "txn_id=ZT101 · tenant_status=R, owner_occupancy_type=R",
+        "check": "action:Re-activate"
+      },
+      {
+        "name": "action 'Re-activate': run",
+        "status": "PASS",
+        "issue": null,
+        "detail": "Tenant profile re-activated.",
+        "check": "action:Re-activate"
+      },
+      {
+        "name": "action 'Re-activate': keep the test record",
+        "status": "PASS",
+        "issue": null,
+        "detail": "kept ZT101 as test data — the button may have written records that point at it; clean it under Testing → Test data",
+        "check": "action:Re-activate"
+      },
+      {
+        "name": "action 'View Owner Profile'",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it opens another screen — that happens in the browser, so the browser test cases check it",
+        "check": "action:View Owner Profile"
+      },
+      {
+        "name": "action 'Import'",
+        "status": "SKIP",
+        "issue": null,
+        "detail": "it imports a file the user picks — that happens in the browser, so the browser test cases check it",
+        "check": "action:Import"
+      }
+    ],
+    "checks": [
+      {
+        "id": "record",
+        "kind": "record",
+        "name": "",
+        "label": "Add, list, open, edit and delete a record",
+        "steps": 6,
+        "status": "passed",
+        "first_failure": null
+      },
+      {
+        "id": "action:Remove Tenant",
+        "kind": "action",
+        "name": "Remove Tenant",
+        "label": "Action 'Remove Tenant'",
+        "steps": 1,
+        "status": "skipped",
+        "first_failure": null
+      },
+      {
+        "id": "action:Re-activate",
+        "kind": "action",
+        "name": "Re-activate",
+        "label": "Action 'Re-activate'",
+        "steps": 3,
+        "status": "passed",
+        "first_failure": null
+      },
+      {
+        "id": "action:View Owner Profile",
+        "kind": "action",
+        "name": "View Owner Profile",
+        "label": "Action 'View Owner Profile'",
+        "steps": 1,
+        "status": "skipped",
+        "first_failure": null
+      },
+      {
+        "id": "action:Import",
+        "kind": "action",
+        "name": "Import",
+        "label": "Action 'Import'",
+        "steps": 1,
+        "status": "skipped",
+        "first_failure": null
+      }
+    ],
+    "first_failure": null,
+    "emitted_events": [],
+    "kept_records": [
+      {
+        "obj": "ccw_tenant_profile",
+        "txn_id": "ZT101",
+        "check": "action:Re-activate"
+      }
+    ]
+  },
+  "at": "2026-11-16T11:39:07+00:00",
+  "by": "nilay.sharma@proteustech.in",
+  "via": "Ask-AI"
+}

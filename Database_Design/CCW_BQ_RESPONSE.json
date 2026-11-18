@@ -1,0 +1,73 @@
+{
+  "table_name": "CCW_BQ_RESPONSE",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "QUERY_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Parent query",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "LINE_NO",
+      "data_type": "NUMBER",
+      "size": "4",
+      "key": true,
+      "description": "Line number",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "RESPONSE_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "When responded",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "RESPONDER_UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Unit of the responder",
+      "sequence": 4,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_UNIT_MASTER",
+        "display_column": "UNIT_NO",
+        "value_column": "UNIT_NO"
+      }
+    },
+    {
+      "column_name": "RESPONDER_BUSINESS_NAME",
+      "data_type": "VARCHAR",
+      "size": "150",
+      "key": false,
+      "description": "Business of the responder",
+      "sequence": 5
+    },
+    {
+      "column_name": "RESPONSE_TEXT",
+      "data_type": "VARCHAR",
+      "size": "1000",
+      "key": false,
+      "description": "Response text",
+      "sequence": 6,
+      "mandatory": true
+    },
+    {
+      "column_name": "RESPONDER_CONTACT_NO",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Responder contact (defaults from the responder's profile)",
+      "sequence": 7
+    }
+  ]
+}

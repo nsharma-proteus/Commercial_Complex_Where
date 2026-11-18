@@ -1,0 +1,138 @@
+{
+  "page": {
+    "obj_name": "ccw_portal_home",
+    "title": "Portal Home",
+    "kind": "internal",
+    "pageMode": "web",
+    "pageSchemaVersion": 2,
+    "theme": {"preset": "corporate"},
+    "chrome": {"smoothScroll": true},
+    "inputs": [
+      {"name": "dir_search", "label": "Search business or unit (e.g. D715)", "type": "text", "isInput": true, "default": ""}
+    ],
+    "actions": [],
+    "sections": [
+      {
+        "id": "sec_banner",
+        "tag": "main",
+        "blocks": [
+          {"id": "emb_banner", "type": "embed", "embed": {"obj_type": "V", "obj_name": "ccw_banner_carousel", "filters": []}}
+        ]
+      },
+      {
+        "id": "sec_hero",
+        "tag": "main",
+        "style": {"padding": {"top": 32, "bottom": 24}},
+        "blocks": [
+          {
+            "id": "hero_1", "type": "hero", "align": "left", "height": "compact",
+            "eyebrow": "Commercial Complex Portal",
+            "title": "Welcome, {{me.name}}",
+            "subtitle": "Your one place for the business directory, notices, events, guest passes and facility help across every wing of the complex.",
+            "primaryCta": {"id": "hero_p", "label": "Business Directory", "variant": "primary", "size": "md",
+              "on_click": {"kind": "navigate", "obj_type": "V", "obj_name": "ccw_business_directory"}},
+            "secondaryCta": {"id": "hero_s", "label": "Browse quick links", "variant": "outline", "size": "md",
+              "on_click": {"kind": "scroll_to", "target": "quick_links"}}
+          }
+        ]
+      },
+      {
+        "id": "sec_search",
+        "tag": "main",
+        "style": {"padding": {"top": 8, "bottom": 16}},
+        "blocks": [
+          {"id": "ig_search", "type": "input_group", "layout": "inline", "inputs": ["dir_search"]},
+          {"id": "bg_search", "type": "button_group", "align": "left", "gap": 8,
+            "buttons": [
+              {"id": "btn_search", "label": "Search directory", "variant": "primary", "icon": "search",
+                "on_click": {"kind": "navigate", "obj_type": "V", "obj_name": "ccw_business_directory"}}
+            ]}
+        ]
+      },
+      {
+        "id": "sec_links",
+        "anchorId": "quick_links",
+        "tag": "main",
+        "style": {"padding": {"top": 40, "bottom": 40}},
+        "blocks": [
+          {
+            "id": "fg_links", "type": "feature_grid", "eyebrow": "Quick links", "heading": "What would you like to do?",
+            "columns": 4, "iconStyle": "circle",
+            "animation": {"preset": "fade-up", "on": "scroll", "once": true, "stagger": 80},
+            "style": {"hover": {"translateY": -4, "shadow": "lg"}, "transition": 220},
+            "items": [
+              {"id": "fl_dir", "icon": "search", "title": "Business Directory", "description": "Find businesses and units across the complex.",
+                "on_click": {"kind": "navigate", "obj_type": "V", "obj_name": "ccw_business_directory"}},
+              {"id": "fl_notice", "icon": "bell", "title": "Notices", "description": "Latest announcements from management.",
+                "on_click": {"kind": "navigate", "obj_type": "V", "obj_name": "ccw_notice_board"}},
+              {"id": "fl_event", "icon": "calendar", "title": "Events", "description": "What is happening in the complex.",
+                "on_click": {"kind": "navigate", "obj_type": "V", "obj_name": "ccw_event_calendar"}},
+              {"id": "fl_query", "icon": "users", "title": "Raise a Business Query", "description": "Ask the community for a business service.",
+                "on_click": {"kind": "navigate", "obj_type": "T", "obj_name": "ccw_business_query"}},
+              {"id": "fl_guest", "icon": "user", "title": "Register a Guest", "description": "Pre-register a guest and get a pass code.",
+                "on_click": {"kind": "navigate", "obj_type": "T", "obj_name": "ccw_guest_entry"}},
+              {"id": "fl_fac", "icon": "wrench", "title": "Raise a Facility Request", "description": "Report a concern to the facility team.",
+                "on_click": {"kind": "navigate", "obj_type": "T", "obj_name": "ccw_facility_request"}},
+              {"id": "fl_prof", "icon": "building", "title": "My Profile", "description": "View or update your unit's profile.",
+                "on_click": {"kind": "navigate", "obj_type": "T", "obj_name": "ccw_member_profile"}},
+              {"id": "fl_banner", "icon": "image", "title": "Book a Banner", "description": "Advertise in the portal carousel.",
+                "on_click": {"kind": "navigate", "obj_type": "T", "obj_name": "ccw_banner_booking"}}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sec_mgmt",
+        "tag": "main",
+        "visibility": {"roles": ["management", "admin"]},
+        "style": {"padding": {"top": 0, "bottom": 32}},
+        "blocks": [
+          {
+            "id": "cg_mgmt", "type": "card_grid", "columns": 2, "gap": 16,
+            "cards": [
+              {"id": "cm_notice", "title": "Create Notice", "subtitle": "Management", "body": "Publish a notice to members and tenants.",
+                "cta": {"id": "cm_notice_c", "label": "Open Notices", "variant": "link",
+                  "on_click": {"kind": "navigate", "obj_type": "T", "obj_name": "ccw_notice"}}},
+              {"id": "cm_event", "title": "Create Event", "subtitle": "Management", "body": "Announce an event in the complex.",
+                "cta": {"id": "cm_event_c", "label": "Open Events", "variant": "link",
+                  "on_click": {"kind": "navigate", "obj_type": "T", "obj_name": "ccw_event"}}}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sec_feeds",
+        "tag": "main",
+        "style": {"padding": {"top": 32, "bottom": 40}},
+        "blocks": [
+          {
+            "id": "cols_feeds", "type": "columns", "count": 2, "gap": 24, "align": "top",
+            "columns": [
+              {"id": "col_notices", "blocks": [
+                {"id": "h_notices", "type": "heading", "level": 2, "text": "Latest Notices"},
+                {"id": "emb_notices", "type": "embed", "embed": {"obj_type": "V", "obj_name": "ccw_notice_board", "filters": []}}
+              ]},
+              {"id": "col_events", "blocks": [
+                {"id": "h_events", "type": "heading", "level": 2, "text": "Upcoming Events"},
+                {"id": "emb_events", "type": "embed", "embed": {"obj_type": "V", "obj_name": "ccw_event_calendar", "filters": []}}
+              ]}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sec_contacts",
+        "tag": "main",
+        "style": {"padding": {"top": 16, "bottom": 56}},
+        "blocks": [
+          {
+            "id": "co_contacts", "type": "callout", "variant": "info", "icon": "phone", "iconPosition": "left",
+            "title": "Facility desk and security contacts",
+            "body": "Facility Desk: contact number to be maintained by management. Security Desk (gate): contact number to be maintained by management."
+          }
+        ]
+      }
+    ],
+    "blocks": []
+  }
+}

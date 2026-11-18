@@ -1,0 +1,1335 @@
+{
+  "transaction": {
+    "obj_name": "ccw_business_query",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Business Query",
+          "form_descr": "A member or tenant asks the community for a business service",
+          "form_no": "1",
+          "main_table": "CCW_BUSINESS_QUERY",
+          "row_security": {
+            "rules": [
+              {
+                "column": "RAISED_BY_EMAIL",
+                "op": "in",
+                "sql": "SELECT :user_email AS e UNION SELECT q.raised_by_email FROM ccw_business_query q JOIN ccw_bq_recipient r ON r.query_no = q.query_no WHERE LOWER(r.recipient_email) = LOWER(:user_email)"
+              }
+            ],
+            "exempt_roles": [
+              "admin",
+              "func-admin",
+              "management"
+            ]
+          },
+          "columns": [
+            {
+              "column": {
+                "name": "query_no",
+                "db_name": "QUERY_NO",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Query No",
+                "descr": "Auto-generated query number",
+                "key": true,
+                "default_value": "auto_generate()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "query_date",
+                "db_name": "QUERY_DATE",
+                "group_name": "Basic",
+                "col_type": "DATE",
+                "heading": "Query Date",
+                "descr": "Date raised",
+                "default_value": "today()",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "target_business_category",
+                "db_name": "TARGET_BUSINESS_CATEGORY",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Business Category",
+                "descr": "Category of businesses the query is forwarded to (cannot change after first save)",
+                "mandatory": true,
+                "lookup": "CCW_BUSINESS_CATEGORY(CATEGORY_NAME, CATEGORY_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Category exists",
+                    "message": "Business category not found.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_BUSINESS_CATEGORY",
+                      "match_column": "CATEGORY_CODE"
+                    }
+                  },
+                  {
+                    "type": "business_logic",
+                    "name": "Category locked after first save",
+                    "error_code": "BQ_CAT_LOCK",
+                    "message": "Business category cannot be changed after the first save.",
+                    "business_logic": {
+                      "method": "check_query_category_unchanged",
+                      "description": "Category cannot change after first save",
+                      "spec": "If _action = 'edit', read the stored TARGET_BUSINESS_CATEGORY of CCW_BUSINESS_QUERY for the payload QUERY_NO and return {\"error\":\"Business category cannot be changed after the first save.\"} when the payload value differs. On 'add' return None."
+                    }
+                  }
+                ],
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "category_name",
+                "db_name": "CATEGORY_NAME",
+                "table_name": "CCW_BUSINESS_CATEGORY",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Category Name",
+                "descr": "Category name (from master)",
+                "protect": "1",
+                "inline_with": "TARGET_BUSINESS_CATEGORY",
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_display_name": "Business category master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "subject",
+                "db_name": "SUBJECT",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Subject",
+                "descr": "Short subject, e.g. Need a lawyer",
+                "mandatory": true,
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "200",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "description",
+                "db_name": "DESCRIPTION",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Description",
+                "descr": "What is needed",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "textarea"
+                },
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "1000",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "raised_by_email",
+                "db_name": "RAISED_BY_EMAIL",
+                "group_name": "Raised By",
+                "col_type": "VARCHAR",
+                "heading": "Raised By Email",
+                "descr": "Raiser email (defaults to the signed-in user)",
+                "default_value": ":user_email",
+                "mandatory": true,
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_OWNER",
+                  "match_table_col": "OWNER_EMAIL",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "raised_by_unit_no",
+                      "table_col": "UNIT_NO"
+                    },
+                    {
+                      "form_col": "raised_by_name",
+                      "table_col": "OWNER_NAME"
+                    }
+                  ]
+                },
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "raised_by_unit_no",
+                "db_name": "RAISED_BY_UNIT_NO",
+                "group_name": "Raised By",
+                "col_type": "VARCHAR",
+                "heading": "Raised By Unit",
+                "descr": "Unit of the raiser (defaults from the user's unit)",
+                "mandatory": true,
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Unit exists",
+                    "message": "Unit not found in Unit Master.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_UNIT_MASTER",
+                      "match_column": "UNIT_NO"
+                    }
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_PROFILE",
+                  "match_table_col": "UNIT_NO",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "raised_by_name",
+                      "table_col": "CONTACT_PERSON"
+                    }
+                  ]
+                },
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "raised_by_name",
+                "db_name": "RAISED_BY_NAME",
+                "group_name": "Raised By",
+                "col_type": "VARCHAR",
+                "heading": "Raised By Name",
+                "descr": "Name of the raiser",
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Closure",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Open / Closed; changed by Close and Reopen",
+                "default_value": "O",
+                "protect": "1",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "O",
+                      "display": "Open"
+                    },
+                    {
+                      "data": "C",
+                      "display": "Closed"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "O",
+                      "color": "green",
+                      "label": "Open"
+                    },
+                    {
+                      "when": "C",
+                      "color": "grey",
+                      "label": "Closed"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "closure_remark",
+                "db_name": "CLOSURE_REMARK",
+                "group_name": "Closure",
+                "col_type": "VARCHAR",
+                "heading": "Closure Remark",
+                "descr": "Filled by Close",
+                "protect": "1",
+                "x": "110",
+                "y": "110",
+                "col_id": "11",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "closed_on",
+                "db_name": "CLOSED_ON",
+                "group_name": "Closure",
+                "col_type": "DATETIME",
+                "heading": "Closed On",
+                "descr": "Filled by Close",
+                "protect": "1",
+                "x": "120",
+                "y": "120",
+                "col_id": "12",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Audit: added on",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "130",
+                "y": "130",
+                "col_id": "13",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Audit: added by",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "140",
+                "y": "140",
+                "col_id": "14",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added Terminal",
+                "descr": "Audit: added from",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "150",
+                "y": "150",
+                "col_id": "15",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Audit: changed on",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "160",
+                "y": "160",
+                "col_id": "16",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Audit: changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "170",
+                "y": "170",
+                "col_id": "17",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed Terminal",
+                "descr": "Audit: changed from",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "180",
+                "y": "180",
+                "col_id": "18",
+                "table_name": "CCW_BUSINESS_QUERY",
+                "table_display_name": "Business query",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_BUSINESS_QUERY",
+                  "main_table": true,
+                  "table_descr": "Business query"
+                },
+                {
+                  "table": "CCW_BUSINESS_CATEGORY",
+                  "main_table": false,
+                  "table_descr": "Business category master",
+                  "column": "CATEGORY_CODE",
+                  "join_table": "CCW_BUSINESS_QUERY",
+                  "join_column": "TARGET_BUSINESS_CATEGORY",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "list_view": {
+            "tabs": {
+              "column": "STATUS",
+              "values": [
+                "O",
+                "C"
+              ],
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          },
+          "validations": []
+        }
+      },
+      {
+        "sql_model": {
+          "form_title": "Recipients",
+          "form_descr": "Businesses the query was forwarded to (system generated)",
+          "form_no": "2",
+          "parent_form_no": "1",
+          "parent_key_col": "QUERY_NO",
+          "main_table": "CCW_BQ_RECIPIENT",
+          "lines_locked": true,
+          "display_in_group": "Recipients",
+          "columns": [
+            {
+              "column": {
+                "name": "query_no",
+                "db_name": "QUERY_NO",
+                "group_name": "Recipients",
+                "col_type": "VARCHAR",
+                "heading": "Query No",
+                "descr": "Parent query",
+                "key": true,
+                "hidden": 1,
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_BQ_RECIPIENT",
+                "table_display_name": "Query recipient",
+                "db_size": "10",
+                "width": 100,
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "line_no",
+                "db_name": "LINE_NO",
+                "group_name": "Recipients",
+                "col_type": "NUMBER",
+                "heading": "Line",
+                "descr": "Line number",
+                "key": true,
+                "default_value": "auto_generate_line_no()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_BQ_RECIPIENT",
+                "table_display_name": "Query recipient",
+                "db_size": "4",
+                "width": 50,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Recipients",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Recipient unit",
+                "mandatory": true,
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_PROFILE",
+                  "match_table_col": "UNIT_NO",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "business_name",
+                      "table_col": "BUSINESS_NAME"
+                    },
+                    {
+                      "form_col": "recipient_email",
+                      "table_col": "EMAIL"
+                    }
+                  ]
+                },
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_BQ_RECIPIENT",
+                "table_display_name": "Query recipient",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": ""
+              }
+            },
+            {
+              "column": {
+                "name": "business_name",
+                "db_name": "BUSINESS_NAME",
+                "group_name": "Recipients",
+                "col_type": "VARCHAR",
+                "heading": "Business Name",
+                "descr": "Business (owner profile or tenant company)",
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_BQ_RECIPIENT",
+                "table_display_name": "Query recipient",
+                "db_size": "150",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "recipient_email",
+                "db_name": "RECIPIENT_EMAIL",
+                "group_name": "Recipients",
+                "col_type": "VARCHAR",
+                "heading": "Recipient Email",
+                "descr": "Email the query was forwarded to",
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_BQ_RECIPIENT",
+                "table_display_name": "Query recipient",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "forwarded_on",
+                "db_name": "FORWARDED_ON",
+                "group_name": "Recipients",
+                "col_type": "DATETIME",
+                "heading": "Forwarded On",
+                "descr": "When the query was forwarded",
+                "default_value": "now()",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_BQ_RECIPIENT",
+                "table_display_name": "Query recipient",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "viewed",
+                "db_name": "VIEWED",
+                "group_name": "Recipients",
+                "col_type": "VARCHAR",
+                "heading": "Viewed",
+                "descr": "Whether the recipient has viewed it",
+                "default_value": "N",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "Y",
+                      "display": "Yes"
+                    },
+                    {
+                      "data": "N",
+                      "display": "No"
+                    }
+                  ]
+                },
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_BQ_RECIPIENT",
+                "table_display_name": "Query recipient",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Viewed is a listed value",
+                    "error_code": "VIEWED_LIST",
+                    "message": "Viewed must be one of: Y, N",
+                    "expression": "is_empty({form.viewed}) or in_list({form.viewed}, \"Y,N\")"
+                  }
+                ],
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_BQ_RECIPIENT",
+                  "main_table": true,
+                  "table_descr": "Query recipient"
+                },
+                {
+                  "table": "CCW_BUSINESS_QUERY",
+                  "main_table": false,
+                  "table_descr": "Parent query",
+                  "column": "QUERY_NO",
+                  "join_table": "CCW_BQ_RECIPIENT",
+                  "join_column": "QUERY_NO",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": []
+        }
+      },
+      {
+        "sql_model": {
+          "form_title": "Responses",
+          "form_descr": "Responses from recipients (added with the Add Response action)",
+          "form_no": "3",
+          "parent_form_no": "1",
+          "parent_key_col": "QUERY_NO",
+          "main_table": "CCW_BQ_RESPONSE",
+          "lines_locked": true,
+          "display_in_group": "Responses",
+          "columns": [
+            {
+              "column": {
+                "name": "query_no",
+                "db_name": "QUERY_NO",
+                "group_name": "Responses",
+                "col_type": "VARCHAR",
+                "heading": "Query No",
+                "descr": "Parent query",
+                "key": true,
+                "hidden": 1,
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_BQ_RESPONSE",
+                "table_display_name": "Query response",
+                "db_size": "10",
+                "width": 100,
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "line_no",
+                "db_name": "LINE_NO",
+                "group_name": "Responses",
+                "col_type": "NUMBER",
+                "heading": "Line",
+                "descr": "Line number",
+                "key": true,
+                "default_value": "auto_generate_line_no()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_BQ_RESPONSE",
+                "table_display_name": "Query response",
+                "db_size": "4",
+                "width": 50,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "response_date",
+                "db_name": "RESPONSE_DATE",
+                "group_name": "Responses",
+                "col_type": "DATETIME",
+                "heading": "Response Date",
+                "descr": "When responded",
+                "default_value": "now()",
+                "mandatory": true,
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_BQ_RESPONSE",
+                "table_display_name": "Query response",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "responder_unit_no",
+                "db_name": "RESPONDER_UNIT_NO",
+                "group_name": "Responses",
+                "col_type": "VARCHAR",
+                "heading": "Responder Unit",
+                "descr": "Unit of the responder",
+                "mandatory": true,
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_PROFILE",
+                  "match_table_col": "UNIT_NO",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "responder_business_name",
+                      "table_col": "BUSINESS_NAME"
+                    },
+                    {
+                      "form_col": "responder_contact_no",
+                      "table_col": "CONTACT_NO_1"
+                    }
+                  ]
+                },
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_BQ_RESPONSE",
+                "table_display_name": "Query response",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": ""
+              }
+            },
+            {
+              "column": {
+                "name": "responder_business_name",
+                "db_name": "RESPONDER_BUSINESS_NAME",
+                "group_name": "Responses",
+                "col_type": "VARCHAR",
+                "heading": "Responder Business",
+                "descr": "Business of the responder",
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_BQ_RESPONSE",
+                "table_display_name": "Query response",
+                "db_size": "150",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "response_text",
+                "db_name": "RESPONSE_TEXT",
+                "group_name": "Responses",
+                "col_type": "VARCHAR",
+                "heading": "Response",
+                "descr": "Response text",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "textarea"
+                },
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_BQ_RESPONSE",
+                "table_display_name": "Query response",
+                "db_size": "1000",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "responder_contact_no",
+                "db_name": "RESPONDER_CONTACT_NO",
+                "group_name": "Responses",
+                "col_type": "VARCHAR",
+                "heading": "Contact No",
+                "descr": "Responder contact (defaults from the responder's profile)",
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_BQ_RESPONSE",
+                "table_display_name": "Query response",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_BQ_RESPONSE",
+                  "main_table": true,
+                  "table_descr": "Query response"
+                },
+                {
+                  "table": "CCW_BUSINESS_QUERY",
+                  "main_table": false,
+                  "table_descr": "Parent query",
+                  "column": "QUERY_NO",
+                  "join_table": "CCW_BQ_RESPONSE",
+                  "join_column": "QUERY_NO",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": []
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Edit",
+        "handler": "system",
+        "system_op": "edit",
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Open only",
+            "message": "Only Open queries can be edited.",
+            "expression": "{form.status} == \"O\""
+          },
+          {
+            "type": "business_logic",
+            "name": "Raiser only",
+            "message": "Only the raiser can edit this query.",
+            "business_logic": {
+              "method": "check_query_raiser_or_mgmt",
+              "description": "Raiser (or management where stated) check",
+              "spec": "Return {\"error\":\"Only the raiser can edit this query.\"} unless the signed-in user's email equals RAISED_BY_EMAIL (case-insensitive) of CCW_BUSINESS_QUERY for QUERY_NO. Management is NOT allowed for Edit."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "business_logic",
+            "name": "No responses; raiser or management",
+            "message": "Only the raiser or management can delete a query, and only when it has no responses.",
+            "business_logic": {
+              "method": "check_query_deletable",
+              "description": "Delete guard",
+              "spec": "Return an error if any row exists in CCW_BQ_RESPONSE for the QUERY_NO ('A query with responses cannot be deleted'). Also return an error unless the signed-in user's email equals RAISED_BY_EMAIL (case-insensitive) or the user holds a management/admin role."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Add Response",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "capture": {
+          "mode": "text",
+          "prompt": "Enter your response (include how to reach you)",
+          "field": "RESPONSE_TEXT"
+        },
+        "business_logic": {
+          "method": "add_query_response",
+          "description": "Add a response to the query and notify the raiser",
+          "spec": "Read RESPONSE_TEXT from the payload (error if blank). Refuse with an error if CCW_BUSINESS_QUERY.STATUS for QUERY_NO is 'C' ('A closed query accepts no further responses'). Identify the responder by the signed-in user's email: allowed only if it equals RAISED_BY_EMAIL, or matches CCW_BQ_RECIPIENT.RECIPIENT_EMAIL for the QUERY_NO (case-insensitive); otherwise error 'Only recipients and the raiser can respond'. Determine RESPONDER_UNIT_NO from the matching recipient row (or RAISED_BY_UNIT_NO for the raiser); set RESPONDER_BUSINESS_NAME and RESPONDER_CONTACT_NO (CONTACT_NO_1) from CCW_MEMBER_PROFILE for that unit, or from CCW_TENANT_PROFILE (TENANT_COMPANY_NAME, CONTACT_NO_1) when the recipient is the active tenant. Insert a CCW_BQ_RESPONSE row with next LINE_NO for the QUERY_NO, RESPONSE_DATE = now. Mark the responder's CCW_BQ_RECIPIENT row VIEWED='Y'. Send an in-app notification and email to RAISED_BY_EMAIL with the response text and responder contact details. Return {\"message\":\"Response added\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Open",
+            "message": "A closed query accepts no further responses.",
+            "expression": "{form.status} == \"O\""
+          }
+        ],
+        "visible_when": "{form.status} == \"O\""
+      },
+      {
+        "name": "Close",
+        "handler": "message",
+        "scope": "row",
+        "capture": {
+          "mode": "text",
+          "prompt": "Closure remark",
+          "field": "CLOSURE_REMARK"
+        },
+        "business_logic": {
+          "method": "close_query",
+          "description": "Close the query",
+          "spec": "Allowed only to the raiser (signed-in email equals RAISED_BY_EMAIL, case-insensitive) or a management/admin role; otherwise error. Refuse unless STATUS='O'. Set STATUS='C', CLOSURE_REMARK from the payload, CLOSED_ON = now on CCW_BUSINESS_QUERY. Return {\"message\":\"Query closed\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Open",
+            "message": "Only Open queries can be closed.",
+            "expression": "{form.status} == \"O\""
+          }
+        ],
+        "visible_when": "{form.status} == \"O\"",
+        "confirmation": {
+          "mode": "reconfirm",
+          "message": "Close query {form.query_no}? No further responses will be accepted."
+        }
+      },
+      {
+        "name": "Reopen",
+        "handler": "message",
+        "scope": "row",
+        "business_logic": {
+          "method": "reopen_query",
+          "description": "Reopen a closed query",
+          "spec": "Allowed only to the raiser (signed-in email equals RAISED_BY_EMAIL, case-insensitive) or a management/admin role; otherwise error. Refuse unless STATUS='C'. Set STATUS='O', CLOSURE_REMARK=NULL and CLOSED_ON=NULL on CCW_BUSINESS_QUERY. Return {\"message\":\"Query reopened\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Closed",
+            "message": "Only Closed queries can be reopened.",
+            "expression": "{form.status} == \"C\""
+          }
+        ],
+        "visible_when": "{form.status} == \"C\""
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [
+      {
+        "mode": "business_logic",
+        "business_logic": {
+          "method": "generate_query_recipients",
+          "description": "Generate recipients on first save",
+          "spec": "Run only when action = 'add' (first save). From CCW_MEMBER_PROFILE where PROFILE_STATUS='A', SHOW_IN_DIRECTORY='Y' and BUSINESS_CATEGORY equals header TARGET_BUSINESS_CATEGORY, excluding UNIT_NO = header RAISED_BY_UNIT_NO, choose one recipient per unit: if OCCUPANCY_TYPE='O' (Owner Used) use the profile itself (BUSINESS_NAME, EMAIL as RECIPIENT_EMAIL); if OCCUPANCY_TYPE='R' (Given on Rent) use the tenant from CCW_TENANT_PROFILE for that UNIT_NO only when TENANT_STATUS='A', LOGIN_ENABLED='Y', SHOW_IN_DIRECTORY='Y' and the profile's SHOW_TENANT_IN_DIRECTORY='Y' and TENANT_LOGIN_ALLOWED='Y' (TENANT_COMPANY_NAME as BUSINESS_NAME, TENANT_EMAIL as RECIPIENT_EMAIL); otherwise skip the unit (a rented unit whose tenant is not shown falls back to the owner profile per the directory rule: use the owner profile). Insert rows into CCW_BQ_RECIPIENT (QUERY_NO = header QUERY_NO, LINE_NO numbered from 1, UNIT_NO, BUSINESS_NAME, RECIPIENT_EMAIL, FORWARDED_ON = now, VIEWED='N') inside the save transaction. If no recipient is found return {\"warnings\":[{\"message\":\"No businesses found in this category; the query is saved without recipients.\"}]} and still save."
+        }
+      }
+    ],
+    "post_commit": [
+      {
+        "mode": "business_logic",
+        "business_logic": {
+          "method": "notify_query_recipients",
+          "description": "Email and notify recipients on first save",
+          "spec": "Run only when action = 'add'. For every CCW_BQ_RECIPIENT row of the saved QUERY_NO, create an in-app notification and send an email containing SUBJECT, DESCRIPTION and the raiser's contact details (RAISED_BY_NAME, RAISED_BY_UNIT_NO, RAISED_BY_EMAIL, and the raiser's CCW_MEMBER_PROFILE.CONTACT_NO_1). Failures must not affect the save."
+        }
+      }
+    ],
+    "attach_docs": [],
+    "follow_up_actions": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "table_name": "CCW_FACILITY_TEAM_MEMBER",
+  "objects": [
+    {
+      "object_name": "ccw_facility_team_member_master",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "CHG_USER",
+        "SPECIALISATION",
+        "ADD_TERM",
+        "ADD_USER",
+        "EMAIL",
+        "STAFF_CODE",
+        "CHG_TERM",
+        "ADD_DATE",
+        "CHG_DATE",
+        "MOBILE_NO",
+        "STATUS",
+        "ROLE",
+        "STAFF_NAME"
+      ],
+      "join_info": {
+        "column": "SPECIALISATION",
+        "join_table": "CCW_FACILITY_REQ_CATEGORY",
+        "join_column": "REQUEST_CATEGORY_CODE"
+      }
+    },
+    {
+      "object_name": "ccw_facility_request",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "STAFF_CODE",
+        "STAFF_NAME"
+      ],
+      "join_info": {
+        "column": "STAFF_CODE",
+        "join_table": "CCW_FACILITY_REQUEST",
+        "join_column": "ASSIGNED_TO"
+      }
+    }
+  ]
+}

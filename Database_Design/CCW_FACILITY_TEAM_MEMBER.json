@@ -1,0 +1,145 @@
+{
+  "table_name": "CCW_FACILITY_TEAM_MEMBER",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "STAFF_CODE",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Unique staff code",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "STAFF_NAME",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Full name",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "ROLE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Facility Staff / Security Guard / Supervisor",
+      "sequence": 3,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "F",
+          "label": "Facility Staff"
+        },
+        {
+          "value": "G",
+          "label": "Security Guard"
+        },
+        {
+          "value": "S",
+          "label": "Supervisor"
+        }
+      ]
+    },
+    {
+      "column_name": "MOBILE_NO",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Mobile number",
+      "sequence": 4,
+      "mandatory": true
+    },
+    {
+      "column_name": "EMAIL",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Email address",
+      "sequence": 5
+    },
+    {
+      "column_name": "SPECIALISATION",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Facility request category the person specialises in (optional)",
+      "sequence": 6,
+      "lookup": {
+        "table": "CCW_FACILITY_REQ_CATEGORY",
+        "display_column": "NAME",
+        "value_column": "REQUEST_CATEGORY_CODE"
+      }
+    },
+    {
+      "column_name": "STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Active or Inactive",
+      "sequence": 7,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Active"
+        },
+        {
+          "value": "I",
+          "label": "Inactive"
+        }
+      ]
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Created date",
+      "sequence": 8
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Created by",
+      "sequence": 9
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Created from terminal",
+      "sequence": 10
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Last change date",
+      "sequence": 11
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Last changed by",
+      "sequence": 12
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Last changed from terminal",
+      "sequence": 13
+    }
+  ]
+}

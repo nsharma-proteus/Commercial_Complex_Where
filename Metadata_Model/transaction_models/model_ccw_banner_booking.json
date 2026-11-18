@@ -1,0 +1,1563 @@
+{
+  "transaction": {
+    "obj_name": "ccw_banner_booking",
+    "unit_test": {
+      "sample": {
+        "advertiser_type": "E",
+        "advertiser_name": "Test Advertiser",
+        "contact_no": "9999999999",
+        "email": "test@example.com",
+        "banner_title": "Test Banner",
+        "banner_image": "banner.png",
+        "start_date": "2030-01-01",
+        "no_of_months": 1
+      }
+    },
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Banner Booking",
+          "form_descr": "Book, approve, invoice and record payment for banner slots",
+          "form_no": "1",
+          "main_table": "CCW_BANNER_BOOKING",
+          "row_security": {
+            "rules": [
+              {
+                "column": "ADD_USER",
+                "source": "short_user_id"
+              }
+            ],
+            "exempt_roles": [
+              "admin",
+              "func-admin",
+              "management"
+            ]
+          },
+          "open_groups": [
+            "Booking",
+            "Billing"
+          ],
+          "columns": [
+            {
+              "column": {
+                "name": "booking_no",
+                "db_name": "BOOKING_NO",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Booking No",
+                "descr": "Auto-generated booking number",
+                "key": true,
+                "default_value": "auto_generate()",
+                "protect": "1",
+                "mandatory": true,
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "booking_date",
+                "db_name": "BOOKING_DATE",
+                "group_name": "Booking",
+                "col_type": "DATE",
+                "heading": "Booking Date",
+                "descr": "Date of booking",
+                "default_value": "today()",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "advertiser_type",
+                "db_name": "ADVERTISER_TYPE",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Advertiser Type",
+                "descr": "Member / Tenant / External",
+                "default_value": "M",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "M",
+                      "display": "Member"
+                    },
+                    {
+                      "data": "T",
+                      "display": "Tenant"
+                    },
+                    {
+                      "data": "E",
+                      "display": "External"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Advertiser type is a listed value",
+                    "error_code": "ADV_TYPE",
+                    "message": "Advertiser type must be M, T or E.",
+                    "expression": "in_list({form.advertiser_type}, \"M,T,E\")"
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "fill": [
+                    {
+                      "form_col": "unit_no",
+                      "expr": "iif({form.advertiser_type} == \"E\", \"\", {form.unit_no})"
+                    }
+                  ],
+                  "protect": [
+                    {
+                      "form_col": "unit_no",
+                      "when": "{form.advertiser_type} == \"E\""
+                    }
+                  ]
+                },
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "unit_no",
+                "db_name": "UNIT_NO",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Unit No",
+                "descr": "Unit of the advertiser (mandatory for Member and Tenant)",
+                "lookup": "CCW_UNIT_MASTER(UNIT_NO, UNIT_NO)",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Unit exists",
+                    "message": "Unit not found in Unit Master.",
+                    "builtin": {
+                      "kind": "must_exist_in_master",
+                      "table": "CCW_UNIT_MASTER",
+                      "match_column": "UNIT_NO"
+                    }
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_MEMBER_PROFILE",
+                  "match_table_col": "UNIT_NO",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "advertiser_name",
+                      "table_col": "BUSINESS_NAME"
+                    },
+                    {
+                      "form_col": "contact_no",
+                      "table_col": "CONTACT_NO_1"
+                    },
+                    {
+                      "form_col": "email",
+                      "table_col": "EMAIL"
+                    }
+                  ]
+                },
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": ""
+              }
+            },
+            {
+              "column": {
+                "name": "advertiser_name",
+                "db_name": "ADVERTISER_NAME",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Advertiser Name",
+                "descr": "Advertiser name",
+                "mandatory": true,
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "150",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "contact_no",
+                "db_name": "CONTACT_NO",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Contact No",
+                "descr": "Advertiser contact number",
+                "mandatory": true,
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "email",
+                "db_name": "EMAIL",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Email",
+                "descr": "Advertiser email",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid email",
+                    "error_code": "BB_EMAIL",
+                    "message": "Enter a valid email address.",
+                    "expression": "match({form.email}, \"^[^@ ]+@[^@ ]+\\\\.[^@ ]+$\")"
+                  }
+                ],
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "banner_title",
+                "db_name": "BANNER_TITLE",
+                "group_name": "Banner",
+                "col_type": "VARCHAR",
+                "heading": "Banner Title",
+                "descr": "Title shown on the banner",
+                "mandatory": true,
+                "x": "100",
+                "y": "100",
+                "col_id": "8",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "150",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "banner_image",
+                "db_name": "BANNER_IMAGE",
+                "group_name": "Banner",
+                "col_type": "VARCHAR",
+                "heading": "Banner Image",
+                "descr": "Banner image (see the plan's image size guidance)",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "image"
+                },
+                "x": "110",
+                "y": "110",
+                "col_id": "9",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "click_url",
+                "db_name": "CLICK_URL",
+                "group_name": "Banner",
+                "col_type": "VARCHAR",
+                "heading": "Click URL",
+                "descr": "Web address opened when the banner is clicked",
+                "edit_mask": {
+                  "mask": "url"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid web address",
+                    "error_code": "BB_URL",
+                    "message": "Click URL must be a valid web address starting with http:// or https://.",
+                    "expression": "is_empty({form.click_url}) or match({form.click_url}, \"^https?://[^ ]+\\\\.[^ ]+$\")"
+                  }
+                ],
+                "x": "120",
+                "y": "120",
+                "col_id": "10",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "start_date",
+                "db_name": "START_DATE",
+                "group_name": "Banner",
+                "col_type": "DATE",
+                "heading": "Start Date",
+                "descr": "First day of the banner period (not in the past)",
+                "mandatory": true,
+                "x": "130",
+                "y": "130",
+                "col_id": "11",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "no_of_months",
+                "db_name": "NO_OF_MONTHS",
+                "group_name": "Banner",
+                "col_type": "NUMBER",
+                "heading": "No of Months",
+                "descr": "Whole number of months, at least the plan's minimum",
+                "mandatory": true,
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Whole number of months",
+                    "error_code": "BB_MONTHS",
+                    "message": "No of months must be a whole number of at least 1.",
+                    "expression": "{form.no_of_months} >= 1 and {form.no_of_months} == int({form.no_of_months})"
+                  },
+                  {
+                    "type": "builtin",
+                    "name": "At least plan minimum",
+                    "error_code": "BB_MINMONTHS",
+                    "message": "No of months is below the minimum months of the active rate plan.",
+                    "builtin": {
+                      "kind": "sql_range",
+                      "sql": "SELECT CASE WHEN {form.no_of_months} >= MIN_MONTHS THEN 1 ELSE 0 END FROM CCW_BANNER_RATE_PLAN_MASTER WHERE STATUS = 'A'",
+                      "range_min": {
+                        "source": "const",
+                        "value": "1"
+                      },
+                      "on_no_row": "pass",
+                      "on_error": "pass"
+                    }
+                  }
+                ],
+                "item_change": {
+                  "mode": "rule",
+                  "source_table": "CCW_BANNER_RATE_PLAN_MASTER",
+                  "match_mode": "advanced",
+                  "where_sql": "STATUS = 'A'",
+                  "on_no_match": "leave",
+                  "fill": [
+                    {
+                      "form_col": "rate_per_month",
+                      "table_col": "RATE_PER_SLOT_PER_MONTH"
+                    },
+                    {
+                      "form_col": "tax_pct",
+                      "table_col": "TAX_PCT"
+                    },
+                    {
+                      "form_col": "amount",
+                      "expr": "round({form.no_of_months} * {form.rate_per_month}, 2)"
+                    },
+                    {
+                      "form_col": "tax_amount",
+                      "expr": "round({form.no_of_months} * {form.rate_per_month} * {form.tax_pct} / 100, 2)"
+                    },
+                    {
+                      "form_col": "total_amount",
+                      "expr": "round({form.no_of_months} * {form.rate_per_month}, 2) + round({form.no_of_months} * {form.rate_per_month} * {form.tax_pct} / 100, 2)"
+                    }
+                  ]
+                },
+                "x": "140",
+                "y": "140",
+                "col_id": "12",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "3",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "end_date",
+                "group_name": "Banner",
+                "col_type": "DATE",
+                "heading": "End Date",
+                "descr": "Calculated: start date + no of months - 1 day",
+                "protect": "1",
+                "sql_expression": "CAST({CCW_BANNER_BOOKING}.start_date + CAST({CCW_BANNER_BOOKING}.no_of_months AS integer) * INTERVAL '1 month' - INTERVAL '1 day' AS DATE)",
+                "x": "150",
+                "y": "150",
+                "col_id": "13",
+                "db_name": "end_date",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "display_state",
+                "group_name": "Banner",
+                "col_type": "VARCHAR",
+                "heading": "Display State",
+                "descr": "Derived: Live only when Approved, Paid and today is within start/end; Scheduled before start; Ended after end",
+                "protect": "1",
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "Live",
+                      "color": "green"
+                    },
+                    {
+                      "when": "Scheduled",
+                      "color": "blue"
+                    },
+                    {
+                      "when": "Ended",
+                      "color": "grey"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "sql_expression": "CASE WHEN {CCW_BANNER_BOOKING}.booking_status <> 'A' THEN NULL WHEN CURRENT_DATE > CAST({CCW_BANNER_BOOKING}.start_date + CAST({CCW_BANNER_BOOKING}.no_of_months AS integer) * INTERVAL '1 month' - INTERVAL '1 day' AS DATE) THEN 'Ended' WHEN CURRENT_DATE < {CCW_BANNER_BOOKING}.start_date THEN 'Scheduled' WHEN {CCW_BANNER_BOOKING}.payment_status = 'P' THEN 'Live' ELSE 'Scheduled' END",
+                "x": "160",
+                "y": "160",
+                "col_id": "14",
+                "db_name": "display_state",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "booking_status",
+                "db_name": "BOOKING_STATUS",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Booking Status",
+                "descr": "Requested / Approved / Rejected / Cancelled; changed by actions",
+                "default_value": "R",
+                "protect": "1",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "R",
+                      "display": "Requested"
+                    },
+                    {
+                      "data": "A",
+                      "display": "Approved"
+                    },
+                    {
+                      "data": "J",
+                      "display": "Rejected"
+                    },
+                    {
+                      "data": "C",
+                      "display": "Cancelled"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "R",
+                      "color": "yellow",
+                      "label": "Requested"
+                    },
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Approved"
+                    },
+                    {
+                      "when": "J",
+                      "color": "red",
+                      "label": "Rejected"
+                    },
+                    {
+                      "when": "C",
+                      "color": "grey",
+                      "label": "Cancelled"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "item_change": {
+                  "mode": "rule",
+                  "protect": [
+                    {
+                      "form_col": "advertiser_type",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "unit_no",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "advertiser_name",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "contact_no",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "email",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "banner_title",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "banner_image",
+                      "when": "{form.booking_status} != \"R\" and {form.booking_status} != \"A\""
+                    },
+                    {
+                      "form_col": "click_url",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "start_date",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "no_of_months",
+                      "when": "{form.booking_status} != \"R\""
+                    },
+                    {
+                      "form_col": "payment_mode",
+                      "when": "{form.booking_status} != \"A\" or {form.payment_status} == \"P\""
+                    },
+                    {
+                      "form_col": "payment_reference",
+                      "when": "{form.booking_status} != \"A\" or {form.payment_status} == \"P\""
+                    },
+                    {
+                      "form_col": "payment_date",
+                      "when": "{form.booking_status} != \"A\" or {form.payment_status} == \"P\""
+                    },
+                    {
+                      "form_col": "received_by",
+                      "when": "{form.booking_status} != \"A\" or {form.payment_status} == \"P\""
+                    }
+                  ]
+                },
+                "x": "80",
+                "y": "80",
+                "col_id": "15",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "rejection_reason",
+                "db_name": "REJECTION_REASON",
+                "group_name": "Booking",
+                "col_type": "VARCHAR",
+                "heading": "Rejection Reason",
+                "descr": "Filled by Reject",
+                "protect": "1",
+                "x": "90",
+                "y": "90",
+                "col_id": "16",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "500",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "rate_per_month",
+                "db_name": "RATE_PER_MONTH",
+                "group_name": "Billing",
+                "col_type": "NUMBER",
+                "heading": "Rate per Month",
+                "descr": "Defaults from the Active Banner Rate Plan (RATE_PER_SLOT_PER_MONTH)",
+                "protect": "1",
+                "item_change": {
+                  "mode": "rule",
+                  "fill": [
+                    {
+                      "form_col": "amount",
+                      "expr": "round({form.no_of_months} * {form.rate_per_month}, 2)"
+                    },
+                    {
+                      "form_col": "tax_amount",
+                      "expr": "round({form.no_of_months} * {form.rate_per_month} * {form.tax_pct} / 100, 2)"
+                    },
+                    {
+                      "form_col": "total_amount",
+                      "expr": "round({form.no_of_months} * {form.rate_per_month}, 2) + round({form.no_of_months} * {form.rate_per_month} * {form.tax_pct} / 100, 2)"
+                    }
+                  ]
+                },
+                "x": "170",
+                "y": "170",
+                "col_id": "17",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "12,2",
+                "width": 130,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "amount",
+                "db_name": "AMOUNT",
+                "group_name": "Billing",
+                "col_type": "NUMBER",
+                "heading": "Amount",
+                "descr": "RATE_PER_MONTH x NO_OF_MONTHS",
+                "protect": "1",
+                "x": "180",
+                "y": "180",
+                "col_id": "18",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "14,2",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "tax_pct",
+                "db_name": "TAX_PCT",
+                "group_name": "Billing",
+                "col_type": "NUMBER",
+                "heading": "Tax %",
+                "descr": "From the Active Banner Rate Plan",
+                "protect": "1",
+                "x": "190",
+                "y": "190",
+                "col_id": "19",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "5,2",
+                "width": 60,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "tax_amount",
+                "db_name": "TAX_AMOUNT",
+                "group_name": "Billing",
+                "col_type": "NUMBER",
+                "heading": "Tax Amount",
+                "descr": "AMOUNT x TAX_PCT / 100",
+                "protect": "1",
+                "x": "200",
+                "y": "200",
+                "col_id": "20",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "14,2",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "total_amount",
+                "db_name": "TOTAL_AMOUNT",
+                "group_name": "Billing",
+                "col_type": "NUMBER",
+                "heading": "Total Amount",
+                "descr": "AMOUNT + TAX_AMOUNT",
+                "protect": "1",
+                "x": "210",
+                "y": "210",
+                "col_id": "21",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "14,2",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "invoice_no",
+                "db_name": "INVOICE_NO",
+                "group_name": "Billing",
+                "col_type": "VARCHAR",
+                "heading": "Invoice No",
+                "descr": "Generated on Approve",
+                "protect": "1",
+                "x": "220",
+                "y": "220",
+                "col_id": "22",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "20",
+                "width": 200,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "invoice_date",
+                "db_name": "INVOICE_DATE",
+                "group_name": "Billing",
+                "col_type": "DATE",
+                "heading": "Invoice Date",
+                "descr": "Generated on Approve",
+                "protect": "1",
+                "x": "230",
+                "y": "230",
+                "col_id": "23",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "payment_status",
+                "db_name": "PAYMENT_STATUS",
+                "group_name": "Payment",
+                "col_type": "VARCHAR",
+                "heading": "Payment Status",
+                "descr": "Unpaid / Paid; set by Record Payment",
+                "default_value": "U",
+                "protect": "1",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "U",
+                      "display": "Unpaid"
+                    },
+                    {
+                      "data": "P",
+                      "display": "Paid"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "U",
+                      "color": "amber",
+                      "label": "Unpaid"
+                    },
+                    {
+                      "when": "P",
+                      "color": "green",
+                      "label": "Paid"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "x": "240",
+                "y": "240",
+                "col_id": "24",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "payment_mode",
+                "db_name": "PAYMENT_MODE",
+                "group_name": "Payment",
+                "col_type": "VARCHAR",
+                "heading": "Payment Mode",
+                "descr": "Cash / Cheque / Bank Transfer / UPI",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "C",
+                      "display": "Cash"
+                    },
+                    {
+                      "data": "Q",
+                      "display": "Cheque"
+                    },
+                    {
+                      "data": "B",
+                      "display": "Bank Transfer"
+                    },
+                    {
+                      "data": "U",
+                      "display": "UPI"
+                    }
+                  ]
+                },
+                "x": "250",
+                "y": "250",
+                "col_id": "25",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "protect": "",
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Payment Mode is a listed value",
+                    "error_code": "PAYMENT_MODE_LIST",
+                    "message": "Payment Mode must be one of: C, Q, B, U",
+                    "expression": "is_empty({form.payment_mode}) or in_list({form.payment_mode}, \"C,Q,B,U\")"
+                  }
+                ],
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "payment_reference",
+                "db_name": "PAYMENT_REFERENCE",
+                "group_name": "Payment",
+                "col_type": "VARCHAR",
+                "heading": "Payment Reference",
+                "descr": "Cheque no / transaction reference",
+                "x": "260",
+                "y": "260",
+                "col_id": "26",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "payment_date",
+                "db_name": "PAYMENT_DATE",
+                "group_name": "Payment",
+                "col_type": "DATE",
+                "heading": "Payment Date",
+                "descr": "Date payment received",
+                "x": "270",
+                "y": "270",
+                "col_id": "27",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "received_by",
+                "db_name": "RECEIVED_BY",
+                "group_name": "Payment",
+                "col_type": "VARCHAR",
+                "heading": "Received By",
+                "descr": "Management user who received the payment",
+                "default_value": ":user_email",
+                "x": "280",
+                "y": "280",
+                "col_id": "28",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Audit: added on",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "290",
+                "y": "290",
+                "col_id": "29",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Audit: added by (also scopes member/tenant visibility)",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "300",
+                "y": "300",
+                "col_id": "30",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added Terminal",
+                "descr": "Audit: added from",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "310",
+                "y": "310",
+                "col_id": "31",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Audit: changed on",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "320",
+                "y": "320",
+                "col_id": "32",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Audit: changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "330",
+                "y": "330",
+                "col_id": "33",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed Terminal",
+                "descr": "Audit: changed from",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "340",
+                "y": "340",
+                "col_id": "34",
+                "table_name": "CCW_BANNER_BOOKING",
+                "table_display_name": "Banner booking",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_BANNER_BOOKING",
+                  "main_table": true,
+                  "table_descr": "Banner booking"
+                }
+              ]
+            }
+          },
+          "list_view": {
+            "tabs": {
+              "column": "BOOKING_STATUS",
+              "values": [
+                "R",
+                "A",
+                "J",
+                "C"
+              ],
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          },
+          "validations": [
+            {
+              "type": "expression",
+              "name": "Unit needed for Member/Tenant",
+              "error_code": "BB_UNIT",
+              "message": "Unit No is mandatory for Member and Tenant advertisers.",
+              "expression": "{form.advertiser_type} == \"E\" or not_empty({form.unit_no})"
+            },
+            {
+              "type": "expression",
+              "name": "Start date not in the past",
+              "error_code": "BB_START",
+              "message": "Start date cannot be in the past.",
+              "expression": "{form.booking_status} != \"R\" or {form.start_date} >= today()"
+            },
+            {
+              "type": "business_logic",
+              "name": "Edit rules after approval",
+              "error_code": "BB_EDITLOCK",
+              "message": "After approval only the payment fields can be edited.",
+              "business_logic": {
+                "method": "validate_booking_edit",
+                "description": "Post-approval edit guard",
+                "spec": "Only when _action = 'edit': read the stored CCW_BANNER_BOOKING row for BOOKING_NO. If stored BOOKING_STATUS <> 'R', return an error when any of ADVERTISER_TYPE, UNIT_NO, ADVERTISER_NAME, CONTACT_NO, EMAIL, BANNER_TITLE, BANNER_IMAGE, CLICK_URL, START_DATE, NO_OF_MONTHS, RATE_PER_MONTH, AMOUNT, TAX_PCT, TAX_AMOUNT, TOTAL_AMOUNT differs from the stored value ('After approval only the payment fields can be edited'). If stored BOOKING_STATUS is not 'A' or PAYMENT_STATUS = 'P', also refuse changes to PAYMENT_MODE, PAYMENT_REFERENCE, PAYMENT_DATE, RECEIVED_BY. Also refuse any change to BOOKING_STATUS, PAYMENT_STATUS, INVOICE_NO, INVOICE_DATE, REJECTION_REASON through the form (they change only through actions). Return None when valid."
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Delete",
+        "handler": "system",
+        "system_op": "delete",
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Requested only",
+            "message": "Only Requested bookings can be deleted.",
+            "expression": "{form.booking_status} == \"R\""
+          }
+        ]
+      },
+      {
+        "name": "Approve",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "business_logic": {
+          "method": "approve_booking",
+          "description": "Approve the booking, check capacity and generate the invoice",
+          "spec": "Management only. Refuse unless BOOKING_STATUS='R'. Compute the period: START_DATE to END_DATE = START_DATE + NO_OF_MONTHS months - 1 day. Read MAX_CAROUSEL_SLOTS from the Active plan in CCW_BANNER_RATE_PLAN_MASTER (STATUS='A'; error if none). For every day D of the period count CCW_BANNER_BOOKING rows with BOOKING_STATUS='A' whose own period (start_date to start_date + no_of_months months - 1 day) covers D; the booked count must stay below MAX_CAROUSEL_SLOTS on every day (i.e. existing approved count + this booking <= MAX_CAROUSEL_SLOTS). If any day is full, block approval with an error stating the next available start date: the first date on/after START_DATE from which a period of NO_OF_MONTHS months has fewer approved bookings than MAX_CAROUSEL_SLOTS on every day. On success set BOOKING_STATUS='A', generate a unique INVOICE_NO (e.g. 'BNR/' + financial year + '/' + zero-padded running serial) and INVOICE_DATE = today, then email the advertiser (EMAIL) the invoice details (invoice no, date, period, amount, tax, total). Return {\"message\":\"Booking approved; invoice <INVOICE_NO> raised\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Requested",
+            "message": "Only Requested bookings can be approved.",
+            "expression": "{form.booking_status} == \"R\""
+          }
+        ],
+        "visible_when": "{form.booking_status} == \"R\"",
+        "confirmation": {
+          "mode": "reconfirm",
+          "message": "Approve booking {form.booking_no} and raise the invoice?"
+        }
+      },
+      {
+        "name": "Reject",
+        "handler": "message",
+        "scope": "row",
+        "capture": {
+          "mode": "text",
+          "prompt": "Reason for rejection",
+          "field": "REJECTION_REASON"
+        },
+        "business_logic": {
+          "method": "reject_booking",
+          "description": "Reject the booking",
+          "spec": "Management only. Refuse unless BOOKING_STATUS='R'. Require a non-blank REJECTION_REASON from the payload. Set BOOKING_STATUS='J' and store REJECTION_REASON on CCW_BANNER_BOOKING; notify the advertiser (EMAIL) with the reason. Return {\"message\":\"Booking rejected\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Requested",
+            "message": "Only Requested bookings can be rejected.",
+            "expression": "{form.booking_status} == \"R\""
+          }
+        ],
+        "visible_when": "{form.booking_status} == \"R\""
+      },
+      {
+        "name": "Cancel",
+        "handler": "message",
+        "scope": "row",
+        "business_logic": {
+          "method": "cancel_booking",
+          "description": "Cancel the booking before its start date",
+          "spec": "Allowed for the booking's owner (ADD_USER) or management. Refuse unless BOOKING_STATUS is 'R' or 'A' and START_DATE is after today ('Cancel is allowed before the start date'). Set BOOKING_STATUS='C'. Refunds are settled outside the system; if PAYMENT_STATUS='P' include that note in the returned message. Return {\"message\":\"Booking cancelled\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Requested or Approved",
+            "message": "Only Requested or Approved bookings can be cancelled.",
+            "expression": "in_list({form.booking_status}, \"R,A\")"
+          },
+          {
+            "type": "expression",
+            "name": "Before start date",
+            "message": "A booking can be cancelled only before its start date.",
+            "expression": "{form.start_date} > today()"
+          }
+        ],
+        "visible_when": "in_list({form.booking_status}, \"R,A\")",
+        "confirmation": {
+          "mode": "reconfirm",
+          "message": "Cancel booking {form.booking_no}?"
+        }
+      },
+      {
+        "name": "Record Payment",
+        "handler": "message",
+        "scope": "row",
+        "placement": "bar",
+        "business_logic": {
+          "method": "record_booking_payment",
+          "description": "Record payment and make the banner eligible for the carousel",
+          "spec": "Management only. Refuse unless BOOKING_STATUS='A' and PAYMENT_STATUS='U' ('A booking can be recorded as Paid only after Approval'). Require PAYMENT_MODE, PAYMENT_REFERENCE and PAYMENT_DATE (not in the future) on the saved record; default RECEIVED_BY to the signed-in user's email when blank. Set PAYMENT_STATUS='P' on CCW_BANNER_BOOKING. The banner is then eligible for the carousel (Live when today is within START_DATE..END_DATE). Notify the advertiser (EMAIL) that payment was received. Return {\"message\":\"Payment recorded\"}."
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Must be Approved",
+            "message": "Payment can be recorded only after approval.",
+            "expression": "{form.booking_status} == \"A\""
+          },
+          {
+            "type": "expression",
+            "name": "Must be Unpaid",
+            "message": "This booking is already Paid.",
+            "expression": "{form.payment_status} == \"U\""
+          },
+          {
+            "type": "expression",
+            "name": "Payment details entered",
+            "message": "Enter payment mode, reference and date (and save) before recording payment.",
+            "expression": "not_empty({form.payment_mode}) and not_empty({form.payment_reference}) and not_empty({form.payment_date})"
+          }
+        ],
+        "visible_when": "{form.booking_status} == \"A\" and {form.payment_status} == \"U\""
+      },
+      {
+        "name": "Print Invoice",
+        "handler": "report",
+        "scope": "row",
+        "report": {
+          "obj_name": "ccw_banner_invoice",
+          "param_map": {
+            "BOOKING_NO": "{form.booking_no}"
+          }
+        },
+        "validations": [
+          {
+            "type": "expression",
+            "name": "Invoice raised",
+            "message": "The invoice is available only after approval.",
+            "expression": "not_empty({form.invoice_no})"
+          }
+        ],
+        "visible_when": "not_empty({form.invoice_no})"
+      },
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": []
+  }
+}

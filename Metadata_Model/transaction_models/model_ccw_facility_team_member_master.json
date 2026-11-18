@@ -1,0 +1,584 @@
+{
+  "transaction": {
+    "obj_name": "ccw_facility_team_member_master",
+    "sql_models": [
+      {
+        "sql_model": {
+          "form_title": "Facility Team Member",
+          "form_descr": "Facility staff, security guards and supervisors.",
+          "form_no": "1",
+          "main_table": "CCW_FACILITY_TEAM_MEMBER",
+          "columns": [
+            {
+              "column": {
+                "name": "staff_code",
+                "db_name": "STAFF_CODE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Staff Code",
+                "descr": "Unique staff code",
+                "key": true,
+                "mandatory": true,
+                "text_case": "upper",
+                "validations": [
+                  {
+                    "type": "builtin",
+                    "name": "Staff code unique",
+                    "error_code": "FTM_CODE_DUP",
+                    "message": "Staff code {form.staff_code} already exists.",
+                    "builtin": {
+                      "kind": "must_be_unique"
+                    }
+                  }
+                ],
+                "x": "10",
+                "y": "10",
+                "col_id": "1",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "10",
+                "width": 100,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "staff_name",
+                "db_name": "STAFF_NAME",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Staff Name",
+                "descr": "Full name",
+                "mandatory": true,
+                "x": "20",
+                "y": "20",
+                "col_id": "2",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "role",
+                "db_name": "ROLE",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Role",
+                "descr": "Facility Staff / Security Guard / Supervisor",
+                "mandatory": true,
+                "default_value": "F",
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "F",
+                      "display": "Facility Staff"
+                    },
+                    {
+                      "data": "G",
+                      "display": "Security Guard"
+                    },
+                    {
+                      "data": "S",
+                      "display": "Supervisor"
+                    }
+                  ]
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Role is a listed value",
+                    "error_code": "FTM_ROLE",
+                    "message": "Role must be F, G or S.",
+                    "expression": "in_list({form.role}, \"F,G,S\")"
+                  }
+                ],
+                "x": "30",
+                "y": "30",
+                "col_id": "3",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "mobile_no",
+                "db_name": "MOBILE_NO",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Mobile No",
+                "descr": "Mobile number",
+                "mandatory": true,
+                "display": {
+                  "type": "telephone"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid mobile number",
+                    "error_code": "FTM_MOBILE",
+                    "message": "Enter a valid mobile number (7 to 15 digits, optional leading +).",
+                    "expression": "match({form.mobile_no}, \"^[+]?[0-9]{7,15}$\")"
+                  }
+                ],
+                "x": "40",
+                "y": "40",
+                "col_id": "4",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "email",
+                "db_name": "EMAIL",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Email",
+                "descr": "Email address",
+                "display": {
+                  "type": "email"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Valid email",
+                    "error_code": "FTM_EMAIL",
+                    "message": "Enter a valid email address.",
+                    "expression": "is_empty({form.email}) or match({form.email}, \"^[^@ ]+@[^@ ]+[.][^@ ]+$\")"
+                  }
+                ],
+                "x": "50",
+                "y": "50",
+                "col_id": "5",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "specialisation",
+                "db_name": "SPECIALISATION",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Specialisation",
+                "descr": "Facility request category the person specialises in (optional)",
+                "lookup": "CCW_FACILITY_REQ_CATEGORY(NAME, REQUEST_CATEGORY_CODE)",
+                "lookup_filter": "STATUS = 'A'",
+                "must_exist_in": "CCW_FACILITY_REQ_CATEGORY",
+                "x": "60",
+                "y": "60",
+                "col_id": "6",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "protect": "",
+                "validations": ""
+              }
+            },
+            {
+              "column": {
+                "name": "specialisation_name",
+                "db_name": "NAME",
+                "table_name": "CCW_FACILITY_REQ_CATEGORY",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Specialisation Name",
+                "descr": "Category name (from Facility Request Category)",
+                "protect": "1",
+                "inline_with": "specialisation",
+                "x": "70",
+                "y": "70",
+                "col_id": "7",
+                "table_display_name": "Facility request category (lookup table)",
+                "db_size": "100",
+                "width": 500,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "default_value": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "status",
+                "db_name": "STATUS",
+                "group_name": "Basic",
+                "col_type": "VARCHAR",
+                "heading": "Status",
+                "descr": "Active or Inactive",
+                "default_value": "A",
+                "mandatory": true,
+                "edit_mask": {
+                  "mask": "ddlb",
+                  "values": [
+                    {
+                      "data": "A",
+                      "display": "Active"
+                    },
+                    {
+                      "data": "I",
+                      "display": "Inactive"
+                    }
+                  ]
+                },
+                "display": {
+                  "type": "status_tag",
+                  "map": [
+                    {
+                      "when": "A",
+                      "color": "green",
+                      "label": "Active"
+                    },
+                    {
+                      "when": "I",
+                      "color": "grey",
+                      "label": "Inactive"
+                    }
+                  ],
+                  "defaultColor": "grey"
+                },
+                "validations": [
+                  {
+                    "type": "expression",
+                    "name": "Status is a listed value",
+                    "error_code": "FTM_STATUS",
+                    "message": "Status must be A or I.",
+                    "expression": "in_list({form.status}, \"A,I\")"
+                  }
+                ],
+                "x": "80",
+                "y": "80",
+                "col_id": "8",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "1",
+                "width": 50,
+                "key": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "protect": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_date",
+                "db_name": "ADD_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Added On",
+                "descr": "Created date",
+                "default_value": ":audit_add_date",
+                "protect": "1",
+                "x": "90",
+                "y": "90",
+                "col_id": "9",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_user",
+                "db_name": "ADD_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added By",
+                "descr": "Created by",
+                "default_value": ":audit_add_user",
+                "protect": "1",
+                "x": "100",
+                "y": "100",
+                "col_id": "10",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "add_term",
+                "db_name": "ADD_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Added From",
+                "descr": "Created from terminal",
+                "default_value": ":audit_add_terminal",
+                "protect": "1",
+                "x": "110",
+                "y": "110",
+                "col_id": "11",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_date",
+                "db_name": "CHG_DATE",
+                "group_name": "Others",
+                "col_type": "DATETIME",
+                "heading": "Changed On",
+                "descr": "Last change date",
+                "default_value": ":audit_chg_date",
+                "protect": "1",
+                "x": "120",
+                "y": "120",
+                "col_id": "12",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "",
+                "width": 50,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_user",
+                "db_name": "CHG_USER",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed By",
+                "descr": "Last changed by",
+                "default_value": ":audit_chg_user",
+                "protect": "1",
+                "x": "130",
+                "y": "130",
+                "col_id": "13",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "10",
+                "width": 100,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            },
+            {
+              "column": {
+                "name": "chg_term",
+                "db_name": "CHG_TERM",
+                "group_name": "Others",
+                "col_type": "VARCHAR",
+                "heading": "Changed From",
+                "descr": "Last changed from terminal",
+                "default_value": ":audit_chg_terminal",
+                "protect": "1",
+                "x": "140",
+                "y": "140",
+                "col_id": "14",
+                "table_name": "CCW_FACILITY_TEAM_MEMBER",
+                "table_display_name": "Facility team member master",
+                "db_size": "15",
+                "width": 150,
+                "key": false,
+                "mandatory": false,
+                "hidden": "",
+                "format": "",
+                "default_function": "",
+                "expression": "",
+                "edit_mask": "",
+                "validations": "",
+                "lookup": ""
+              }
+            }
+          ],
+          "joins": {
+            "join_predicates": {
+              "joins": [
+                {
+                  "table": "CCW_FACILITY_TEAM_MEMBER",
+                  "main_table": true,
+                  "table_descr": "Facility team member master"
+                },
+                {
+                  "table": "CCW_FACILITY_REQ_CATEGORY",
+                  "main_table": false,
+                  "table_descr": "Facility request category (lookup table)",
+                  "column": "REQUEST_CATEGORY_CODE",
+                  "join_table": "CCW_FACILITY_TEAM_MEMBER",
+                  "join_column": "SPECIALISATION",
+                  "join_type": "left"
+                }
+              ]
+            }
+          },
+          "validations": [],
+          "list_view": {
+            "tabs": {
+              "column": "status",
+              "show_all": true,
+              "counts": true,
+              "default": "all"
+            }
+          }
+        }
+      }
+    ],
+    "actions": [
+      {
+        "name": "Export",
+        "handler": "system",
+        "system_op": "export",
+        "scope": "form",
+        "export": {
+          "places": [
+            "list",
+            "bulk",
+            "record"
+          ],
+          "formats": [
+            "xlsx",
+            "csv",
+            "json"
+          ],
+          "offer_list_view": true,
+          "org_templates": true,
+          "templates": []
+        }
+      },
+      {
+        "name": "Import",
+        "handler": "import",
+        "scope": "form",
+        "import": {
+          "mode": "upsert"
+        }
+      }
+    ],
+    "cross_updates": [],
+    "pre_commit": [],
+    "post_commit": [],
+    "attach_docs": [],
+    "follow_up_actions": [],
+    "vector_search": {
+      "enabled": true,
+      "columns": [
+        "staff_name",
+        "role",
+        "status",
+        "specialisation"
+      ],
+      "key_column": "staff_code",
+      "display_column": "staff_name",
+      "allow_alias": true,
+      "auto": true,
+      "reason": "named as a master; searched by staff_name plus role, status, specialisation so same-named records stay distinguishable"
+    }
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "table_name": "CCW_BANNER_BOOKING",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "BOOKING_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Auto-generated booking number",
+      "sequence": 1,
+      "mandatory": true
+    },
+    {
+      "column_name": "BOOKING_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Date of booking",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "ADVERTISER_TYPE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Member / Tenant / External",
+      "sequence": 3,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "M",
+          "label": "Member"
+        },
+        {
+          "value": "T",
+          "label": "Tenant"
+        },
+        {
+          "value": "E",
+          "label": "External"
+        }
+      ]
+    },
+    {
+      "column_name": "UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Unit of the advertiser (mandatory for Member and Tenant)",
+      "sequence": 4,
+      "lookup": {
+        "table": "CCW_UNIT_MASTER",
+        "display_column": "UNIT_NO",
+        "value_column": "UNIT_NO"
+      }
+    },
+    {
+      "column_name": "ADVERTISER_NAME",
+      "data_type": "VARCHAR",
+      "size": "150",
+      "key": false,
+      "description": "Advertiser name",
+      "sequence": 5,
+      "mandatory": true
+    },
+    {
+      "column_name": "CONTACT_NO",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Advertiser contact number",
+      "sequence": 6,
+      "mandatory": true
+    },
+    {
+      "column_name": "EMAIL",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Advertiser email",
+      "sequence": 7,
+      "mandatory": true
+    },
+    {
+      "column_name": "BANNER_TITLE",
+      "data_type": "VARCHAR",
+      "size": "150",
+      "key": false,
+      "description": "Title shown on the banner",
+      "sequence": 8,
+      "mandatory": true
+    },
+    {
+      "column_name": "BANNER_IMAGE",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Banner image (see the plan's image size guidance)",
+      "sequence": 9,
+      "mandatory": true
+    },
+    {
+      "column_name": "CLICK_URL",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Web address opened when the banner is clicked",
+      "sequence": 10
+    },
+    {
+      "column_name": "START_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "First day of the banner period (not in the past)",
+      "sequence": 11,
+      "mandatory": true
+    },
+    {
+      "column_name": "NO_OF_MONTHS",
+      "data_type": "NUMBER",
+      "size": "3",
+      "key": false,
+      "description": "Whole number of months, at least the plan's minimum",
+      "sequence": 12,
+      "mandatory": true
+    },
+    {
+      "column_name": "BOOKING_STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Requested / Approved / Rejected / Cancelled; changed by actions",
+      "sequence": 13,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "R",
+          "label": "Requested"
+        },
+        {
+          "value": "A",
+          "label": "Approved"
+        },
+        {
+          "value": "J",
+          "label": "Rejected"
+        },
+        {
+          "value": "C",
+          "label": "Cancelled"
+        }
+      ]
+    },
+    {
+      "column_name": "REJECTION_REASON",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Filled by Reject",
+      "sequence": 14
+    },
+    {
+      "column_name": "RATE_PER_MONTH",
+      "data_type": "NUMBER",
+      "size": "12,2",
+      "key": false,
+      "description": "Defaults from the Active Banner Rate Plan (RATE_PER_SLOT_PER_MONTH)",
+      "sequence": 15
+    },
+    {
+      "column_name": "AMOUNT",
+      "data_type": "NUMBER",
+      "size": "14,2",
+      "key": false,
+      "description": "RATE_PER_MONTH x NO_OF_MONTHS",
+      "sequence": 16
+    },
+    {
+      "column_name": "TAX_PCT",
+      "data_type": "NUMBER",
+      "size": "5,2",
+      "key": false,
+      "description": "From the Active Banner Rate Plan",
+      "sequence": 17
+    },
+    {
+      "column_name": "TAX_AMOUNT",
+      "data_type": "NUMBER",
+      "size": "14,2",
+      "key": false,
+      "description": "AMOUNT x TAX_PCT / 100",
+      "sequence": 18
+    },
+    {
+      "column_name": "TOTAL_AMOUNT",
+      "data_type": "NUMBER",
+      "size": "14,2",
+      "key": false,
+      "description": "AMOUNT + TAX_AMOUNT",
+      "sequence": 19
+    },
+    {
+      "column_name": "INVOICE_NO",
+      "data_type": "VARCHAR",
+      "size": "20",
+      "key": false,
+      "description": "Generated on Approve",
+      "sequence": 20
+    },
+    {
+      "column_name": "INVOICE_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Generated on Approve",
+      "sequence": 21
+    },
+    {
+      "column_name": "PAYMENT_STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Unpaid / Paid; set by Record Payment",
+      "sequence": 22,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "U",
+          "label": "Unpaid"
+        },
+        {
+          "value": "P",
+          "label": "Paid"
+        }
+      ]
+    },
+    {
+      "column_name": "PAYMENT_MODE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Cash / Cheque / Bank Transfer / UPI",
+      "sequence": 23,
+      "allowed_values": [
+        {
+          "value": "C",
+          "label": "Cash"
+        },
+        {
+          "value": "Q",
+          "label": "Cheque"
+        },
+        {
+          "value": "B",
+          "label": "Bank Transfer"
+        },
+        {
+          "value": "U",
+          "label": "UPI"
+        }
+      ]
+    },
+    {
+      "column_name": "PAYMENT_REFERENCE",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Cheque no / transaction reference",
+      "sequence": 24
+    },
+    {
+      "column_name": "PAYMENT_DATE",
+      "data_type": "DATE",
+      "size": "",
+      "key": false,
+      "description": "Date payment received",
+      "sequence": 25
+    },
+    {
+      "column_name": "RECEIVED_BY",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Management user who received the payment",
+      "sequence": 26
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: added on",
+      "sequence": 27
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: added by (also scopes member/tenant visibility)",
+      "sequence": 28
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: added from",
+      "sequence": 29
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Audit: changed on",
+      "sequence": 30
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Audit: changed by",
+      "sequence": 31
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Audit: changed from",
+      "sequence": 32
+    }
+  ]
+}

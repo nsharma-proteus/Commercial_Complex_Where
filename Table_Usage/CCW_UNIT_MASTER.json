@@ -1,0 +1,60 @@
+{
+  "table_name": "CCW_UNIT_MASTER",
+  "objects": [
+    {
+      "object_name": "ccw_unit_master",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "WING_CODE",
+        "OCCUPANCY_STATUS",
+        "CHG_USER",
+        "ADD_TERM",
+        "UNIT_TYPE",
+        "ADD_USER",
+        "UNIT_NO",
+        "CHG_TERM",
+        "ADD_DATE",
+        "CHG_DATE",
+        "AREA_SQFT",
+        "STATUS",
+        "FLOOR_NO"
+      ],
+      "join_info": {
+        "column": "WING_CODE",
+        "join_table": "CCW_WING_MASTER",
+        "join_column": "WING_CODE"
+      }
+    },
+    {
+      "object_name": "ccw_member_profile",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "WING_CODE",
+        "UNIT_NO",
+        "FLOOR_NO"
+      ],
+      "join_info": {
+        "column": "UNIT_NO",
+        "join_table": "CCW_MEMBER_PROFILE",
+        "join_column": "UNIT_NO"
+      }
+    },
+    {
+      "object_name": "ccw_unit_parking",
+      "form_no": "1",
+      "usage_type": "R",
+      "referred_columns": [
+        "WING_CODE",
+        "FLOOR_NO",
+        "UNIT_NO"
+      ],
+      "join_info": {
+        "column": "UNIT_NO",
+        "join_table": "CCW_UNIT_PARKING",
+        "join_column": "UNIT_NO"
+      }
+    }
+  ]
+}

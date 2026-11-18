@@ -1,0 +1,17 @@
+{
+  "object_name": "ccw_business_category_master",
+  "tables": {
+    "CCW_BUSINESS_CATEGORY": [
+      "CHG_USER",
+      "ADD_TERM",
+      "CATEGORY_NAME",
+      "ADD_USER",
+      "CHG_TERM",
+      "ADD_DATE",
+      "CHG_DATE",
+      "DESCRIPTION",
+      "STATUS",
+      "CATEGORY_CODE"
+    ]
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "table_name": "CCW_MEMBER_PROFILE",
+  "table_description": "",
+  "project": "Commercial_Complex_Where",
+  "columns": [
+    {
+      "column_name": "UNIT_NO",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": true,
+      "description": "Unit this profile belongs to (one profile per unit)",
+      "sequence": 1,
+      "mandatory": true,
+      "lookup": {
+        "table": "CCW_UNIT_MASTER",
+        "display_column": "UNIT_NO",
+        "value_column": "UNIT_NO"
+      }
+    },
+    {
+      "column_name": "PROFILE_STATUS",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Active or Inactive",
+      "sequence": 2,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "A",
+          "label": "Active"
+        },
+        {
+          "value": "I",
+          "label": "Inactive"
+        }
+      ]
+    },
+    {
+      "column_name": "BUSINESS_NAME",
+      "data_type": "VARCHAR",
+      "size": "150",
+      "key": false,
+      "description": "Name of the business run from the unit",
+      "sequence": 2,
+      "mandatory": true
+    },
+    {
+      "column_name": "BUSINESS_CATEGORY",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "Type of business",
+      "sequence": 4,
+      "mandatory": false,
+      "lookup": {
+        "table": "CCW_BUSINESS_CATEGORY",
+        "display_column": "CATEGORY_NAME",
+        "value_column": "CATEGORY_CODE"
+      }
+    },
+    {
+      "column_name": "BUSINESS_DESCRIPTION",
+      "data_type": "VARCHAR",
+      "size": "1000",
+      "key": false,
+      "description": "What the business does",
+      "sequence": 5
+    },
+    {
+      "column_name": "LOGO",
+      "data_type": "VARCHAR",
+      "size": "500",
+      "key": false,
+      "description": "Business logo (uploaded file URL)",
+      "sequence": 6
+    },
+    {
+      "column_name": "CONTACT_PERSON",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Person to contact for the business",
+      "sequence": 7
+    },
+    {
+      "column_name": "CONTACT_NO_1",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Primary contact number",
+      "sequence": 3,
+      "mandatory": true
+    },
+    {
+      "column_name": "CONTACT_NO_2",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Optional second contact number",
+      "sequence": 9
+    },
+    {
+      "column_name": "EMAIL",
+      "data_type": "VARCHAR",
+      "size": "100",
+      "key": false,
+      "description": "Business email address",
+      "sequence": 10,
+      "mandatory": true
+    },
+    {
+      "column_name": "WEBSITE",
+      "data_type": "VARCHAR",
+      "size": "200",
+      "key": false,
+      "description": "Business website",
+      "sequence": 11
+    },
+    {
+      "column_name": "SHOW_IN_DIRECTORY",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "No hides the business from the Business Directory (not from management/security unit lookup)",
+      "sequence": 12,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "OCCUPANCY_TYPE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Owner Used or Given on Rent. Tenant flags apply only when Given on Rent.",
+      "sequence": 7,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "O",
+          "label": "Owner Used"
+        },
+        {
+          "value": "R",
+          "label": "Given on Rent"
+        }
+      ]
+    },
+    {
+      "column_name": "TENANT_LOGIN_ALLOWED",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Enabled only when Given on Rent",
+      "sequence": 5,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "ALLOW_TENANT_TO_UPDATE_PROFILE",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Enabled only when Given on Rent",
+      "sequence": 4,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "SHOW_TENANT_IN_DIRECTORY",
+      "data_type": "VARCHAR",
+      "size": "1",
+      "key": false,
+      "description": "Enabled only when Given on Rent",
+      "sequence": 6,
+      "mandatory": true,
+      "allowed_values": [
+        {
+          "value": "Y",
+          "label": "Yes"
+        },
+        {
+          "value": "N",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "column_name": "ADD_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Record creation date",
+      "sequence": 17
+    },
+    {
+      "column_name": "ADD_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who created the record",
+      "sequence": 18
+    },
+    {
+      "column_name": "ADD_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal that created the record",
+      "sequence": 19
+    },
+    {
+      "column_name": "CHG_DATE",
+      "data_type": "DATETIME",
+      "size": "",
+      "key": false,
+      "description": "Last change date",
+      "sequence": 20
+    },
+    {
+      "column_name": "CHG_USER",
+      "data_type": "VARCHAR",
+      "size": "10",
+      "key": false,
+      "description": "User who last changed the record",
+      "sequence": 21
+    },
+    {
+      "column_name": "CHG_TERM",
+      "data_type": "VARCHAR",
+      "size": "15",
+      "key": false,
+      "description": "Terminal of last change",
+      "sequence": 22
+    }
+  ]
+}
